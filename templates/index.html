@@ -1,18 +1,25 @@
 {% extends 'base.html' %}
+
 {% block head %}
     <title>Home</title>
 {% endblock %}
+
 {% block body %}
     <h1>Home</h1>
     <p>Welcome to the home page!</p>
-    <div class="nav">
-        <a href="/login">Login</a>
-        <a href="/register">Register</a>
+
+    <div>
+        <h2>Daily</h2>
+        <div id="daily-container" class="daily-container">
+        </div>
     </div>
+
+
+    
     <div>
         <h2>Problems</h2>
         <ul class="problems">
-            
         </ul>
     </div>
+
 {% endblock %}

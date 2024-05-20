@@ -4,12 +4,44 @@
 {% endblock %}
 {% block body %}
     <h1>Login</h1>
-    <form action="" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <button type="submit">Login</button>
+
+    <form method="POST" action="{{url_for('login')}}">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required> <br>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required> <br>
+        <button type="submit" value="Login">Login</button>
     </form>
 
+    <button id="testbutton"> CLICK ME </button>
+    <p id="textareaa"></p>
+
+    
+    <script>
+        let testButton = document.getElementById('testbutton');
+        let rendertext = document.getElementById('textareaa');
+
+        const jsonData = {
+            "username": "test",
+            "password": "test"
+        }
+
+        testButton.addEventListener('click', () => {
+            fetch("{{url_for('handlejson')}}", {
+                method : "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(jsonData)
+
+            })
+            .then(response => response.json()) 
+            .then(data => {
+                console.log(data);
+                rendertext.innerHTML = data.message;
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+    </script>
 {% endblock %}
