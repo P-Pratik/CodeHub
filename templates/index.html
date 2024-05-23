@@ -1,25 +1,49 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block head %}
+<title>Home</title>
+{% endblock %} {% block body %}
+<h1>Home</h1>
+<p>Welcome to the home page!</p>
 
-{% block head %}
-    <title>Home</title>
-{% endblock %}
+<!-- <div class="test">
+    <h2>Database</h2>
+    <ul>
+        {% for person in people %}
+        <li>
+            {{ person }}
+            <button onclick="deletePerson( {{ person.pid }} )">Delete</button>
+        </li>
+        {% endfor %}
+    </ul>
+</div> -->
 
-{% block body %}
-    <h1>Home</h1>
-    <p>Welcome to the home page!</p>
+<p> {{ logged_in }} </p>
 
-    <div>
-        <h2>Daily</h2>
-        <div id="daily-container" class="daily-container">
-        </div>
-    </div>
+<div>
+    <h2>Daily</h2>
+    <div id="daily-container" class="daily-container"></div>
+</div>
 
+<div>
+    <h2>Problems</h2>
+    <ul class="problems"></ul>
+</div>
 
-    
-    <div>
-        <h2>Problems</h2>
-        <ul class="problems">
-        </ul>
-    </div>
+<script type="text/javascript">
+    function deletePerson(pid) {
+        fetch('{{ url_for("delete", pid=pid) }}' + "/" + pid, {
+            method: "DELETE",
+        })
+            .then((response) => {
+                if (response.ok) {
+                    window.location.reload();
+                } else {
+                    console.error("Failed to delete person with pid", pid);
+                }
+            })
+            .catch((error) => {
+                console.error("Some Error Occurred", error);
+            });
+    }
+</script>
 
 {% endblock %}

@@ -26,7 +26,7 @@ function fetchProblems() {
         });
 };
 
-function renderdaily(data){
+function renderdaily(data){                                 //WILL REQUIRE MODIFICATION. BASE STUFF.
     let container = document.querySelector('#daily-container');
     container.innerHTML = '';
     const geeksdailyDiv = document.createElement('div');
