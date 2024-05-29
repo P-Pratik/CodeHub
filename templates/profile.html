@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block head %}
+    <title> Profile </title>
+    <script src="{{ url_for('static', filename='js/profile.js') }}" defer></script>
+{% endblock %}
+{% block body %}
+    <div class="profile-info">
+        <h2>Basic Info</h2>
+        <div>
+            <label> User ID </label>
+            <span id="uid"> {{ user.uid }} </span>
+        </div>
+
+        <div>
+            <label>Username:</label>
+            <span>{{ user.username }}</span>
+        </div>
+
+        <h2> Coding Profile Links</h2>
+        <div>
+            <label>Leetcode:</label>
+            <span class="editable" id="leetcode"> {{ userplatform.leetcode}} </span>
+            <button class="edit-link"  onclick="makeEditable('leetcode')">Edit</button>
+        </div>
+
+        <div>
+            <label>GeeksForGeeks:</label>
+            <span class="editable" id="geeksforgeeks"> {{ userplatform.geeksforgeeks}} </span>
+            <button class="edit-link"  onclick="makeEditable('geeksforgeeks')">Edit</button>
+        </div>
+        
+        <button id="update-confirm" onclick="updateProfile( {{ user.uid }} )" disabled>Confirm Changes</button>
+        <button id="update-confirm" onclick="updateProfileQuestions( {{ user.uid }} )">Test button</button>
+    </div>
+{% endblock %}

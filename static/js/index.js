@@ -7,9 +7,7 @@ function fetchProblems() {
         param1: 'value1',
         param2: 'value2'
     };
-
     const url = '/problem';
-
     fetch(url, {
         method: 'POST',
         headers: {
@@ -72,4 +70,60 @@ function fetchDaily() {
         });
 };
 
-fetchDaily();
+fetchDaily(); // throw it somewhere i dont want it here
+
+
+function renderProblems(data) {
+    console.log(data);
+    let container = document.getElementById('problems');
+    container.innerHTML = '';
+
+    for (let i = 0; i < data.length; i++) {
+        let tr = document.createElement('tr');
+        let problem_name = document.createElement('td');
+        let difficulty = document.createElement('td');
+        let accuracy = document.createElement('td');
+        let problem_url = document.createElement('a');
+
+        problem_name.textContent = data[i].problem_name;
+        difficulty.textContent = data[i].difficulty;
+        accuracy.textContent = data[i].accuracy;
+        problem_url.textContent = 'Solve';
+        problem_url.href = data[i].problem_url;
+
+        tr.appendChild(problem_name);
+        tr.appendChild(difficulty);
+        tr.appendChild(accuracy);
+        tr.appendChild(problem_url);
+
+        container.appendChild(tr);
+    }
+}
+
+function fetchProblems() {
+    // maybe not fetch it like this ?
+    const page = document.getElementById('page').value;
+
+    // maybe filters in future ? 
+    const postData = {
+    };
+
+    // problem with fetching page number replacing with 1 for testing
+    fetch('/problem/' + 1 , {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(postData),
+    })
+        .then(response => response.json())
+        .then(data => {
+            // console.log(data);
+            renderProblems(data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+fetchProblems(); 

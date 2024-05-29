@@ -1,10 +1,14 @@
 {% extends 'base.html' %} {% block head %}
 <title>Home</title>
-{% endblock %} {% block body %}
+<script src="{{ url_for('static', filename='js/index.js') }}" defer></script>
+{% endblock %} 
+
+{% block body %}
 <h1>Home</h1>
 <p>Welcome to the home page!</p>
 
-<!-- <div class="test">
+{#
+<div class="test">
     <h2>Database</h2>
     <ul>
         {% for person in people %}
@@ -14,9 +18,10 @@
         </li>
         {% endfor %}
     </ul>
-</div> -->
+</div>
+#}
 
-<p> {{ logged_in }} </p>
+<p>{{ logged_in }}</p>
 
 <div>
     <h2>Daily</h2>
@@ -25,9 +30,33 @@
 
 <div>
     <h2>Problems</h2>
-    <ul class="problems"></ul>
+    <table id="problemstb">
+        <thead>
+            <tr>
+                <th>Problem ID</th>
+                <th>Problem Name</th>
+                <th>Difficulty</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="problems">
+
+        </tbody>
+
+    </table>
+
+    <div class="pagination">
+        {# They dont do anything yet, add js functions and fetch page number #}
+        <button id="prev" onclick="prevPage()">Prev</button>
+        <span id="page">1</span>
+        <button id="next" onclick="nextPage()">Next</button>
+    </div>
 </div>
 
+
+
+
+{#
 <script type="text/javascript">
     function deletePerson(pid) {
         fetch('{{ url_for("delete", pid=pid) }}' + "/" + pid, {
@@ -45,5 +74,8 @@
             });
     }
 </script>
+
+#} 
+
 
 {% endblock %}
