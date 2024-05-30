@@ -14,7 +14,7 @@ def fetchProblems(page):
         'problem_name': 1,
         'difficulty': 1,
         'accuracy': 1,
-        'problem_url': 1,
+        'slug': 1,
         'tags': 1,
         '_id': 0
     }

@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify, session
 from flask_login import login_user, login_required, logout_user, current_user
 from models import User, UserQuestions, UserPlatforms
-from config import dbconnect
 import geeksforgeeks as gfg
 import leetcode as lc
 
@@ -22,11 +21,6 @@ def update_geeksforgeeks(uid, db):
                 db.session.rollback()
                 print(e)
                 return jsonify(success=False, error="Some error occured")
-
-
-
-
-
 
 def register_routes(app, db, bcrypt):
     @app.route('/', methods=['GET'])
@@ -142,7 +136,16 @@ def register_routes(app, db, bcrypt):
 
     @app.route('/problem/<page>', methods=['POST'])
     def problem(page):
-        problems = gfg.fetchProblems(int(page))
+        platform = 'geeksforgeeks'
+        if request.json:
+            platform = request.json['platform']
+        # difficulty = request.json['difficulty']
+        
+        if platform == 'leetcode':
+            problems = lc.fetchProblems(int(page))
+        elif platform == 'geeksforgeeks':
+            problems = gfg.fetchProblems(int(page))
+
         return jsonify(problems) 
 
     @app.route('/getDaily', methods=['GET'])

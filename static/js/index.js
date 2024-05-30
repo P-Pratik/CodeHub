@@ -1,30 +1,4 @@
-console.log('Hello, world!');
-
-let problemArea = document.querySelector('.problems');
-
-function fetchProblems() {
-    const postData = {
-        param1: 'value1',
-        param2: 'value2'
-    };
-    const url = '/problem';
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(postData),
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-};
-
-function renderdaily(data){                                 //WILL REQUIRE MODIFICATION. BASE STUFF.
+function renderdaily(data) {                                 //WILL REQUIRE MODIFICATION. BASE STUFF.
     let container = document.querySelector('#daily-container');
     container.innerHTML = '';
     const geeksdailyDiv = document.createElement('div');
@@ -49,7 +23,7 @@ function renderdaily(data){                                 //WILL REQUIRE MODIF
 
     lcDiv.appendChild(lch3);
     lcDiv.appendChild(lcbutton);
-    
+
     container.appendChild(lcDiv);
 }
 
@@ -73,8 +47,33 @@ function fetchDaily() {
 fetchDaily(); // throw it somewhere i dont want it here
 
 
-function renderProblems(data) {
-    console.log(data);
+function prevPage() {
+    let page = document.getElementById('page').innerText;
+    if (page > 1) {
+        page--;
+        document.getElementById('page').innerText = page;
+        applyfilter();
+    }
+}
+
+function nextPage() {
+    let page = document.getElementById('page').innerText;
+    page++;
+    document.getElementById('page').innerText = page;
+    applyfilter();
+}
+
+function renderProblems(data, platform) {
+
+    if (platform === 'leetcode') {
+        baseUrl = 'https://leetcode.com/problems/'
+        endUrl = '/description/' }
+
+    else {
+            baseUrl = 'https://www.geeksforgeeks.org/problems/'
+            endUrl = '/1/'
+        }
+
     let container = document.getElementById('problems');
     container.innerHTML = '';
 
@@ -89,7 +88,7 @@ function renderProblems(data) {
         difficulty.textContent = data[i].difficulty;
         accuracy.textContent = data[i].accuracy;
         problem_url.textContent = 'Solve';
-        problem_url.href = data[i].problem_url;
+        problem_url.href = baseUrl + data[i].slug + endUrl;
 
         tr.appendChild(problem_name);
         tr.appendChild(difficulty);
@@ -98,18 +97,12 @@ function renderProblems(data) {
 
         container.appendChild(tr);
     }
-}
+};
 
-function fetchProblems() {
-    // maybe not fetch it like this ?
-    const page = document.getElementById('page').value;
-
-    // maybe filters in future ? 
-    const postData = {
-    };
-
-    // problem with fetching page number replacing with 1 for testing
-    fetch('/problem/' + 1 , {
+function fetchProblems(postData = {}) {
+    const page = document.getElementById('page').innerText;
+    console.log(postData)
+    fetch('/problem/' + page, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -119,11 +112,24 @@ function fetchProblems() {
         .then(response => response.json())
         .then(data => {
             // console.log(data);
-            renderProblems(data);
+            renderProblems(data, postData.platform);
         })
         .catch(error => {
             console.error('Error:', error);
         });
 }
+
+function applyfilter() {
+    const difficulty = document.getElementById('difficulty').value;
+    const platform = document.getElementById('platform').value;
+
+    const postData = {
+        difficulty: difficulty,
+        platform: platform,
+    };
+
+    fetchProblems(postData);
+}
+
 
 fetchProblems(); 

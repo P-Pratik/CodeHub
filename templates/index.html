@@ -30,6 +30,26 @@
 
 <div>
     <h2>Problems</h2>
+    <div class="filterForm">
+        <label for="difficulty">Difficulty:</label>
+        <select id="difficulty" name="difficulty">
+            <option value="">All</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+        </select>
+    
+        <label for="platform">Platform:</label>
+        <select id="platform" name="platform">
+            <option value="geeksforgeeks">GeeksForGeeks</option>
+            <option value="leetcode">LeetCode</option>
+        </select>
+    
+        <button onclick="applyfilter()">apply</button>
+    </div>
+
+
+
     <table id="problemstb">
         <thead>
             <tr>
@@ -46,7 +66,6 @@
     </table>
 
     <div class="pagination">
-        {# They dont do anything yet, add js functions and fetch page number #}
         <button id="prev" onclick="prevPage()">Prev</button>
         <span id="page">1</span>
         <button id="next" onclick="nextPage()">Next</button>

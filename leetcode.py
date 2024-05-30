@@ -1,7 +1,8 @@
 import requests
 import json
-
+from config.dbconnect import connect_db
 baseUrl = "https://leetcode.com/graphql?query="
+db = connect_db()
 
 query = {
     "daily" : '''{
@@ -101,6 +102,28 @@ query = {
 '''
 ,
 }
+
+def fetchProblems(page):
+    collection = db['Leetcode']
+    quantity = 20
+    offset = (page - 1) * quantity
+    pipeline = [
+        { '$skip': offset },
+        { '$limit': quantity },
+        { '$project': {
+            '_id': 0,
+            'problem_name': '$title',
+            'difficulty': 1,
+            'accuracy': '$acRate',
+            'slug': '$titleSlug',
+            'tags': '$topicTags'
+        }}
+    ]
+    
+    problems = collection.aggregate(pipeline)
+    
+    return list(problems)
+
 
 def getDaily():
     requestUrl = f'{baseUrl}{query["daily"]}'
