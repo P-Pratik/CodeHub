@@ -7,26 +7,12 @@
 <h1>Home</h1>
 <p>Welcome to the home page!</p>
 
-{#
-<div class="test">
-    <h2>Database</h2>
-    <ul>
-        {% for person in people %}
-        <li>
-            {{ person }}
-            <button onclick="deletePerson( {{ person.pid }} )">Delete</button>
-        </li>
-        {% endfor %}
-    </ul>
-</div>
-#}
-
 <div>
-    <h2>Daily Questions</h2>
+    <h2>Daily</h2>
     <div id="daily-container" class="daily-container"></div>
 </div>
 
-<div>
+<div class="allproblems">
     <h2>Problems</h2>
     <div class="filterForm">
         <label for="difficulty">Difficulty:</label>
@@ -43,7 +29,7 @@
             <option value="leetcode">LeetCode</option>
         </select>
     
-        <button onclick="applyfilter()">apply</button>
+        <button onclick="applyfilter()" id="apply">Apply</button>
     </div>
 
 
