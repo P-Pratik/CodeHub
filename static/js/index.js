@@ -67,12 +67,13 @@ function renderProblems(data, platform) {
 
     if (platform === 'leetcode') {
         baseUrl = 'https://leetcode.com/problems/'
-        endUrl = '/description/' }
+        endUrl = '/description/'
+    }
 
     else {
-            baseUrl = 'https://www.geeksforgeeks.org/problems/'
-            endUrl = '/1/'
-        }
+        baseUrl = 'https://www.geeksforgeeks.org/problems/'
+        endUrl = '/1/'
+    }
 
     let container = document.getElementById('problems');
     container.innerHTML = '';
@@ -82,13 +83,17 @@ function renderProblems(data, platform) {
         let problem_name = document.createElement('td');
         let difficulty = document.createElement('td');
         let accuracy = document.createElement('td');
-        let problem_url = document.createElement('a');
+        let problem_url = document.createElement('td');
+        let problem_url_a = document.createElement('a');
+        
 
         problem_name.textContent = data[i].problem_name;
         difficulty.textContent = data[i].difficulty;
         accuracy.textContent = data[i].accuracy;
-        problem_url.textContent = 'Solve';
-        problem_url.href = baseUrl + data[i].slug + endUrl;
+        problem_url_a.textContent = 'Solve';
+        problem_url_a.href = baseUrl + data[i].slug + endUrl;
+
+        problem_url.appendChild(problem_url_a);
 
         tr.appendChild(problem_name);
         tr.appendChild(difficulty);
@@ -98,6 +103,8 @@ function renderProblems(data, platform) {
         container.appendChild(tr);
     }
 };
+
+
 
 function fetchProblems(postData = {}) {
     const page = document.getElementById('page').innerText;
