@@ -103,13 +103,14 @@ query = {
 ,
 }
 
-def fetchProblems(page):
+def fetchProblems(page, filters={}):
     collection = db['Leetcode']
     quantity = 20
     offset = (page - 1) * quantity
     pipeline = [
         { '$skip': offset },
-        { '$limit': quantity },
+        { '$sort': { 'questionFrontendId': 1 }},
+        { '$match': filters},
         { '$project': {
             '_id': 0,
             'problem_name': '$title',
@@ -117,7 +118,9 @@ def fetchProblems(page):
             'accuracy': '$acRate',
             'slug': '$titleSlug',
             'tags': '$topicTags'
-        }}
+        }},
+        { '$limit': quantity}
+
     ]
     
     problems = collection.aggregate(pipeline)
@@ -136,3 +139,5 @@ def getDailyMin():
     response = requests.get(requestUrl)
     data = response.json()
     return data
+
+# print(fetchProblems(1))

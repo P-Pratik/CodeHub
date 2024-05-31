@@ -133,18 +133,18 @@ def register_routes(app, db, bcrypt):
         people = User.query.all()
         return render_template('index.html', people=people)
 
-
     @app.route('/problem/<page>', methods=['POST'])
     def problem(page):
         platform = 'geeksforgeeks'
+        filters = {}
         if request.json:
             platform = request.json['platform']
-        # difficulty = request.json['difficulty']
+            filters = request.json['filters']
         
         if platform == 'leetcode':
-            problems = lc.fetchProblems(int(page))
+            problems = lc.fetchProblems(int(page), filters)
         elif platform == 'geeksforgeeks':
-            problems = gfg.fetchProblems(int(page))
+            problems = gfg.fetchProblems(int(page), filters)
 
         return jsonify(problems) 
 

@@ -122,14 +122,17 @@ function fetchProblems(postData = {}) {
 function applyfilter() {
     const difficulty = document.getElementById('difficulty').value;
     const platform = document.getElementById('platform').value;
+    const filters = {};
 
+    if (difficulty !== "") {
+        filters.difficulty = difficulty;
+    }
     const postData = {
-        difficulty: difficulty,
+        filters: filters,
         platform: platform,
     };
 
     fetchProblems(postData);
 }
-
 
 fetchProblems(); 

@@ -6,7 +6,7 @@ from config.dbconnect import connect_db
 baseUrl = "https://practiceapi.geeksforgeeks.org"
 db = connect_db()
 
-def fetchProblems(page):
+def fetchProblems(page, filters={}):
     collection = db['GeeksForGeeks']
     quantity = 20
     offset = (page - 1) * quantity
@@ -18,7 +18,10 @@ def fetchProblems(page):
         'tags': 1,
         '_id': 0
     }
-    problems = collection.find({}, query).skip(offset).limit(quantity)
+    sort = {
+        'id' : 1
+    }
+    problems = collection.find(filters, query).skip(offset).limit(quantity).sort(sort)
     return list(problems)
 
 def getDaily():
