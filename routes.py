@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify, session
+from flask import Flask, render_template, request, redirect, url_for, jsonify, session,send_from_directory
+from werkzeug.utils import secure_filename
 from flask_login import login_user, login_required, logout_user, current_user
 from models import User, UserQuestions, UserPlatforms
 import geeksforgeeks as gfg
 import leetcode as lc
-
+import os
 
 def update_geeksforgeeks(uid, db):
     user = UserPlatforms.query.filter(UserPlatforms.uid == uid).first()
@@ -27,11 +28,6 @@ def register_routes(app, db, bcrypt):
     def index():
         logged_in = current_user.is_authenticated
         return render_template('index.html', logged_in=logged_in)
-    
-    @app.route('/u/<uid>', methods=['GET'])
-    def u(uid):
-        user = User.query.filter(User.uid == uid).first()
-        return render_template('user.html', user=user)
 
     @app.route('/profile', methods=['GET', 'POST'])
     @login_required
@@ -41,11 +37,9 @@ def register_routes(app, db, bcrypt):
             userplatform = UserPlatforms.query.filter(UserPlatforms.uid == current_user.uid).first()
             return render_template('profile.html', user=user, userplatform=userplatform)
 
-
         elif request.method == 'POST':
-            user = User.query.filter(User.uid == current_user.uid).first()
-            return redirect(url_for('index'))
-
+            return 
+        
     @app.route('/update-profile', methods=['PUT'])
     @login_required
     def update_profile():
@@ -71,13 +65,56 @@ def register_routes(app, db, bcrypt):
             return jsonify(success=False, error="User not found")
 
 
-    @app.route('/update-user-questions', methods=['PUT'])
+    app.route('/update-user-questions', methods=['PUT'])
     @login_required
     def update_user_questions():
         uid = current_user.uid
         result = update_geeksforgeeks(uid ,db)
         return result
     
+    @app.route('/update/profile-pic', methods=['POST'])
+    @login_required
+    def update_profile_pic():
+        user = User.query.filter(User.uid == current_user.uid).first()
+        
+        if not user:
+            return jsonify(success=False, error="User not found")
+        
+        if not request.files or "profile_pic" not in request.files:
+            return jsonify(success=False, error="No file selected")
+        
+        profile_pic = request.files["profile_pic"]
+        
+        if profile_pic.filename == '':
+            return jsonify(success=False, error="No file selected")
+        
+        allowed_file = lambda filename: '.' in filename and filename.rsplit('.', 1)[1].lower() in ['png', 'jpg', 'jpeg']
+        
+        if not allowed_file(profile_pic.filename):
+            return jsonify(success=False, error="Invalid file type")
+        
+        original_filename = secure_filename(profile_pic.filename)
+        file_ext = os.path.splitext(original_filename)[1]
+        new_filename = f"{current_user.username}_{current_user.uid}{file_ext}"
+        profile_pic.filename = new_filename
+        
+        old_file_path = os.path.join(app.config['IMAGE_UPLOAD_FOLDER'], user.profile_pic)
+        new_file_path = os.path.join(app.config['IMAGE_UPLOAD_FOLDER'], new_filename)
+        
+        try:
+            if os.path.exists(old_file_path) and user.profile_pic != 'default.jpg':
+                os.remove(old_file_path)
+            
+            profile_pic.save(new_file_path)
+            
+            user.profile_pic = new_filename
+            db.session.commit()
+            
+            return jsonify(success=True)
+        except Exception as e:
+            db.session.rollback()
+            return jsonify(success=False, error=str(e))
+
     @app.route('/login', methods=['GET', 'POST'])
     def login():
         if request.method == 'GET':
@@ -142,7 +179,7 @@ def register_routes(app, db, bcrypt):
             filters = request.json['filters']
         
         if platform == 'leetcode':
-            problems = lc.fetchProblems(int(page), filters)
+            problems = lc.fetchProblems(int(page), filters )
         elif platform == 'geeksforgeeks':
             problems = gfg.fetchProblems(int(page), filters)
 
@@ -153,3 +190,7 @@ def register_routes(app, db, bcrypt):
         geeksdaily = gfg.getDaily()
         leetdaily = lc.getDailyMin()
         return jsonify({'geeksdaily': geeksdaily, 'leetdaily': leetdaily})
+    
+    @app.route("/images/<path:filename>")
+    def images(filename):
+        return send_from_directory('images', filename)

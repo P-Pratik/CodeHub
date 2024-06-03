@@ -3,14 +3,18 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
+import os
+
 
 app = Flask(__name__, template_folder='templates')
 db = SQLAlchemy()
 
 def create_app():
+    IMAGE_FOLDER = "images/"
     app = Flask(__name__, template_folder='templates')
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///codehub.db'
     app.config['SECRET_KEY'] = 'key123'
+    app.config['IMAGE_UPLOAD_FOLDER'] = IMAGE_FOLDER
 
     db.init_app(app)
 

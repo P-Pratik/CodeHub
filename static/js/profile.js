@@ -2,7 +2,7 @@
 function makeEditable(id) {
     var span = document.getElementById(id);
     var currentValue = span.innerText;
-    span.innerHTML = '<input type="text" id="edit-' + id + '" value="' + currentValue + '"/>';
+    span.innerHTML = '<input type="text" id="edit-' + id + '" value="' + currentValue +'"/>';
     document.getElementById('edit-' + id).focus();
 
     document.getElementById('edit-' + id).addEventListener('blur', function () {
@@ -62,4 +62,33 @@ function updateProfileQuestions(){
     .then(data => {
         console.log(data);
     })
+}
+
+function updateProfilePicture() {
+    const input = document.getElementById('profilePicInput');
+    if (input.files.length === 0) {
+        alert('No file selected');
+        return;
+    }
+
+    const file = input.files[0];
+    const formData = new FormData();
+    formData.append('profile_pic', file);
+
+    fetch('/update/profile-pic', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Profile picture updated successfully');
+            window.location.reload();
+        } else {
+            alert('Error: ' + data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }

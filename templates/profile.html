@@ -5,6 +5,18 @@
 {% endblock %}
 {% block body %}
     <div class="profile-info">
+        <h1>Profile</h1>
+
+        <div class="avatar">
+            <img src="{{ url_for('images', filename=user.profile_pic)}}" alt="avatar" height="300px">
+        </div>
+        
+        <div>
+            <h2>Upload Profile Picture</h2>
+            <input type="file" id="profilePicInput" accept="image/png, image/jpg, image/jpeg">
+            <button onclick="updateProfilePicture()">Upload</button>
+        </div>
+
         <h2>Basic Info</h2>
         <div>
             <label> User ID </label>
@@ -15,21 +27,25 @@
             <label>Username:</label>
             <span>{{ user.username }}</span>
         </div>
+        <div class="codingprofiles">
+            <h2> Coding Profile</h2>
+            
+            <div>
+                <label>Leetcode:</label>
+                <span class="editable" id="leetcode">{{ userplatform.leetcode}}</span>
+                <button class="edit-link"  onclick="makeEditable('leetcode')">Edit</button>
+            </div>
+    
+            <div>
+                <label>GeeksForGeeks:</label>
+                <span class="editable" id="geeksforgeeks">{{ userplatform.geeksforgeeks}}</span>
+                <button class="edit-link"  onclick="makeEditable('geeksforgeeks')">Edit</button>
+            </div>
 
-        <h2> Coding Profile Links</h2>
-        <div>
-            <label>Leetcode:</label>
-            <span class="editable" id="leetcode"> {{ userplatform.leetcode}} </span>
-            <button class="edit-link"  onclick="makeEditable('leetcode')">Edit</button>
+            <button id="update-confirm" onclick="updateProfile( {{ user.uid }} )" disabled>Confirm Changes</button>
         </div>
 
-        <div>
-            <label>GeeksForGeeks:</label>
-            <span class="editable" id="geeksforgeeks"> {{ userplatform.geeksforgeeks}} </span>
-            <button class="edit-link"  onclick="makeEditable('geeksforgeeks')">Edit</button>
-        </div>
-        
-        <button id="update-confirm" onclick="updateProfile( {{ user.uid }} )" disabled>Confirm Changes</button>
         <button id="update-confirm" onclick="updateProfileQuestions( {{ user.uid }} )">Test button</button>
+        <button id="logoutbtn"><a href="/logout"> logout </a></button>
     </div>
 {% endblock %}
