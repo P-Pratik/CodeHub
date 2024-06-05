@@ -1,11 +1,13 @@
 import requests
 import json
-from config.dbconnect import connect_db
-baseUrl = "https://leetcode.com/graphql?query="
-db = connect_db()
+import pprint as pp
+from config.db_singleton import DatabaseConnection
 
+baseUrl = "https://leetcode.com/graphql?query="
+altUrl = "https://leetcode.com/graphql/"
+db = DatabaseConnection().connection
 query = {
-    "daily" : '''{
+    "daily": """{
     activeDailyCodingChallengeQuestion {
         date
         link
@@ -72,9 +74,8 @@ query = {
             note
         }
     }
-}'''
-,
-"dailyMin" : '''
+}""",
+    "dailyMin": """
 {
     activeDailyCodingChallengeQuestion {
         date
@@ -99,32 +100,52 @@ query = {
         }
     }
 }
-'''
-,
+""",
+    "userSubmissions": """
+{
+  matchedUser(username: "vUsername") {
+    userCalendar(year: vYear) {
+      activeYears
+      streak
+      totalActiveDays
+      dccBadges {
+        timestamp
+        badge {
+          name
+          icon
+        }
+      }
+      submissionCalendar
+    }
+  }
 }
 
+""",
+}
+
+
 def fetchProblems(page, filters={}):
-    collection = db['Leetcode']
+    collection = db["Leetcode"]
     quantity = 20
     offset = (page - 1) * quantity
     pipeline = [
-        { '$skip': offset },
-        { '$sort': { 'questionFrontendId': 1 }},
-        { '$match': filters},
-        { '$project': {
-            '_id': 0,
-            'problem_name': '$title',
-            'difficulty': 1,
-            'accuracy': '$acRate',
-            'slug': '$titleSlug',
-            'tags': '$topicTags'
-        }},
-        { '$limit': quantity}
-
+        {"$skip": offset},
+        {"$sort": {"questionFrontendId": 1}},
+        {"$match": filters},
+        {
+            "$project": {
+                "_id": 0,
+                "problem_name": "$title",
+                "difficulty": 1,
+                "accuracy": "$acRate",
+                "slug": "$titleSlug",
+                "tags": "$topicTags",
+            }
+        },
+        {"$limit": quantity},
     ]
-    
+
     problems = collection.aggregate(pipeline)
-    
     return list(problems)
 
 
@@ -134,10 +155,25 @@ def getDaily():
     data = response.json()
     return data
 
+
 def getDailyMin():
     requestUrl = f'{baseUrl}{query["dailyMin"]}'
     response = requests.get(requestUrl)
     data = response.json()
     return data
 
+def getSubmissionCalender (username="pratik_420", year=2024):
+    q = "query userProfileCalendar($username: String!, $year: Int) { matchedUser(username: $username) { userCalendar(year: $year) { activeYears submissionCalendar } } }"
+    v = {"username": username, "year": year}
+    requestUrl = altUrl
+
+    try:
+        response = requests.post(requestUrl, json={"query": q, "variables": v})
+        data = response.json()
+        data = data["data"]["matchedUser"]["userCalendar"]["submissionCalendar"]
+    except:
+        data = {"error": "Error fetching data"}
+    return data
+
 # print(fetchProblems(1))
+# pp.pprint(getSubmissionCalender())
