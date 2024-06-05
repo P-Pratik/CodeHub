@@ -3,3 +3,4 @@ __pycache__
 instance
 /config
 migrations
+/static/node_modules

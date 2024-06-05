@@ -2,21 +2,29 @@
 {% block head %}
     <title> Profile </title>
     <script src="{{ url_for('static', filename='js/profile.js') }}" defer></script>
+    <link  href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js" defer></script>
 {% endblock %}
 {% block body %}
     <div class="profile-info">
         <h1>Profile</h1>
-
         <div class="avatar">
-            <img src="{{ url_for('images', filename=user.profile_pic)}}" alt="avatar" height="300px">
+            <img id="avatar" src="{{ url_for('images', filename=user.profile_pic) }}" alt="avatar" height="300px">
         </div>
-        
+
         <div>
             <h2>Upload Profile Picture</h2>
             <input type="file" id="profilePicInput" accept="image/png, image/jpg, image/jpeg">
-            <button onclick="updateProfilePicture()">Upload</button>
+            <button id="uploadButton">Upload</button>
         </div>
 
+        <div>
+            <img id="cropImage" style="display:none;" height="400px">
+        </div>
+        <br>
+        <button id="cropButton" style="display:none;">Crop and Upload</button>
+
+    </div>
         <h2>Basic Info</h2>
         <div>
             <label> User ID </label>
@@ -45,7 +53,8 @@
             <button id="update-confirm" onclick="updateProfile( {{ user.uid }} )" disabled>Confirm Changes</button>
         </div>
 
-        <button id="update-confirm" onclick="updateProfileQuestions( {{ user.uid }} )">Test button</button>
+        <button id="update-confirm" onclick="updateProfileQuestions({{ user.uid }})">Test button</button>
         <button id="logoutbtn"><a href="/logout"> logout </a></button>
     </div>
+
 {% endblock %}

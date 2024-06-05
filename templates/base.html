@@ -7,9 +7,10 @@
     <script type="text/javascript">
         const dailyUrl = "{{ url_for('daily') }}";
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js" integrity="sha512-JyCZjCOZoyeQZSd5+YEAcFgz2fowJ1F1hyJOXgtKu4llIa0KneLcidn5bwfutiehUTiOuK87A986BZJMko0eWQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     {% block head %} {% endblock %}
+
+
 </head>
 <body>
     <div class="nav">
@@ -18,8 +19,7 @@
         <a href="{{ url_for('register')}}"> Register  </a>
         <a href="{{ url_for('profile')}}"> Edit_Profile  </a>
     </div>
-    {% block body %} 
 
-    {% endblock %}
+    {% block body %} {% endblock %}
 </body>
 </html>
