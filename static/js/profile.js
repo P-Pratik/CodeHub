@@ -35,7 +35,7 @@ function updateProfile(uid) {
         leetcode: leetcode
     };
 
-    fetch('/update-profile', {
+    fetch('/update/profile', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

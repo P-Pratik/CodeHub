@@ -101,28 +101,7 @@ query = {
     }
 }
 """,
-    "userSubmissions": """
-{
-  matchedUser(username: "vUsername") {
-    userCalendar(year: vYear) {
-      activeYears
-      streak
-      totalActiveDays
-      dccBadges {
-        timestamp
-        badge {
-          name
-          icon
-        }
-      }
-      submissionCalendar
-    }
-  }
 }
-
-""",
-}
-
 
 def fetchProblems(page, filters={}):
     collection = db["Leetcode"]
@@ -148,13 +127,11 @@ def fetchProblems(page, filters={}):
     problems = collection.aggregate(pipeline)
     return list(problems)
 
-
 def getDaily():
     requestUrl = f'{baseUrl}{query["daily"]}'
     response = requests.get(requestUrl)
     data = response.json()
     return data
-
 
 def getDailyMin():
     requestUrl = f'{baseUrl}{query["dailyMin"]}'
@@ -162,7 +139,23 @@ def getDailyMin():
     data = response.json()
     return data
 
-def getSubmissionCalender (username="pratik_420", year=2024):
+def getProfile(username):
+    pass
+
+def getSolveStats(username):
+    query = "query ($username: String!) { matchedUser(username: $username) { submitStats { acSubmissionNum { difficulty count submissions } } } }"
+    var = {"username": username}
+    requestUrl = altUrl
+
+    try:
+        response = requests.post(requestUrl, json={"query": query, "variables": var})
+        data = response.json()
+        data = data["data"]["matchedUser"]["submitStats"]["acSubmissionNum"]
+    except:
+        data = {"error": "Error fetching data"}
+    return data
+
+def getSubmissionCalendar (username, year=2024):
     q = "query userProfileCalendar($username: String!, $year: Int) { matchedUser(username: $username) { userCalendar(year: $year) { activeYears submissionCalendar } } }"
     v = {"username": username, "year": year}
     requestUrl = altUrl
@@ -177,3 +170,4 @@ def getSubmissionCalender (username="pratik_420", year=2024):
 
 # print(fetchProblems(1))
 # pp.pprint(getSubmissionCalender())
+# pp.pprint(getSubmitStats("pratik_420"))

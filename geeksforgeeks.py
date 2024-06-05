@@ -33,21 +33,20 @@ def getDaily():
         data = {"error": "Error fetching data"}
     return data
 
-
-def getProfile(username="pratikp2lgv"):
-
+def getSolved(username):
     reqData = {"handle": username, "requestType": "", "year": "", "month": ""}
     requestUrl = f"{baseUrl}/api/v1/user/problems/submissions/"
     try:
         response = requests.post(requestUrl, data=reqData)
         response = response.json()
+        response = response["result"]
     except:
         response = {"error": "User not found"}
 
     return response
 
 
-def getSubmissionCalender(username="pratikp2lgv", year=datetime.now().year, month=""):
+def getSubmissionCalendar(username, year=datetime.now().year, month=""):
     if not username or username == "":
         return {"error": "Username not provided"}
 
@@ -72,5 +71,6 @@ def getSubmissionCalender(username="pratikp2lgv", year=datetime.now().year, mont
     return response
 
 # pp.pprint(fetchProblems(1))
+# pp.pprint(getProfile())
 # pp.pprint(getSubmissionCalender(year="2023"))
 
