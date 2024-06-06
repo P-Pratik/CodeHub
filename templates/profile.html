@@ -14,8 +14,7 @@
 
         <div>
             <h2>Upload Profile Picture</h2>
-            <input type="file" id="profilePicInput" accept="image/png, image/jpg, image/jpeg">
-            <button id="uploadButton">Upload</button>
+            <input type="file" id="profilePicInput" accept="image/png, image/jpg, image/jpeg" onclick="handleProfilePicture()">
         </div>
 
         <div>
@@ -52,8 +51,9 @@
 
             <button id="update-confirm" onclick="updateProfile( {{ user.uid }} )" disabled>Confirm Changes</button>
         </div>
-
-        <button id="update-confirm" onclick="updateProfileQuestions({{ user.uid }})">Test button</button>
+        
+        
+        <button id="update-confirm" onclick="updateStats() ">Test button</button>
         <button id="logoutbtn"><a href="/logout"> logout </a></button>
     </div>
 

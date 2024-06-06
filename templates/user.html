@@ -1,12 +1,37 @@
-{% extends 'base.html' %}
-{% block head %}
-    <title> {{ user.username }} </title>
-{% endblock %}
+{% extends 'base.html' %} {% block head %}
+<title>{{ user.username }}</title>
+<script src="{{ url_for('static', filename='js/user.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/profile.js') }}" defer></script>
+{% endblock %} {% block body %}
+
+<h1>Profile</h1>
+
+<div class="user-info">
+    <div class="avatar">
+        <img
+            id="avatar"
+            src="{{ url_for('images', filename=user.profile_pic) }}"
+            alt="avatar"
+            height="300px"
+        />
+    </div>
+    <p> {{ user.username }} </p>
+    <div class="edit-profile"></div>
+</div>
+
+<div class="statistics">
+    <div class="heatmap">
+        <h2>Heatmap</h2>
+        <div id="heatmap"></div>
+    </div>
+
+    <div class="solved">
+        <h2>Solved</h2>
+    </div>
 
 
-{% block body %}
 
-<h2> Profile </h2>
-<p> {{ user }} </p>
+</div>
+
 
 {% endblock %}

@@ -1,4 +1,5 @@
 // Remove console.logs before deployment
+let cropper;
 
 function makeEditable(id) {
     var span = document.getElementById(id);
@@ -52,31 +53,19 @@ function updateProfile(uid) {
         });
 }
 
-function updateProfileQuestions() {
-    fetch('/update-user-questions', {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-        })
-};
-
 function handleProfilePicture() {
-    let cropper;
     const fileInput = document.getElementById('profilePicInput');
     const image = document.getElementById('cropImage');
     const cropButton = document.getElementById('cropButton');
-    const uploadButton = document.getElementById('uploadButton');
 
     fileInput.addEventListener('change', handleFileChange);
     cropButton.addEventListener('click', handleCrop);
-    uploadButton.addEventListener('click', handleUpload);
 
     function handleFileChange(event) {
+        if (!fileInput.files.length) {
+            alert('No file selected');
+            return;
+        }
         const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
@@ -95,6 +84,7 @@ function handleProfilePicture() {
             reader.readAsDataURL(file);
         }
     }
+
     function handleCrop() {
         const canvas = cropper.getCroppedCanvas();
         canvas.toBlob((blob) => {
@@ -127,30 +117,7 @@ function handleProfilePicture() {
             });
     }
 
-    function handleUpload() {
-        if (!fileInput.files.length) {
-            alert('No file selected');
-            return;
-        }
-        const file = fileInput.files[0];
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            image.src = e.target.result;
-            image.style.display = 'block';
-            if (cropper) {
-                cropper.destroy();
-            }
-            cropper = new Cropper(image, {
-                aspectRatio: 1,
-                viewMode: 1,
-            });
-            cropButton.style.display = 'block';
-        };
-        reader.readAsDataURL(file);
-    }
 }
-
-handleProfilePicture();
 
 function updateStats(){
     fetch('/update/stats', {
@@ -163,5 +130,4 @@ function updateStats(){
         .then(data => {
             console.log(data);
         })
-}
-
+} 
