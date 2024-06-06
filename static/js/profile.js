@@ -2,7 +2,7 @@
 
 function makeEditable(id) {
     var span = document.getElementById(id);
-    var currentValue = span.innerText;
+    var currentValue = span.innerText; 
     span.innerHTML = '<input type="text" id="edit-' + id + '" value="' + currentValue + '"/>';
     document.getElementById('edit-' + id).focus();
 
@@ -95,7 +95,6 @@ function handleProfilePicture() {
             reader.readAsDataURL(file);
         }
     }
-
     function handleCrop() {
         const canvas = cropper.getCroppedCanvas();
         canvas.toBlob((blob) => {
@@ -152,3 +151,17 @@ function handleProfilePicture() {
 }
 
 handleProfilePicture();
+
+function updateStats(){
+    fetch('/update/stats', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        })
+}
+

@@ -1,7 +1,7 @@
 import requests
 import json
 import pprint as pp
-from config.db_singleton import DatabaseConnection
+from config.dbconnect import DatabaseConnection
 
 baseUrl = "https://leetcode.com/graphql?query="
 altUrl = "https://leetcode.com/graphql/"

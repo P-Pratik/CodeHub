@@ -2,7 +2,7 @@ import requests
 import json
 import pprint as pp
 from datetime import datetime
-from config.db_singleton import DatabaseConnection
+from config.dbconnect import DatabaseConnection
 
 baseUrl = "https://practiceapi.geeksforgeeks.org"
 db = DatabaseConnection().connection

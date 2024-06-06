@@ -11,9 +11,11 @@ from flask import (
 from werkzeug.utils import secure_filename
 from flask_login import login_user, login_required, logout_user, current_user
 from models import User, UserQuestions, UserPlatforms
+import os
+
 import geeksforgeeks as gfg
 import leetcode as lc
-import os
+from handleUser import handleUser
 
 
 def register_routes(app, db, bcrypt):
@@ -65,12 +67,21 @@ def register_routes(app, db, bcrypt):
             return jsonify(success=False, error="User not found")
 
     # under dev
-    app.route("/update-user-questions", methods=["PUT"])
-
+    @app.route("/update/stats", methods=["PUT"])
     @login_required
-    def update_user_questions():
-        uid = current_user.uid
-        return
+    def update_stats():
+        userplatform = UserPlatforms.query.filter(UserPlatforms.uid == current_user.uid).first()
+        data = [
+            { "platform": "lc", "username": userplatform.leetcode },
+            { "platform": "gfg", "username": userplatform.geeksforgeeks }
+        ]
+        
+        try:
+            handleUser(uid=current_user.uid, users=data)
+            return jsonify(success=True)
+        except Exception as e:
+            print(e)
+            return jsonify(success=False)
 
     @app.route("/update/profile-pic", methods=["POST"])
     @login_required

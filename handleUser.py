@@ -3,7 +3,7 @@ import json
 import pprint as pp
 import datetime
 from collections import defaultdict
-from config.db_singleton import DatabaseConnection
+from config.dbconnect import DatabaseConnection
 
 # platforms
 import geeksforgeeks as gfg
@@ -73,7 +73,7 @@ def buildUserCalender(users):
     return submissionCalender, totalActiveDays
 
 
-# -------------------------------------------------------------------------------------------------------------- #
+# TODO -------------------------------------------------------------------------------------------------------------- #
 # leetcode version requires session cookie
 # pushed back on developing this function
 def getUserQuestions():
@@ -100,8 +100,7 @@ def convertFormat(data, platform="geeksforgeeks"):
 def addUserQuestions():
     pass
 
-
-# -------------------------------------------------------------------------------------------------------------- #
+# TODO end-------------------------------------------------------------------------------------------------------------- #
 
 
 def getUserStats(users):
@@ -171,10 +170,25 @@ def buildUserData(uid, users):
         # }
         "stats": {"solvedStats": solvedStats},
     }
-    print(query)
+    col.insert_one(query)
+
+def updateUserdata(uid, users):
+    pass
+
+def handleUser(uid, users):
+    user = col.find_one({"uid": uid})
+    if user:
+        updateUserdata(uid, users)
+    else:
+        buildUserData(uid, users)
 
 
 # print(datetime.datetime.fromtimestamp(1704067200, datetime.UTC).strftime('%Y-%m-%d'))
 # print(getUserQuestions())
 # getUserStats()
 # buildUserData(1)
+
+# users = [
+#     {'platform': 'gfg', 'username': 'pratikp2lgv'},
+#     {'platform': 'lc', 'username': 'pratik_420'},
+# ]
