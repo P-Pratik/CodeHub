@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <script type="text/javascript">
         const dailyUrl = "{{ url_for('daily') }}";
     </script>
@@ -13,12 +13,20 @@
 
 </head>
 <body>
-    <div class="nav">
-        <a href="{{url_for('index')}}"> Home</a>
-        <a href="{{ url_for('login')}}"> Login  </a>
-        <a href="{{ url_for('register')}}"> Register  </a>
-        <a href="{{ url_for('profile')}}"> Edit_Profile  </a>
-    </div>
+    <header>
+        <a href="{{url_for('index')}}">
+            <img class="logo" src="{{ url_for('static', filename='logo/codehub.svg') }}" alt="logo" height="35px">
+        </a>
+        <div class="nav">
+            <ul class="nav__links">
+                <li><a href="{{url_for('index')}}"> Home</a></li>
+                <li><a href="{{ url_for('login')}}"> Login  </a></li>
+                <li><a href="{{ url_for('register')}}"> Register  </a></li>
+                <li><a href="{{ url_for('profile')}}"> Edit_Profile  </a></li>
+            </ul>
+        </div>
+        <a href="">User</a>
+    </header>
 
     {% block body %} {% endblock %}
 </body>
