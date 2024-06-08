@@ -68,15 +68,30 @@ p{
     font-size: 1.1em;
 }
 
+.daily-div{
+    margin-bottom: 5%;
+}
+
 .daily-title{
     background-color: #FF9000;
-    color: #1E1E1E;
     max-width: 800px;
     margin: 20px auto;
     margin-bottom: 0;
-    padding: 0.5em;
+    padding: 1em;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.daily-title h2{
+    color: #1E1E1E;
+    margin-left: 3%;
+}
+
+.daily-title h3{
+    color: #1E1E1E;
+    margin-right: 3%;
 }
 
 .daily-container{
@@ -94,11 +109,8 @@ p{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #D9D9D920;
     padding: 10px;
     margin-bottom: 10px;
-    border-radius: 100px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .daily-problem h3 {

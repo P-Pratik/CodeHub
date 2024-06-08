@@ -1,36 +1,40 @@
-function renderdaily(data) {
-    let container = document.querySelector('#daily-container');
-    container.innerHTML = '';
+function renderDaily(data) {
+    const gfgContainer = document.querySelector('#gfg-daily-content');
+    const leetcodeContainer = document.querySelector('#leetcode-daily-content');
+
+    // Clear previous content
+    gfgContainer.innerHTML = '';
+    leetcodeContainer.innerHTML = '';
 
     // Create GeeksForGeeks daily challenge
-    const geeksdailyDiv = document.createElement('div');
-    geeksdailyDiv.classList.add('daily-problem');
-    
-    let gfgTitle = document.createElement('h3');
+    const gfgDailyDiv = document.createElement('div');
+    gfgDailyDiv.classList.add('daily-problem');
+
+    const gfgTitle = document.createElement('h3');
     gfgTitle.textContent = data.geeksdaily.problem_name;
-    
-    let gfgButton = document.createElement('a');
+
+    const gfgButton = document.createElement('a');
     gfgButton.textContent = "Solve";
     gfgButton.href = data.geeksdaily.problem_url;
-    
-    geeksdailyDiv.appendChild(gfgTitle);
-    geeksdailyDiv.appendChild(gfgButton);
-    container.appendChild(geeksdailyDiv);
+
+    gfgDailyDiv.appendChild(gfgTitle);
+    gfgDailyDiv.appendChild(gfgButton);
+    gfgContainer.appendChild(gfgDailyDiv);
 
     // Create LeetCode daily challenge
-    const lcDiv = document.createElement('div');
-    lcDiv.classList.add('daily-problem');
-    
-    let lcTitle = document.createElement('h3');
-    lcTitle.textContent = data.leetdaily.data.activeDailyCodingChallengeQuestion.question.title;
-    
-    let lcButton = document.createElement('a');
-    lcButton.textContent = "Solve";
-    lcButton.href = `https://leetcode.com${data.leetdaily.data.activeDailyCodingChallengeQuestion.link}`;
-    
-    lcDiv.appendChild(lcTitle);
-    lcDiv.appendChild(lcButton);
-    container.appendChild(lcDiv);
+    const leetcodeDailyDiv = document.createElement('div');
+    leetcodeDailyDiv.classList.add('daily-problem');
+
+    const leetcodeTitle = document.createElement('h3');
+    leetcodeTitle.textContent = data.leetdaily.data.activeDailyCodingChallengeQuestion.question.title;
+
+    const leetcodeButton = document.createElement('a');
+    leetcodeButton.textContent = "Solve";
+    leetcodeButton.href = `https://leetcode.com${data.leetdaily.data.activeDailyCodingChallengeQuestion.link}`;
+
+    leetcodeDailyDiv.appendChild(leetcodeTitle);
+    leetcodeDailyDiv.appendChild(leetcodeButton);
+    leetcodeContainer.appendChild(leetcodeDailyDiv);
 }
 
 function fetchDaily() {
@@ -43,7 +47,7 @@ function fetchDaily() {
     .then(response => response.json())
     .then(data => {
         console.log(data);
-        renderdaily(data);
+        renderDaily(data);
     })
     .catch(error => {
         console.error('Error:', error);
