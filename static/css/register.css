@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+*{
+    box-sizing: border-box;
+    font-family: 'Inter';
+    margin: 0;
+    padding: 0;
+}
+
+.form-title{
+    background: #FF9000;
+    margin: 5% auto;
+    width: 50%;
+    margin-bottom: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-title h1 {
+    text-align: center;
+    color: #1E1E1E;
+    width: 100%;
+}
+
+
+.form-container {
+    margin: 20px auto;
+    margin-top: 0;
+    background: #D9D9D920;
+    padding: 20px 40px;
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 50%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+label {
+    margin: 10px 0 5px;
+    color: #ccc;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    padding: 10px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #FF9000;
+    outline: none;
+}
+
+button[type="submit"] {
+    background-color: #FF9000;
+    color: #1E1E1E;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    width: fit-content;
+    font-weight: 500;
+    transition: all 0.3s ease 0s;
+}
+
+button[type="submit"]:hover {
+    background-color: #ffb617;
+    
+}
+
+.button-container{
+    display: flex;
+    justify-content: center;
+}
