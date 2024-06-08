@@ -90,6 +90,47 @@ p{
     border-top-right-radius: 0px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+.daily-problem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #D9D9D920;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 100px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.daily-problem h3 {
+    color: #fff;
+    margin: 0;
+    margin-left: 10px;
+    flex-grow: 1; /* Allow the title to grow and fill remaining space */
+}
+
+.daily-problem a {
+    background-color: #ccc;
+    color: #1E1E1E;
+    padding: 5px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease 0s;
+}
+
+.daily-problem a:hover {
+    background-color: #ffffff;
+}
+
+.daily-problem > * {
+    display: flex;
+    align-items: center;
+}
+
+.daily-problem h3 {
+    margin-right: auto;
+}
+
+
 
 .filterForm, .problems-container, .pagination{
     max-width: 800px;
@@ -115,7 +156,15 @@ p{
     border-radius: 100px;
 }
 
-.daily-container div a, .problems-container a{
+.daily-container div a{
+    display: block;
+    text-align: center;
+    padding: 10px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.problems-container a{
     display: block;
     background: #007BFF;
     color: #ffffff;
@@ -132,7 +181,7 @@ p{
     border-radius: 100px;
 }
 
-.daily-container div a:hover, .problems-container a:hover{
+.problems-container a:hover{
     background: #0056b3;
 }
 
@@ -187,7 +236,7 @@ th, td{
 }
 
 th{
-    background: #f4f4f4;
+    background: #0E0E0E;
 }
 
 .pagination{

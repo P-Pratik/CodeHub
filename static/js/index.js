@@ -1,29 +1,35 @@
-function renderdaily(data) {                                 //WILL REQUIRE MODIFICATION. BASE STUFF.
+function renderdaily(data) {
     let container = document.querySelector('#daily-container');
     container.innerHTML = '';
+
+    // Create GeeksForGeeks daily challenge
     const geeksdailyDiv = document.createElement('div');
-    let h2 = document.createElement('h3');
-    let button = document.createElement('a')
-    h2.textContent = data.geeksdaily.problem_name;
-    button.textContent = "Solve";
-    button.href = data.geeksdaily.problem_url
-
-    geeksdailyDiv.appendChild(h2);
-    geeksdailyDiv.appendChild(button);
-
+    geeksdailyDiv.classList.add('daily-problem');
+    
+    let gfgTitle = document.createElement('h3');
+    gfgTitle.textContent = data.geeksdaily.problem_name;
+    
+    let gfgButton = document.createElement('a');
+    gfgButton.textContent = "Solve";
+    gfgButton.href = data.geeksdaily.problem_url;
+    
+    geeksdailyDiv.appendChild(gfgTitle);
+    geeksdailyDiv.appendChild(gfgButton);
     container.appendChild(geeksdailyDiv);
 
+    // Create LeetCode daily challenge
     const lcDiv = document.createElement('div');
-    const lch3 = document.createElement('h3');
-    const lcbutton = document.createElement('a')
-
-    lch3.textContent = data.leetdaily.data.activeDailyCodingChallengeQuestion.question.title;
-    lcbutton.textContent = "Solve";
-    lcbutton.href = `https://leetcode.com${data.leetdaily.data.activeDailyCodingChallengeQuestion.link}`
-
-    lcDiv.appendChild(lch3);
-    lcDiv.appendChild(lcbutton);
-
+    lcDiv.classList.add('daily-problem');
+    
+    let lcTitle = document.createElement('h3');
+    lcTitle.textContent = data.leetdaily.data.activeDailyCodingChallengeQuestion.question.title;
+    
+    let lcButton = document.createElement('a');
+    lcButton.textContent = "Solve";
+    lcButton.href = `https://leetcode.com${data.leetdaily.data.activeDailyCodingChallengeQuestion.link}`;
+    
+    lcDiv.appendChild(lcTitle);
+    lcDiv.appendChild(lcButton);
     container.appendChild(lcDiv);
 }
 
@@ -34,15 +40,15 @@ function fetchDaily() {
             'Content-Type': 'application/json',
         }
     })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            renderdaily(data);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-};
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        renderdaily(data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
 
 fetchDaily(); // throw it somewhere i dont want it here
 
