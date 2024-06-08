@@ -7,8 +7,8 @@
 }
 
 body{
-    background-color: #f4f4f4;
-    color: #333333;
+    background-color: #1E1E1E;
+    color: #fff;
 }
 
 .nav{
@@ -52,13 +52,15 @@ header{
     color: #FF9000;
 }
 
-h1, h2, h3{
-    color: #333333;
+h2, h3{
+    color: #FF9000;
     text-align: center;
 }
 
 h1{
     margin-top: 20px;
+    padding: 1em;
+    text-align: center;
 }
 
 p{
@@ -66,12 +68,36 @@ p{
     font-size: 1.1em;
 }
 
-.daily-container, .filterForm, .problems-container, .pagination{
+.daily-title{
+    background-color: #FF9000;
+    color: #1E1E1E;
     max-width: 800px;
     margin: 20px auto;
+    margin-bottom: 0;
+    padding: 0.5em;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.daily-container{
+    max-width: 800px;
+    margin: 20px auto;
+    margin-top: 0;
     padding: 20px;
-    background: #ffffff;
-    border-radius: 8px;
+    background: #D9D9D920;
+    border-radius: 10px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.filterForm, .problems-container, .pagination{
+    max-width: 800px;
+    margin: 20px auto;
+    margin-top: 0;
+    padding: 20px;
+    background: #D9D9D920;
+    border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
