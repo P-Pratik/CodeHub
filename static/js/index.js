@@ -48,14 +48,96 @@ function fetchDaily() {
     .then(data => {
         console.log(data);
         renderDaily(data);
+        updateTimers();
     })
     .catch(error => {
         console.error('Error:', error);
     });
 }
 
-fetchDaily(); // throw it somewhere i dont want it here
+function updateTimers() {
+    function getRemainingTimeIST() {
+        const now = new Date();
+        const istOffset = 5.5 * 60 * 60 * 1000; // IST is UTC+5:30
+        const utcNow = now.getTime() + (now.getTimezoneOffset() * 60000); // Convert local time to UTC
+        const istNow = new Date(utcNow + istOffset); // Convert UTC time to IST
+        const endOfDayIST = new Date(
+            istNow.getFullYear(),
+            istNow.getMonth(),
+            istNow.getDate() + 1, // Next day
+            0, 0, 0 // Midnight
+        ).getTime();
+        const remainingMilliseconds = endOfDayIST - istNow.getTime();
+        const hours = String(Math.floor((remainingMilliseconds / (1000 * 60 * 60)) % 24)).padStart(2, '0');
+        const minutes = String(Math.floor((remainingMilliseconds / (1000 * 60)) % 60)).padStart(2, '0');
+        const seconds = String(Math.floor((remainingMilliseconds / 1000) % 60)).padStart(2, '0');
+        return { hours, minutes, seconds };
+    }
 
+    function getRemainingTimeUTC() {
+        const now = new Date();
+        const endOfDayUTC = new Date(
+            Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1, 0, 0, 0)
+        );
+        const remainingMilliseconds = endOfDayUTC - now;
+        const hours = String(Math.floor((remainingMilliseconds / (1000 * 60 * 60)) % 24)).padStart(2, '0');
+        const minutes = String(Math.floor((remainingMilliseconds / (1000 * 60)) % 60)).padStart(2, '0');
+        const seconds = String(Math.floor((remainingMilliseconds / 1000) % 60)).padStart(2, '0');
+        return { hours, minutes, seconds };
+    }
+
+    function updateTimer() {
+        const gfgHours = document.getElementById('gfg-hours');
+        const gfgMinutes = document.getElementById('gfg-minutes');
+        const gfgSeconds = document.getElementById('gfg-seconds');
+        
+        const leetHours = document.getElementById('leet-hours');
+        const leetMinutes = document.getElementById('leet-minutes');
+        const leetSeconds = document.getElementById('leet-seconds');
+
+        const gfgTime = getRemainingTimeIST();
+        gfgHours.textContent = gfgTime.hours;
+        gfgMinutes.textContent = gfgTime.minutes;
+        gfgSeconds.textContent = gfgTime.seconds;
+
+        const leetTime = getRemainingTimeUTC();
+        leetHours.textContent = leetTime.hours;
+        leetMinutes.textContent = leetTime.minutes;
+        leetSeconds.textContent = leetTime.seconds;
+    }
+
+    updateTimer();
+    setInterval(updateTimer, 1000);
+}
+
+function displayCurrentDate() {
+    const gfgDateElement = document.getElementById('gfg-date');
+    const leetDateElement = document.getElementById('leet-date');
+
+    if (!gfgDateElement || !leetDateElement) {
+        console.error('Element with id "gfg-date" or "leet-date" not found.');
+        return;
+    }
+
+    const now = new Date();
+
+    // IST Date
+    const istOffset = 5.5 * 60 * 60 * 1000; // IST is UTC+5:30
+    const utcNow = now.getTime() + (now.getTimezoneOffset() * 60000); // Convert local time to UTC
+    const istNow = new Date(utcNow + istOffset); // Convert UTC time to IST
+    const istDay = istNow.getDate();
+    const istMonth = istNow.toLocaleString('default', { month: 'long' });
+    const formattedISTDate = `${istDay}, ${istMonth}`;
+    gfgDateElement.textContent = formattedISTDate;
+
+    // UTC Date
+    const utcDay = now.getUTCDate();
+    const utcMonth = now.toLocaleString('default', { month: 'long', timeZone: 'UTC' });
+    const formattedUTCDate = `${utcDay}, ${utcMonth}`;
+    leetDateElement.textContent = formattedUTCDate;
+}
+
+displayCurrentDate();
 
 function prevPage() {
     let page = document.getElementById('page').innerText;
@@ -74,15 +156,14 @@ function nextPage() {
 }
 
 function renderProblems(data, platform) {
+    let baseUrl, endUrl;
 
     if (platform === 'leetcode') {
-        baseUrl = 'https://leetcode.com/problems/'
-        endUrl = '/description/'
-    }
-
-    else {
-        baseUrl = 'https://www.geeksforgeeks.org/problems/'
-        endUrl = '/1/'
+        baseUrl = 'https://leetcode.com/problems/';
+        endUrl = '/description/';
+    } else {
+        baseUrl = 'https://www.geeksforgeeks.org/problems/';
+        endUrl = '/1/';
     }
 
     let container = document.getElementById('problems');
@@ -95,7 +176,6 @@ function renderProblems(data, platform) {
         let accuracy = document.createElement('td');
         let problem_url = document.createElement('td');
         let problem_url_a = document.createElement('a');
-        
 
         problem_name.textContent = data[i].problem_name;
         difficulty.textContent = data[i].difficulty;
@@ -112,9 +192,7 @@ function renderProblems(data, platform) {
 
         container.appendChild(tr);
     }
-};
-
-
+}
 
 function fetchProblems(postData = {}) {
     const page = document.getElementById('page').innerText;
@@ -126,14 +204,13 @@ function fetchProblems(postData = {}) {
         },
         body: JSON.stringify(postData),
     })
-        .then(response => response.json())
-        .then(data => {
-            // console.log(data);
-            renderProblems(data, postData.platform);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+    .then(response => response.json())
+    .then(data => {
+        renderProblems(data, postData.platform);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }
 
 function applyfilter() {
@@ -152,4 +229,5 @@ function applyfilter() {
     fetchProblems(postData);
 }
 
-fetchProblems(); 
+fetchDaily();
+fetchProblems();
