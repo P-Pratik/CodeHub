@@ -179,7 +179,7 @@ function renderProblems(data, platform) {
 
         problem_name.textContent = data[i].problem_name;
         difficulty.textContent = data[i].difficulty;
-        accuracy.textContent = data[i].accuracy;
+        accuracy.textContent = `${parseFloat(data[i].accuracy).toFixed(2)}%`;
         problem_url_a.textContent = 'Solve';
         problem_url_a.href = baseUrl + data[i].slug + endUrl;
 
