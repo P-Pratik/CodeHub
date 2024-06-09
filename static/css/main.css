@@ -14,8 +14,11 @@ body{
 
 .nav{
     text-decoration: none;
-    font-size: 1em;
+    font-size: 1.1em;
+    margin-right: 10%;
+    margin-left: 2%;
 }
+
 
 .nav li, a{
     text-decoration: none;
@@ -28,7 +31,7 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5em 8%;
+    padding: 1.5em 8%;
 }
 
 
@@ -46,11 +49,15 @@ header{
 }
 
 .nav__links li a{
-    transition: all 0.3s ease 0.1s;
+    transition: all 0.3s ease 0s;
 }
 
 .nav__links li a:hover{
     color: #FF9000;
+}
+
+.user{
+    margin-right: 2%;
 }
 
 h2, h3{
@@ -132,6 +139,7 @@ p{
     /* max-width: 800px; */
     margin: 20px auto;
     width: 500px;
+    height: 60%;
     margin-top: 0;
     padding: 20px;
     background: #D9D9D920;
@@ -205,10 +213,6 @@ p{
     font-size: 15px;
     border-radius: 10px;
     transition: all 0.3s ease 0s;
-}
-
-.allproblems a:hover{
-    background: #ffb617;
 }
 
 .daily-container div a{
@@ -355,20 +359,64 @@ table{
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
-    border: #0E0E0E solid 4px;
+}
+
+th{
+    padding: 4% 3%;
+}
+
+td{
+    padding: 3%;
 }
 
 th, td{
     text-align: left;
-    padding: 3%;
-    border-bottom: 1px solid #dddddd;
-    background: #fff;
-    color: #1E1E1E;
+    color: #353535;
+    transition: all 0.3s ease 0s;
+}
+
+td{
+    font-weight: 500;
+}
+
+tr{
+    background: #f2f2f2;
+    transition: all 0.3s ease 0s;
+}
+
+
+tr:nth-child(even){
+    background: #dddddd;
+    transition: all 0.3s ease 0s;
+}
+
+tr:hover{
+    background-color: #FF9000;
+}
+
+tr:hover a{
+    background-color: #fff;
+}
+
+tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
 }
 
 th{
     background: #0E0E0E;
     color: #fff;
+}
+
+th:first-child{
+    border-top-left-radius: 10px;
+}
+
+th:last-child{
+    border-top-right-radius: 10px;
 }
 
 
@@ -392,6 +440,7 @@ th{
     border: none;
     border-radius: 100%;
     cursor: pointer;
+    transition: all 0.3s ease 0s;
 }
 
 .pagination button:hover{

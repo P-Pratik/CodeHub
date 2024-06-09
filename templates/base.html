@@ -15,7 +15,7 @@
 <body>
     <header>
         <a href="{{url_for('index')}}">
-            <img class="logo" src="{{ url_for('static', filename='svg/codehub.svg') }}" alt="logo" height="35px">
+            <img class="logo" src="{{ url_for('static', filename='svg/codehub.svg') }}" alt="logo" height="50px">
         </a>
         <div class="nav">
             <ul class="nav__links">
@@ -25,7 +25,7 @@
                 <li><a href="{{ url_for('profile')}}"> Edit_Profile  </a></li>
             </ul>
         </div>
-        <a href="">User</a>
+        <a class="user" href="">User</a>
     </header>
 
     {% block body %} {% endblock %}
