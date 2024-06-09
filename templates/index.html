@@ -8,10 +8,13 @@
 
 <p>{{ logged_in }}</p><br>
 
+<!-- <div class="daily-align">
+</div> -->
+
 <div class="daily-div">
     <div class="daily-title">
         <h2>GeeksForGeeks Daily Challenge</h2>
-        <div id="gfg-timer">
+        <div class="timer" id="gfg-timer">
             <span id="gfg-hours" class="timer-box"></span>
             <span class="timer-colon">:</span>
             <span id="gfg-minutes" class="timer-box"></span>
@@ -28,7 +31,7 @@
 <div class="daily-div">
     <div class="daily-title">
         <h2>LeetCode Daily Challenge</h2>
-        <div id="leet-timer">
+        <div class="timer" id="leet-timer">
             <span id="leet-hours" class="timer-box"></span>
             <span class="timer-colon">:</span>
             <span id="leet-minutes" class="timer-box"></span>
@@ -43,36 +46,42 @@
 </div>
 
 <div class="allproblems">
-    <h2>Problems</h2>
-    <div class="filterForm">
-        <label for="difficulty">Difficulty:</label>
-        <select id="difficulty" name="difficulty">
-            <option value="">All</option>
-            <option value="Easy">Easy</option>
-            <option value="Medium">Medium</option>
-            <option value="Hard">Hard</option>
-        </select>
-    
-        <label for="platform">Platform:</label>
-        <select id="platform" name="platform">
-            <option value="geeksforgeeks">GeeksForGeeks</option>
-            <option value="leetcode">LeetCode</option>
-        </select>
-    
-        <button onclick="applyfilter()" id="apply">Apply</button>
+    <div>        
+        <div class="filter-title">
+            <h2>Filter Problems</h2>
+            <img src="{{ url_for('static', filename='svg/filter.svg') }}" alt="filter" height="45px">
+        </div>
+        <div class="filterForm">
+            <label for="difficulty">Difficulty:</label>
+            <select id="difficulty" name="difficulty">
+                <option value="">All</option>
+                <option value="Easy">Easy</option>
+                <option value="Medium">Medium</option>
+                <option value="Hard">Hard</option>
+            </select>
+        
+            <label for="platform">Platform:</label>
+            <select id="platform" name="platform">
+                <option value="geeksforgeeks">GeeksForGeeks</option>
+                <option value="leetcode">LeetCode</option>
+            </select>
+            <button onclick="applyfilter()" id="apply">Apply</button>
+        </div>
     </div>
-
-    <table id="problemstb">
-        <thead>
-            <tr>
-                <th>Problem ID</th>
-                <th>Problem Name</th>
-                <th>Difficulty</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody id="problems"></tbody>
-    </table>
+    
+    <div class="problemtb-container">
+        <table id="problemstb">
+            <thead>
+                <tr>
+                    <th>Problem Name</th>
+                    <th>Difficulty</th>
+                    <th>Accuracy</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="problems"></tbody>
+        </table>
+    </div>
 
     <div class="pagination">
         <button id="prev" onclick="prevPage()">Prev</button>
