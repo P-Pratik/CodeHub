@@ -24,6 +24,11 @@ def register_routes(app, db, bcrypt):
         logged_in = current_user.is_authenticated
         return render_template("index.html", logged_in=logged_in)
 
+    @app.route("/get-username", methods=["GET"])
+    def get_username():
+        username = current_user.username
+        return jsonify(username)
+
     @app.route("/check-logged-in", methods=["GET"])
     def check_loggedin():
         logged_in = current_user.is_authenticated
@@ -54,8 +59,8 @@ def register_routes(app, db, bcrypt):
             return jsonify(success=False, error="No data provided")
 
         uid = request.json["uid"]
-        geeksforgeeks = request.json["geeksforgeeks"]
-        leetcode = request.json["leetcode"]
+        geeksforgeeks = request.json["geeksforgeeks"].strip()
+        leetcode = request.json["leetcode"].strip()
 
         user = UserPlatforms.query.filter(UserPlatforms.uid == uid).first()
 
@@ -80,7 +85,6 @@ def register_routes(app, db, bcrypt):
             { "platform": "lc", "username": userplatform.leetcode },
             { "platform": "gfg", "username": userplatform.geeksforgeeks }
         ]
-        
         try:
             handleUser(uid=current_user.uid, users=data)
             return jsonify(success=True)

@@ -30,7 +30,7 @@ def getDaily():
         response = requests.get(requestUrl)
         data = response.json()
     except:
-        data = {"error": "Error fetching data"}
+        data = {"error": "Some error occurred"}
     return data
 
 def getSolved(username):
@@ -41,7 +41,7 @@ def getSolved(username):
         response = response.json()
         response = response["result"]
     except:
-        response = {"error": "User not found"}
+        response = {"error": "Some error occurred"}
 
     return response
 
@@ -67,7 +67,7 @@ def getSubmissionCalendar(username, year=datetime.now().year, month=""):
         response = response.json()
         response = response["result"]
     except:
-        response = {"error": "User not found"}
+        response = {"error": "Some error occurred"}
     return response
 
 # pp.pprint(fetchProblems(1))
