@@ -10,7 +10,7 @@
     <div class="avatar">
         <img
             id="avatar"
-            src="{{ url_for('images', filename=user.profile_pic) }}"
+            src="{{ url_for('static', filename='images/' + user.profile_pic) }}"
             alt="avatar"
             height="300px"
         />

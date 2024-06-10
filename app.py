@@ -9,7 +9,7 @@ app = Flask(__name__, template_folder='templates')
 db = SQLAlchemy()
 
 def create_app():
-    IMAGE_FOLDER = "images/"
+    IMAGE_FOLDER = os.path.join('static', 'images')
     app = Flask(__name__, template_folder='templates')
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///codehub.db'
     app.config['SECRET_KEY'] = 'key123'
