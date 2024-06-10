@@ -1,33 +1,74 @@
-body{
-    font-family: 'Arial', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+*{
+    box-sizing: border-box;
+    font-family: 'Inter';
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    color: #333333;
+}
+
+body{
+    background: #1E1E1E;
+    color: #fff;
 }
 
 .nav{
-    background-color: #333333;
-    padding: 1em;
-    text-align: center;
-    color: #ffffff;
-    margin: 0 15px;
     text-decoration: none;
-    font-size: 1.2em;
+    font-size: 1.1em;
+    margin-right: 10%;
+    margin-left: 4%;
 }
 
-.nav a{
+
+.nav li, a{
     text-decoration: none;
     font-weight: bold;
+    color: #fff;
 }
 
-h1, h2, h3{
-    color: #333333;
+header{
+    background-color: #0E0E0E;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 8%;
+}
+
+
+.logo{
+    cursor: pointer;
+}
+
+.nav__links{
+    list-style: none;
+}
+
+.nav__links li{
+    display: inline-block;
+    padding: 0 20px;
+}
+
+.nav__links li a{
+    transition: all 0.3s ease 0s;
+}
+
+.nav__links li a:hover{
+    color: #FF9000;
+}
+
+.user{
+    margin-right: 2%;
+}
+
+h2, h3{
+    color: #FF9000;
     text-align: center;
 }
 
 h1{
     margin-top: 20px;
+    padding: 1em;
+    text-align: center;
 }
 
 p{
@@ -35,12 +76,128 @@ p{
     font-size: 1.1em;
 }
 
-.daily-container, .filterForm, .problems-container, .pagination{
+.daily-align{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.daily-bigdiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 4% 8%;
+    margin-top: 1%;
+    border: #353535 solid;
+    border-radius: 10px;
+    background: linear-gradient(to bottom right, #35353520, #35353560);
+}
+
+.daily-bigdiv h1{
+    margin-bottom: 3%;
+    margin-top: 1%;
+    font-size: 2em;
+}
+
+.daily-div{
+    margin-bottom: 5%;
+}
+
+.daily-title{
+    background: #FF9000;
     max-width: 800px;
     margin: 20px auto;
+    margin-bottom: 0;
+    padding: 1em;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.current-date{
+    color: #ccc;
+    margin-left: 3%;
+    margin-top: 5px;
+}
+
+.daily-title h2{
+    font-size: 1.3em;
+    color: #1E1E1E;
+    text-align: left;
+    margin-left: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.daily-title h3{
+    color: #1E1E1E;
+    margin-right: 3%;
+}
+
+.daily-container{
+    /* max-width: 800px; */
+    margin: 20px auto;
+    width: 450px;
+    height: 60%;
+    margin-top: 0;
     padding: 20px;
+    background: #D9D9D920;
+    border-radius: 10px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.daily-problem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.daily-problem h3 {
+    color: #fff;
+    text-align: left;
+    margin: 0;
+    flex-grow: 1; /* Allow the title to grow and fill remaining space */
+}
+
+.daily-problem a {
+    background-color: #ccc;
+    color: #1E1E1E;
+    padding: 5px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease 0s;
+}
+
+.daily-problem a:hover {
     background: #ffffff;
-    border-radius: 8px;
+}
+
+.daily-problem > * {
+    display: flex;
+    align-items: center;
+}
+
+.daily-problem h3 {
+    margin-right: auto;
+}
+
+
+
+.filterForm, .problems-container{
+    max-width: 800px;
+    margin: 20px auto;
+    margin-top: 0;
+    padding: 20px;
+    background: #D9D9D920;
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -49,16 +206,54 @@ p{
 }
 
 .allproblems a{
-    background: #007BFF;
-    color: #ffffff;
+    background: #FF9000;
+    color: #1E1E1E;
     cursor: pointer;
-    padding: 5px;
+    padding: 10px 20px;
     text-decoration: none;
-    font-weight: bold;
-    border-radius: 100px;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 10px;
+    transition: all 0.3s ease 0s;
 }
 
-.daily-container div a, .problems-container a{
+.daily-container div a{
+    margin-right: 2%;
+    margin-left: 2%;
+    width: 25%;
+    border-radius: 4px;
+    display: block;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+.timer{
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: 3%;
+}
+
+.timer-box {
+    display: inline-block;
+    background-color: #353535;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 0 5px;
+    /* font-size: 18px; */
+    font-size: 1.3em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.timer-colon {
+    display: inline-block;
+    /* font-size: 18px; */
+    font-size: 1.5em;
+}
+
+/* .problems-container a{
     display: block;
     background: #007BFF;
     color: #ffffff;
@@ -68,15 +263,27 @@ p{
     text-decoration: none;
 }
 
-.daily-container div a{
-    margin-right: auto;
-    margin-left: auto;
-    width: 30%;
-    border-radius: 100px;
+.problems-container a:hover{
+    background: #0056b3;
+} */
+
+.filter-title{
+    background: #FF9000;
+    margin: 20px auto;
+    margin-bottom: 0;
+    padding: 1em;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    justify-content: space-between;
 }
 
-.daily-container div a:hover, .problems-container a:hover{
-    background: #0056b3;
+.filter-title h2{
+    color: #1E1E1E;
+    margin-left: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .filterForm{
@@ -89,6 +296,7 @@ p{
     flex: 1 0 100%;
     margin-bottom: 5px;
     font-weight: bold;
+    color: #ccc;
 }
 
 .filterForm select, .filterForm button{
@@ -99,22 +307,55 @@ p{
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+.filterForm select:focus, .filterForm button:focus{
+    border-color: #FF9000;
+}
+
+.filter-button{
+    display: flex;
+    justify-content: center;
+}
 
 .allproblems{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin: 4% 8%;
+    margin-top: 1%;
+    border: #353535 solid;
+    border-radius: 10px;
+    background: linear-gradient(to bottom right, #35353520, #35353560);
     
 }
 
+.allproblems h1{
+    margin-bottom: 3%;
+    margin-top: 1%;
+    font-size: 2em;
+}
+
 #apply{
-    background: #007BFF;
-    color: #ffffff;
+    background: #FF9000;
+    border: none;
+    color: #1E1E1E;
     cursor: pointer;
-    border-radius: 100px;
-    margin-left: 10px;
-    margin-right: 10px;
+    font-weight: 600;
+    border-radius: 10px;
+    margin-left: 3%;
+    margin-right: 1%;
+    transition: all 0.3s ease 0s;
+}
+
+#apply:hover{
+    background: #ffb617;
+}
+
+.problemtb-container{
+    margin: 5% 0;
+    display: flex;
+    justify-content: center;
+    width: 80%;
 }
 
 table{
@@ -123,34 +364,90 @@ table{
     margin-bottom: 20px;
 }
 
+th{
+    padding: 4% 3%;
+}
+
+td{
+    padding: 3%;
+}
+
 th, td{
     text-align: left;
-    padding: 10px;
-    border-bottom: 1px solid #dddddd;
+    color: #353535;
+    transition: all 0.3s ease 0s;
+}
+
+td{
+    font-weight: 500;
+}
+
+tr{
+    background: #f2f2f2;
+    transition: all 0.3s ease 0s;
+}
+
+
+tr:nth-child(even){
+    background: #dddddd;
+    transition: all 0.3s ease 0s;
+}
+
+tr:hover{
+    background-color: #FF9000;
+}
+
+tr:hover a{
+    background-color: #fff;
+}
+
+tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
 }
 
 th{
-    background: #f4f4f4;
+    background: #0E0E0E;
+    color: #fff;
 }
+
+th:first-child{
+    border-top-left-radius: 10px;
+}
+
+th:last-child{
+    border-top-right-radius: 10px;
+}
+
 
 .pagination{
     display: flex;
     justify-content: center;
     align-items: center;
+    max-width: 800px;
+    margin: 20px auto;
+    margin-top: 0;
+    padding: 20px;
+    border-radius: 100px;
+    border: #353535 solid;
 }
 
 .pagination button{
-    padding: 10px 20px;
+    padding: 8px 9px;
     margin: 0 5px;
-    background: #007BFF;
-    color: #ffffff;
+    background: #ccc;
+    color: #1E1E1E;
     border: none;
-    border-radius: 100px;
+    border-radius: 100%;
     cursor: pointer;
+    transition: all 0.3s ease 0s;
 }
 
 .pagination button:hover{
-    background: #0056b3;
+    background: #fff;
 }
 
 .pagination span{

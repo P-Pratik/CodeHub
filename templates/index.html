@@ -4,97 +4,96 @@
 {% endblock %} 
 
 {% block body %}
-<h1>Home</h1>
-<p>Welcome to the home page!</p>
+<h1 class="welcome">Welcome👋</h1>
 
-{#  
-<div class="test">
-    <h2>Database</h2>
-    <ul>
-        {% for person in people %}
-        <li>
-            {{ person }}
-            <button onclick="deletePerson( {{ person.pid }} )">Delete</button>
-        </li>
-        {% endfor %}
-    </ul>
+<p>{{ logged_in }}</p><br>
+
+<div class="daily-bigdiv">
+    <h1>Daily Challenge 🎯</h1>
+    <div class="daily-align">
+        <div class="daily-div">
+            <div class="daily-title">
+                <h2>GeeksForGeeks</h2>
+                <div class="timer" id="gfg-timer">
+                    <span id="gfg-hours" class="timer-box"></span>
+                    <span class="timer-colon">:</span>
+                    <span id="gfg-minutes" class="timer-box"></span>
+                    <span class="timer-colon">:</span>
+                    <span id="gfg-seconds" class="timer-box"></span>
+                </div>
+            </div>
+            <div class="daily-container" id="gfg-daily-container">
+                <h4 id="gfg-date" class="current-date"></h4>
+                <div id="gfg-daily-content" class="daily-content"></div>
+            </div>
+        </div>
+        
+        <div class="daily-div">
+            <div class="daily-title">
+                <h2>LeetCode</h2>
+                <div class="timer" id="leet-timer">
+                    <span id="leet-hours" class="timer-box"></span>
+                    <span class="timer-colon">:</span>
+                    <span id="leet-minutes" class="timer-box"></span>
+                    <span class="timer-colon">:</span>
+                    <span id="leet-seconds" class="timer-box"></span>
+                </div>
+            </div>
+            <div class="daily-container" id="leetcode-daily-container">
+                <h4 id="leet-date" class="current-date"></h4>
+                <div id="leetcode-daily-content" class="daily-content"></div>
+            </div>
+        </div>
+    </div>
 </div>
-#}
 
-<p>{{ logged_in }}</p>
 
-<div>
-    <h2>Daily</h2>
-    <div id="daily-container" class="daily-container"></div>
-</div>
 
 <div class="allproblems">
-    <h2>Problems</h2>
-    <div class="filterForm">
-        <label for="difficulty">Difficulty:</label>
-        <select id="difficulty" name="difficulty">
-            <option value="">All</option>
-            <option value="Easy">Easy</option>
-            <option value="Medium">Medium</option>
-            <option value="Hard">Hard</option>
-        </select>
-    
-        <label for="platform">Platform:</label>
-        <select id="platform" name="platform">
-            <option value="geeksforgeeks">GeeksForGeeks</option>
-            <option value="leetcode">LeetCode</option>
-        </select>
-    
-        <button onclick="applyfilter()" id="apply">Apply</button>
+    <h1>Problems 🧩</h1>
+    <div>        
+        <div class="filter-title">
+            <h2>Filter Problems</h2>
+            <img src="{{ url_for('static', filename='svg/filter.svg') }}" alt="filter" height="45px">
+        </div>
+
+        <div class="filterForm">
+            <label for="difficulty">Difficulty:</label>
+            <select id="difficulty" name="difficulty">
+                <option value="">All</option>
+                <option value="Easy">Easy</option>
+                <option value="Medium">Medium</option>
+                <option value="Hard">Hard</option>
+            </select>
+        
+            <label for="platform">Platform:</label>
+            <select id="platform" name="platform">
+                <option value="geeksforgeeks">GeeksForGeeks</option>
+                <option value="leetcode">LeetCode</option>
+            </select>
+            <button onclick="applyfilter()" id="apply">Apply</button>
+        </div>
     </div>
-
-
-
-    <table id="problemstb">
-        <thead>
-            <tr>
-                <th>Problem ID</th>
-                <th>Problem Name</th>
-                <th>Difficulty</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody id="problems">
-
-        </tbody>
-
-    </table>
+    
+    <div class="problemtb-container">
+        <table id="problemstb">
+            <thead>
+                <tr>
+                    <th>Problem Name</th>
+                    <th>Difficulty</th>
+                    <th>Accuracy</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="problems"></tbody>
+        </table>
+    </div>
 
     <div class="pagination">
-        <button id="prev" onclick="prevPage()">Prev</button>
+        <button id="prev" onclick="prevPage()">◄</button>
         <span id="page">1</span>
-        <button id="next" onclick="nextPage()">Next</button>
+        <button id="next" onclick="nextPage()">►</button>
     </div>
 </div>
-
-
-
-
-{#
-<script type="text/javascript">
-    function deletePerson(pid) {
-        fetch('{{ url_for("delete", pid=pid) }}' + "/" + pid, {
-            method: "DELETE",
-        })
-            .then((response) => {
-                if (response.ok) {
-                    window.location.reload();
-                } else {
-                    console.error("Failed to delete person with pid", pid);
-                }
-            })
-            .catch((error) => {
-                console.error("Some Error Occurred", error);
-            });
-    }
-</script>
-
-#} 
-
 
 {% endblock %}
