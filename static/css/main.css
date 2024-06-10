@@ -238,15 +238,19 @@ p{
 }
 
 .timer-box {
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #353535;
-    padding: 10px;
     border-radius: 5px;
+    padding: 10px;
     margin: 0 5px;
-    /* font-size: 18px; */
     font-size: 1.3em;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 45px;
+    height: 45px;
 }
+
 .timer-colon {
     display: inline-block;
     /* font-size: 18px; */
