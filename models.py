@@ -10,7 +10,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.Text, unique=True, nullable=False)
     email = db.Column(db.Text, unique=True, nullable=False)
     password = db.Column(db.Text, nullable=False)
-    profile_pic = db.Column(db.Text, nullable=False, default='default.jpg') # store image name and store images in a folder and then fetch it like that or something
+    profile_pic = db.Column(db.Text, nullable=False, default='default.jpg')
     role = db.Column(db.Text)
     description = db.Column(db.Text)
     created_at = db.Column(db.DateTime, server_default=db.func.now())

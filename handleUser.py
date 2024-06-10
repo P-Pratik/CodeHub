@@ -239,6 +239,9 @@ def updateUserdata(uid, users):
     result = col.update_one({"uid": uid}, query)
     print(result.modified_count)
 
+def fetchUserData(uid):
+    user_data = col.find_one({"uid": uid}, {"_id": 0, "uid": 0})
+    return user_data
 
 def handleUser(uid, users):
     user = col.find_one({"uid": uid}, {"uid": 1})

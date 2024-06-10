@@ -5,6 +5,9 @@
 {% endblock %} {% block body %}
 
 <h1>Profile</h1>
+<script>
+    const username = "{{ user.username }}";
+</script>
 
 <div class="user-info">
     <div class="avatar">
@@ -26,15 +29,12 @@
 <div class="statistics">
     <div class="heatmap">
         <h2>Heatmap</h2>
-        <div id="heatmap"></div>
+        <div id="cal-heatmap"></div>
     </div>
 
     <div class="solved">
         <h2>Solved</h2>
     </div>
-
-
-
 </div>
 
 

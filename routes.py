@@ -15,7 +15,7 @@ import os
 
 import geeksforgeeks as gfg
 import leetcode as lc
-from handleUser import handleUser
+from handleUser import handleUser, fetchUserData
 
 
 def register_routes(app, db, bcrypt):
@@ -23,6 +23,52 @@ def register_routes(app, db, bcrypt):
     def index():
         logged_in = current_user.is_authenticated
         return render_template("index.html", logged_in=logged_in)
+
+    @app.route("/login", methods=["GET", "POST"])
+    def login():
+        if request.method == "GET":
+            return render_template("login.html")
+        elif request.method == "POST":
+            username = request.form["username"]
+            password = request.form["password"]
+            user = User.query.filter(User.username == username).first()
+
+            if user and bcrypt.check_password_hash(user.password, password):
+                login_user(user)
+                return redirect(url_for("index"))
+            else:
+                return "Invalid credentials"
+
+    @app.route("/logout", methods=["GET"])
+    @login_required
+    def logout():
+        logout_user()
+        return redirect(url_for("index"))
+
+    @app.route("/register", methods=["GET", "POST"])
+    def register():
+        if request.method == "POST":
+            username = request.form["username"]
+            email = request.form["email"]
+            password = request.form["password"]
+            hashed_password = bcrypt.generate_password_hash(password).decode("utf-8")
+            user = User(username=username, email=email, password=hashed_password)
+
+            db.session.add(user)
+            db.session.commit()
+
+            usr = User.query.filter(User.username == username).first()
+            userplatforms = UserPlatforms(
+                uid=usr.uid, leetcode=None, geeksforgeeks=None, hackerrank=None
+            )
+            db.session.add(userplatforms)
+            db.session.commit()
+
+            print(f"User {username} has been created!")
+            return redirect(url_for("login"))
+
+        elif request.method == "GET":
+            return render_template("register.html")
 
     @app.route("/user/<username>")
     def user(username):
@@ -41,6 +87,16 @@ def register_routes(app, db, bcrypt):
 
         elif request.method == "POST":
             return
+
+    @app.route("/api/profile/<username>", methods=["GET"])
+    def stats(username):
+        user = User.query.filter(User.username == username).first()
+        try:
+            data = fetchUserData(uid=user.uid)
+        except Exception as e:
+            print(e)
+            data = {"error": "Some error occurred"}
+        return jsonify(data)
 
     @app.route("/update/profile", methods=["PUT"])
     @login_required
@@ -70,10 +126,12 @@ def register_routes(app, db, bcrypt):
     @app.route("/update/stats", methods=["PUT"])
     @login_required
     def update_stats():
-        userplatform = UserPlatforms.query.filter(UserPlatforms.uid == current_user.uid).first()
+        userplatform = UserPlatforms.query.filter(
+            UserPlatforms.uid == current_user.uid
+        ).first()
         data = [
-            { "platform": "lc", "username": userplatform.leetcode },
-            { "platform": "gfg", "username": userplatform.geeksforgeeks }
+            {"platform": "lc", "username": userplatform.leetcode},
+            {"platform": "gfg", "username": userplatform.geeksforgeeks},
         ]
         try:
             handleUser(uid=current_user.uid, users=data)
@@ -129,61 +187,6 @@ def register_routes(app, db, bcrypt):
             db.session.rollback()
             return jsonify(success=False, error=str(e))
 
-    @app.route("/login", methods=["GET", "POST"])
-    def login():
-        if request.method == "GET":
-            return render_template("login.html")
-        elif request.method == "POST":
-            username = request.form["username"]
-            password = request.form["password"]
-            user = User.query.filter(User.username == username).first()
-
-            if user and bcrypt.check_password_hash(user.password, password):
-                login_user(user)
-                return redirect(url_for("index"))
-            else:
-                return "Invalid credentials"
-
-    @app.route("/logout", methods=["GET"])
-    @login_required
-    def logout():
-        logout_user()
-        return redirect(url_for("index"))
-
-    @app.route("/register", methods=["GET", "POST"])
-    def register():
-        if request.method == "POST":
-            username = request.form["username"]
-            email = request.form["email"]
-            password = request.form["password"]
-            hashed_password = bcrypt.generate_password_hash(password).decode("utf-8")
-            user = User(username=username, email=email, password=hashed_password)
-
-            db.session.add(user)
-            db.session.commit()
-
-            usr = User.query.filter(User.username == username).first()
-            userplatforms = UserPlatforms(
-                uid=usr.uid, leetcode=None, geeksforgeeks=None, hackerrank=None
-            )
-            db.session.add(userplatforms)
-            db.session.commit()
-
-            print(f"User {username} has been created!")
-            return redirect(url_for("login"))
-
-        elif request.method == "GET":
-            return render_template("register.html")
-
-    @app.route("/delete/<uid>", methods=["DELETE"])
-    @login_required
-    def delete(uid):
-        User.query.filter(User.uid == uid).delete()
-        db.session.commit()
-
-        people = User.query.all()
-        return render_template("index.html", people=people)
-
     @app.route("/problem/<page>", methods=["POST"])
     def problem(page):
         platform = "geeksforgeeks"
@@ -205,6 +208,10 @@ def register_routes(app, db, bcrypt):
         leetdaily = lc.getDailyMin()
         return jsonify({"geeksdaily": geeksdaily, "leetdaily": leetdaily})
 
-    @app.route("/images/<path:filename>")
-    def images(filename):
-        return send_from_directory("images", filename)
+    @app.route("/delete/<uid>", methods=["DELETE"])
+    @login_required
+    def delete(uid):
+        User.query.filter(User.uid == uid).delete()
+        db.session.commit()
+        people = User.query.all()
+        return render_template("index.html", people=people)
