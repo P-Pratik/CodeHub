@@ -24,16 +24,6 @@ def register_routes(app, db, bcrypt):
         logged_in = current_user.is_authenticated
         return render_template("index.html", logged_in=logged_in)
 
-    @app.route("/get-username", methods=["GET"])
-    def get_username():
-        username = current_user.username
-        return jsonify(username)
-
-    @app.route("/check-logged-in", methods=["GET"])
-    def check_loggedin():
-        logged_in = current_user.is_authenticated
-        return jsonify(logged_in)
-
     @app.route("/user/<username>")
     def user(username):
         user = User.query.filter(User.username == username).first()

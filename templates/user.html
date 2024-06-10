@@ -16,7 +16,11 @@
         />
     </div>
     <p id="username"> {{ user.username }} </p>
-    <div class="edit-profile"></div>
+    {% if current_user.is_authenticated and current_user.username == user.username %}
+    <div class="edit-profile">
+        <a href="{{ url_for('profile') }}">Edit Profile</a>
+    </div>
+    {% endif %}
 </div>
 
 <div class="statistics">
