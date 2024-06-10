@@ -44,8 +44,10 @@
         </div>
         {% if current_user.is_authenticated %}
         <a id="user" class="user" href="{{ url_for('user', username=current_user.username) }}">
-            
-            <img src="{{ url_for('static', filename='images/' + current_user.profile_pic) }}" alt="User Profile Picture">
+            <div class="user-div">
+                <img src="{{ url_for('static', filename='images/' + current_user.profile_pic) }}" alt="User Profile Picture">
+                <p>{{ current_user.username }}</p>
+            </div>
         </a>
         {% else %}
         <a id="user" class="user" href="#"></a>
