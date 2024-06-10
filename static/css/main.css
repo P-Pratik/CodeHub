@@ -60,16 +60,45 @@ header{
     margin-right: 2%;
 }
 
-.user img{
-    height: 42px;
-    aspect-ratio: 1/1;
-    border-radius: 100%;
+.user-div{
     border: #fff solid 2px;
+    background: #fff;
+    height: 38px;
+    border-radius: 100px;
+    transition: all 0.3s ease 0s;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-div p{
+    padding: 15px;
+    padding-left: 10px;
+    color: #1E1E1E;
     transition: all 0.3s ease 0s;
 }
 
-.user img:hover, .user img:focus{
+.user-div:hover p{
+    color: #fff;
+}
+
+.user-div img{
+    height: 38px;
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+    border: #fff solid 2px;
+    border-left: none;
+    transition: all 0.3s ease 0s;
+}
+
+.user-div:hover img, .user-div:focus img{
     border-color: #ffb617;
+}
+
+.user-div:hover, .user-div:focus{
+    border: #ffb617 solid 2px;
+    background: #FF9000;
 }
 
 h2, h3{
