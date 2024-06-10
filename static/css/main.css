@@ -31,7 +31,7 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5em 8%;
+    padding: 1em 8%;
 }
 
 
@@ -87,7 +87,8 @@ p{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 0 4% 4% 4%;
+    margin: 4% 8%;
+    margin-top: 1%;
     border: #353535 solid;
     border-radius: 10px;
     background: linear-gradient(to bottom right, #35353520, #35353560);
@@ -95,8 +96,8 @@ p{
 
 .daily-bigdiv h1{
     margin-bottom: 3%;
-    margin-top: 3%;
-    font-size: 40px;
+    margin-top: 1%;
+    font-size: 2em;
 }
 
 .daily-div{
@@ -122,6 +123,7 @@ p{
 }
 
 .daily-title h2{
+    font-size: 1.3em;
     color: #1E1E1E;
     text-align: left;
     margin-left: 3%;
@@ -138,7 +140,7 @@ p{
 .daily-container{
     /* max-width: 800px; */
     margin: 20px auto;
-    width: 500px;
+    width: 450px;
     height: 60%;
     margin-top: 0;
     padding: 20px;
@@ -242,7 +244,7 @@ p{
     border-radius: 5px;
     margin: 0 5px;
     /* font-size: 18px; */
-    font-size: 1.5em;
+    font-size: 1.3em;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 .timer-colon {
@@ -319,7 +321,8 @@ p{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 0 4% 4% 4%;
+    margin: 4% 8%;
+    margin-top: 1%;
     border: #353535 solid;
     border-radius: 10px;
     background: linear-gradient(to bottom right, #35353520, #35353560);
@@ -328,8 +331,8 @@ p{
 
 .allproblems h1{
     margin-bottom: 3%;
-    margin-top: 3%;
-    font-size: 40px;
+    margin-top: 1%;
+    font-size: 2em;
 }
 
 #apply{
