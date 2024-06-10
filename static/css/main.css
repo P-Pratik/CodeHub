@@ -60,6 +60,18 @@ header{
     margin-right: 2%;
 }
 
+.user img{
+    height: 42px;
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+    border: #fff solid 2px;
+    transition: all 0.3s ease 0s;
+}
+
+.user img:hover, .user img:focus{
+    border-color: #ffb617;
+}
+
 h2, h3{
     color: #FF9000;
     text-align: center;
@@ -336,7 +348,7 @@ p{
 .allproblems h1{
     margin-bottom: 3%;
     margin-top: 1%;
-    font-size: 2em;
+    font-size: 2.1em;
 }
 
 #apply{

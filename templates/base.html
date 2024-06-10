@@ -33,7 +33,13 @@
                 {% endif %}
             </ul>
         </div>
-        <a class="user" href="">User</a>
+        {% if current_user.is_authenticated %}
+        <a id="user" class="user" href="{{ url_for('profile') }}">
+            <img src="{{ url_for('static', filename='images/' + current_user.profile_pic) }}" alt="User Profile Picture">
+        </a>
+        {% else %}
+        <a id="user" class="user" href="#"></a>
+        {% endif %}
     </header>
 
     {% block body %} {% endblock %}
