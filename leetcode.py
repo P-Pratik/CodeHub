@@ -108,9 +108,9 @@ def fetchProblems(page, filters={}):
     quantity = 20
     offset = (page - 1) * quantity
     pipeline = [
-        {"$skip": offset},
         {"$sort": {"questionFrontendId": 1}},
         {"$match": filters},
+        {"$skip": offset},
         {
             "$project": {
                 "_id": 0,

@@ -12,10 +12,9 @@ import leetcode as lc
 db = DatabaseConnection().connection
 col = db["Users"]
 
-def addUserCalendar(users):
-    years = [2023, 2024]
-    finalMerge = defaultdict(int)
 
+def addUserCalendar(users, years):
+    finalMerge = defaultdict(int)
     for year in years:
         for user in users:
             platform = user["platform"]
@@ -31,7 +30,9 @@ def addUserCalendar(users):
             else:
                 print(f"Unsupported platform: {platform}")
                 return
-
+            if "error" in calendar:
+                print(calendar["error"])
+                return
             finalMerge = mergeDictionaries(finalMerge, calendar)
 
     return finalMerge
@@ -39,7 +40,6 @@ def addUserCalendar(users):
 
 def convertCalendar(calendar):
     converted = defaultdict(int)
-
     for key, value in calendar.items():
         if key == "error":
             print(value)
@@ -62,8 +62,8 @@ def mergeDictionaries(dict1, dict2):
     return merged_dict
 
 
-def buildUserCalender(users):
-    data = addUserCalendar(users)
+def buildUserCalender(users, years=[2023, 2024]):
+    data = addUserCalendar(users, years)
     submissionCalender = []
     totalActiveDays = len(data)
 
@@ -71,6 +71,63 @@ def buildUserCalender(users):
         submissionCalender.append({"date": key, "count": value})
 
     return submissionCalender, totalActiveDays
+
+
+def getUserStats(users):
+    mergedStats = []
+
+    for user in users:
+        platform = user["platform"]
+        username = user["username"]
+
+        if platform == "gfg":
+            data = gfg.getSolved(username=username)
+            stats = convertStatsGFG(data)
+
+        elif platform == "lc":
+            stats = lc.getSolveStats(username=username)
+
+        else:
+            print(f"Unsupported platform: {platform}")
+            return
+
+        if "error" in stats:
+            print(stats["error"])
+            return
+        mergedStats = mergeStats(mergedStats, stats)
+
+    return mergedStats
+
+
+def convertStatsGFG(data):
+    stats = []
+    totalCount = 0
+    for difficulty, pid in data.items():
+        curStats = defaultdict(int)
+        totalCount += len(pid)
+        curStats["difficulty"] = difficulty
+        curStats["count"] = len(pid)
+        stats.append(curStats)
+    stats.append({"difficulty": "All", "count": totalCount})
+    return stats
+
+
+def mergeStats(*args):
+    merged_dict = defaultdict(lambda: {"count": 0})
+
+    def add_to_merged_dict(stats_list):
+        for entry in stats_list:
+            difficulty = entry["difficulty"]
+            merged_dict[difficulty]["count"] += entry["count"]
+
+    for arg in args:
+        add_to_merged_dict(arg)
+
+    merged_list = [
+        {"difficulty": difficulty, "count": values["count"]}
+        for difficulty, values in merged_dict.items()
+    ]
+    return merged_list
 
 
 # TODO -------------------------------------------------------------------------------------------------------------- #
@@ -100,83 +157,91 @@ def convertFormat(data, platform="geeksforgeeks"):
 def addUserQuestions():
     pass
 
+
 # TODO end-------------------------------------------------------------------------------------------------------------- #
 
-
-def getUserStats(users):
-    mergedStats = []
-
-    for user in users:
-        platform = user["platform"]
-        username = user["username"]
-
-        if platform == "gfg":
-            data = gfg.getSolved(username=username)
-            stats = convertStatsGFG(data)
-
-        elif platform == "lc":
-            stats = lc.getSolveStats(username=username)
-
-        else:
-            print(f"Unsupported platform: {platform}")
-            return
-
-        mergedStats = mergeStats(mergedStats, stats)
-
-    return mergedStats
+# ? -------------------------------------------------------------------------------------------------------------- #
+# *: was overoptimizing, maybe not needed saved for future reference
 
 
-def convertStatsGFG(data):
-    stats = []
-    totalCount = 0
-    for difficulty, pid in data.items():
-        curStats = defaultdict(int)
-        totalCount += len(pid)
-        curStats["difficulty"] = difficulty
-        curStats["count"] = len(pid)
-        stats.append(curStats)
-    stats.append({"difficulty": "All", "count": totalCount})
-    return stats
-
-
-def mergeStats(*args):
-
-    merged_dict = defaultdict(lambda: {"count": 0})
-
-    def add_to_merged_dict(stats_list):
-        for entry in stats_list:
-            difficulty = entry["difficulty"]
-            merged_dict[difficulty]["count"] += entry["count"]
-
-    for arg in args:
-        add_to_merged_dict(arg)
-
-    merged_list = [
-        {"difficulty": difficulty, "count": values["count"]}
-        for difficulty, values in merged_dict.items()
+def updateCalender(uid, users):
+    lastUpdate = fetchLastUpdated(uid)
+    years = [
+        i
+        for i in range(int(lastUpdate.split("-")[0]), datetime.datetime.now().year + 1)
     ]
-    return merged_list
+    calender, _ = buildUserCalender(users, years)
+    filtered = [i for i in calender if i["date"] >= "2024-04-16"]
+    # storedLastUpdate = fetchCalenderDate(uid, lastUpdate)
+    # if storedLastUpdate:
+    #     filtered.insert(0, storedLastUpdate)
+
+    print(filtered)
+    # return filtered
+
+
+def fetchCalenderDate(uid, date):
+    pipeline = [
+        {"$match": {"uid": uid}},
+        {"$unwind": "$userCalender.submissionCalender"},
+        {"$match": {"userCalender.submissionCalender.date": date}},
+        {"$project": {"specificDate": "$userCalender.submissionCalender", "_id": 0}},
+    ]
+    data = col.aggregate(pipeline)
+    print(list(data)[0].get("specificDate", None))
+    # return list(date.get("specificDate", None))
+
+
+def fetchLastUpdated(uid):
+    user_data = col.find_one({"uid": uid}, {"_id": 0, "lastUpdated": 1})
+    return user_data.get("lastUpdated", None)
+
+
+# ? -------------------------------------------------------------------------------------------------------------- #
 
 
 def buildUserData(uid, users):
-    calender, days = buildUserCalender(users)
+    calender, activeDays = buildUserCalender(users)
     solvedStats = getUserStats(users)
+    date = datetime.datetime.now().strftime("%Y-%m-%d")
     query = {
         "uid": uid,
-        "userCalender": {"submissionCalender": calender, "totalActiveDays": days},
+        "userCalender": {
+            "submissionCalender": calender,
+            "totalActiveDays": activeDays
+            },
         # "solvedQuestions": {
         #     "questions" : [],
         #     "count" : variable
         # }
-        "stats": {"solvedStats": solvedStats},
+        "stats": {
+            "solvedStats": solvedStats
+            },
+        "lastUpdated": date,
     }
-    col.insert_one(query)
+    result = col.insert_one(query)
+    print(result.inserted_id)
+
 
 def updateUserdata(uid, users):
-    pass
+    calender, activeDays = buildUserCalender(users)
+    solvedStats = getUserStats(users)
+    date = datetime.datetime.now().strftime("%Y-%m-%d")
+    query = {
+        "$set": {
+            "userCalender.submissionCalender": calender,
+            "userCalender.totalActiveDays": activeDays,
+            "stats.solvedStats": solvedStats,
+            "lastUpdated": date,
+        }
+    }
+
+    result = col.update_one({"uid": uid}, query)
+    print(result.modified_count)
+
 
 def handleUser(uid, users):
-    user = col.find_one({"uid": uid})
+    user = col.find_one({"uid": uid}, {"uid": 1})
     if user:
         updateUserdata(uid, users)
     else:
@@ -186,9 +251,16 @@ def handleUser(uid, users):
 # print(datetime.datetime.fromtimestamp(1704067200, datetime.UTC).strftime('%Y-%m-%d'))
 # print(getUserQuestions())
 # getUserStats()
-# buildUserData(1)
-
 # users = [
 #     {'platform': 'gfg', 'username': 'pratikp2lgv'},
 #     {'platform': 'lc', 'username': 'pratik_420'},
 # ]
+# buildUserData(1, users)
+
+
+# updateCalender(
+#     1,
+#     users
+# )
+
+# fetchCalenderDate(1, "2024-05-28")

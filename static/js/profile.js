@@ -28,8 +28,8 @@ function updateConfirm() {
 }
 
 function updateProfile(uid) {
-    var geeksforgeeks = document.getElementById('geeksforgeeks').innerText;
-    var leetcode = document.getElementById('leetcode').innerText;
+    var geeksforgeeks = document.getElementById('geeksforgeeks').innerText.trim();
+    var leetcode = document.getElementById('leetcode').innerText.trim();
     var postData = {
         uid: uid,
         geeksforgeeks: geeksforgeeks,
