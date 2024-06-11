@@ -178,15 +178,19 @@ function renderProblems(data, platform) {
         let problem_url = document.createElement('td');
         let problem_url_a = document.createElement('a');
 
+        // Determine color class based on difficulty
+        let difficultyClass = '';
         if (data[i].difficulty === 'Basic') {
-            diff_text.style.color = '#3333AA';
+            difficultyClass = 'basic-difficulty';
         } else if (data[i].difficulty === 'Easy') {
-            diff_text.style.color = '#00AF00';
+            difficultyClass = 'easy-difficulty';
         } else if (data[i].difficulty === 'Medium') {
-            diff_text.style.color = '#FFB855';
+            difficultyClass = 'medium-difficulty';
         } else if (data[i].difficulty === 'Hard') {
-            diff_text.style.color = '#FF2D55';
+            difficultyClass = 'hard-difficulty';
         }
+        diff_text.classList.add(difficultyClass);
+
         difficulty.appendChild(diff_text);
 
         problem_name.textContent = data[i].problem_name;
@@ -202,9 +206,23 @@ function renderProblems(data, platform) {
         tr.appendChild(accuracy);
         tr.appendChild(problem_url);
 
+        // Add event listener to toggle class on hover
+        tr.addEventListener('mouseenter', () => {
+            // Remove difficulty class and add hover-text class
+            diff_text.classList.remove(difficultyClass);
+            diff_text.classList.add('hover-text');
+        });
+
+        tr.addEventListener('mouseleave', () => {
+            // Remove hover-text class and add the previous difficulty class
+            diff_text.classList.remove('hover-text');
+            diff_text.classList.add(difficultyClass);
+        });
+
         container.appendChild(tr);
     }
 }
+
 
 function fetchProblems(postData = {}) {
     const page = document.getElementById('page').innerText;

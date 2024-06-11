@@ -61,8 +61,8 @@ header{
 }
 
 .user-div{
-    border: #fff solid 2px;
-    background: #fff;
+    border: #ffb617 solid 2px;
+    background: #FF9000;
     height: 38px;
     border-radius: 100px;
     transition: all 0.3s ease 0s;
@@ -75,7 +75,7 @@ header{
 .user-div p{
     padding: 15px;
     padding-left: 10px;
-    color: #1E1E1E;
+    color: #fff;
     transition: all 0.3s ease 0s;
 }
 
@@ -88,7 +88,7 @@ header{
     box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.5);
     aspect-ratio: 1/1;
     border-radius: 100%;
-    border: #fff solid 2px;
+    border: #ffb617 solid 2px;
     border-left: none;
     transition: all 0.3s ease 0s;
 }
@@ -99,7 +99,7 @@ header{
 
 .user-div:hover, .user-div:focus{
     border: #ffb617 solid 2px;
-    background: #FF9000;
+    background: #fe780a;
 }
 
 h2, h3{
@@ -397,54 +397,50 @@ p{
     background: #ffb617;
 }
 
-.problemtb-container{
+.problemtb-container {
     margin: 5% 0;
     display: flex;
     justify-content: center;
     width: 80%;
 }
 
-table{
+table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-th{
+th {
     padding: 4% 3%;
-}
-
-td{
-    padding: 3%;
-}
-
-th, td{
+    background: #0E0E0E;
+    color: #fff;
     text-align: left;
-    color: #353535;
-    transition: all 0.3s ease 0s;
 }
 
-td{
+td {
+    padding: 3%;
+    color: #fff;
     font-weight: 500;
+    text-align: left;
 }
 
-tr{
-    background: #f2f2f2;
-    transition: all 0.3s ease 0s;
+tr {
+    background: #333333;
+    transition: background-color 0.3s ease;
 }
 
-
-tr:nth-child(even){
-    background: #dddddd;
-    transition: all 0.3s ease 0s;
+tr:nth-child(even) {
+    background: #3d3d3d;
 }
 
-tr:hover{
+tr:hover {
     background-color: #FF9000;
 }
 
-tr:hover a{
+tr:hover a {
     background-color: #fff;
+    color: #1E1E1E; /
 }
 
 tr:last-child td:first-child {
@@ -455,17 +451,33 @@ tr:last-child td:last-child {
     border-bottom-right-radius: 10px;
 }
 
-th{
-    background: #0E0E0E;
-    color: #fff;
-}
-
-th:first-child{
+th:first-child {
     border-top-left-radius: 10px;
 }
 
-th:last-child{
+th:last-child {
     border-top-right-radius: 10px;
+}
+
+.hover-text{
+    color: #fff;
+    transition: all 0.3s ease 0s;
+}
+
+.basic-difficulty{
+    color: #479aff;
+}
+
+.easy-difficulty{
+    color: #00AF00;
+}
+
+.medium-difficulty{
+    color: #FFB855;
+}
+
+.hard-difficulty{
+    color: #FF2D55;
 }
 
 
