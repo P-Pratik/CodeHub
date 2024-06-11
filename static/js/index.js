@@ -193,6 +193,22 @@ function renderProblems(data, platform) {
 
         difficulty.appendChild(diff_text);
 
+        // color the acceptance or accuracy- 100% is green, 25% is red rest in between
+        /*
+        let accuracy_color;
+        let value = data[i].accuracy;
+        if (value <= 25) {
+            accuracy_color = "red";
+        } else if (value <= 75) {
+          var redValue = Math.round(255 * value / 100);
+          var greenValue = Math.round(255 * value / 100);
+          var blueValue  = 0;
+          accuracy_color = "rgb(" + redValue + ", " + greenValue + ", " + blueValue + ", 0)";
+        } else {
+            accuracy_color = "black";
+        }
+        accuracy.style.color = accuracy_color;
+        */
         problem_name.textContent = data[i].problem_name;
         diff_text.innerHTML = data[i].difficulty;
         accuracy.textContent = `${parseFloat(data[i].accuracy).toFixed(2)}%`;
