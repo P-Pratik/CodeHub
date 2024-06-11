@@ -173,12 +173,24 @@ function renderProblems(data, platform) {
         let tr = document.createElement('tr');
         let problem_name = document.createElement('td');
         let difficulty = document.createElement('td');
+        let diff_text = document.createElement('p');
         let accuracy = document.createElement('td');
         let problem_url = document.createElement('td');
         let problem_url_a = document.createElement('a');
 
+        if (data[i].difficulty === 'Basic') {
+            diff_text.style.color = '#3333AA';
+        } else if (data[i].difficulty === 'Easy') {
+            diff_text.style.color = '#00AF00';
+        } else if (data[i].difficulty === 'Medium') {
+            diff_text.style.color = '#FFB855';
+        } else if (data[i].difficulty === 'Hard') {
+            diff_text.style.color = '#FF2D55';
+        }
+        difficulty.appendChild(diff_text);
+
         problem_name.textContent = data[i].problem_name;
-        difficulty.textContent = data[i].difficulty;
+        diff_text.innerHTML = data[i].difficulty;
         accuracy.textContent = `${parseFloat(data[i].accuracy).toFixed(2)}%`;
         problem_url_a.textContent = 'Solve';
         problem_url_a.href = baseUrl + data[i].slug + endUrl;
