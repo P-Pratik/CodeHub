@@ -2,8 +2,8 @@
 {% block head %}
     <title> Profile </title>
     <script src="{{ url_for('static', filename='js/profile.js') }}" defer></script>
-    <link  href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+    <link  href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js" defer></script>
 {% endblock %}
 {% block body %}
@@ -78,5 +78,5 @@
     </div>
     <button id="update-confirm" onclick="updateProfile( {{ user.uid }} )" disabled>Confirm Changes</button>
     <button id="update-confirm" onclick="updateStats() ">Test button</button>
-    <button id="logoutbtn"><a href="/logout"> logout </a></button>
+    <button id="logoutbtn"><a href="/logout" style="color: #000;"> logout </a></button>
 {% endblock %}
