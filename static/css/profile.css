@@ -168,3 +168,20 @@ body{
 .file-upload label img:hover {
     border-color: #777;
 }
+
+.textbox{
+    display: flex;
+    align-items: center;
+    background: transparent;
+    width: 150px;
+    color: #fff;
+    outline: none;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.textbox:focus{
+    border: none;
+    outline: none;
+}
+
