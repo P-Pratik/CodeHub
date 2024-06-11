@@ -41,9 +41,9 @@ function renderCalender(calender, date) {
             date: { start: date },
             scale: {
                 color: {
-                    type: "linear",
+                    type: "quantize",
                     domain: [-1, 10],
-                    scheme: "YlOrRd",
+                    scheme: "Oranges",
                 },
             },
             data: {
