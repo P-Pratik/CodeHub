@@ -1,26 +1,28 @@
 // Remove console.logs before deployment
+
 let cropper;
 
 function makeEditable(id) {
     var span = document.getElementById(id);
     var currentValue = span.innerText; 
-    span.innerHTML = '<input type="text" id="edit-' + id + '" value="' + currentValue + '"/>';
-    document.getElementById('edit-' + id).focus();
+    span.innerHTML = '<input type="text" id="edit-' + id + '" value="' + currentValue + '" class="textbox"/>';
+    var inputElement = document.getElementById('edit-' + id);
+    inputElement.focus();
+    inputElement.setSelectionRange(currentValue.length, currentValue.length);
 
-    document.getElementById('edit-' + id).addEventListener('blur', function () {
+    inputElement.addEventListener('blur', function () {
         var newValue = this.value;
         span.innerHTML = newValue;
+        if (currentValue != newValue) {
+            updateConfirm();
+        }
     });
 
-    document.getElementById('edit-' + id).addEventListener('keypress', function (e) {
+    inputElement.addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
             this.blur();
         }
     });
-
-    if (currentValue != span.innerText) {
-        updateConfirm();
-    }
 }
 
 function updateConfirm() {
@@ -43,14 +45,19 @@ function updateProfile(uid) {
         },
         body: JSON.stringify(postData),
     })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            document.getElementById('update-confirm').disabled = true;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        document.getElementById('update-confirm').disabled = true;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+function toggleCropperVisibility(visible) {
+    const overlayCropper = document.querySelector('.overlay-cropper');
+    overlayCropper.style.display = visible ? 'block' : 'none';
 }
 
 function handleProfilePicture() {
@@ -79,6 +86,7 @@ function handleProfilePicture() {
                     aspectRatio: 1,
                     viewMode: 1,
                 });
+                toggleCropperVisibility(true); // Show overlay-cropper
                 cropButton.style.display = 'block';
             };
             reader.readAsDataURL(file);
@@ -103,31 +111,33 @@ function handleProfilePicture() {
             method: 'POST',
             body: formData,
         })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Profile picture updated successfully');
-                    window.location.reload();
-                } else {
-                    alert('Error: ' + data.error);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Profile picture updated successfully');
+                window.location.reload();
+            } else {
+                alert('Error: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        })
+        .finally(() => {
+            toggleCropperVisibility(false); // Hide overlay-cropper after updating profile picture
+        });
     }
-
 }
 
-function updateStats(){
+function updateStats() {
     fetch('/update/stats', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
     })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-        })
-} 
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+    });
+}

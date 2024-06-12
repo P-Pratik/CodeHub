@@ -4,6 +4,12 @@ function getLastYearDate() {
     lastYearDate.setMonth(lastYearDate.getMonth() + 1);
     return lastYearDate.toISOString().split("T")[0];
 }
+function getLastYearDate() {
+    let lastYearDate = new Date();
+    lastYearDate.setFullYear(lastYearDate.getFullYear() - 1);
+    lastYearDate.setMonth(lastYearDate.getMonth() + 1);
+    return lastYearDate.toISOString().split("T")[0];
+}
 
 function userData(username) {
     fetch("/api/profile/" + username)
@@ -41,9 +47,9 @@ function renderCalender(calender, date) {
             date: { start: date },
             scale: {
                 color: {
-                    type: "linear",
+                    type: "quantize",
                     domain: [-1, 10],
-                    scheme: "YlOrRd",
+                    scheme: "Oranges",
                 },
             },
             data: {
