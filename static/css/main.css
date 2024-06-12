@@ -144,6 +144,7 @@ p{
 
 .daily-div{
     margin-bottom: 5%;
+    
 }
 
 .daily-title{
@@ -190,7 +191,8 @@ p{
     border-radius: 10px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    
 }
 .daily-problem {
     display: flex;
@@ -240,7 +242,7 @@ p{
     border-radius: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .daily-container, .filterForm, .problems-container{
