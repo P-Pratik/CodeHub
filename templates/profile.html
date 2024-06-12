@@ -80,7 +80,6 @@
             </div>
         </div>
     </div>
-    <button id="update-confirm" onclick="updateProfile({{ user.uid }})" disabled>Confirm Changes</button>
+    <button class="confirmButton" id="update-confirm" onclick="updateProfile({{ user.uid }})" disabled>Confirm Changes</button>
     <button id="update-stats" onclick="updateStats()">Test button</button>
-    <button id="logoutbtn"><a href="/logout" style="color: #000;">logout</a></button>
 {% endblock %}

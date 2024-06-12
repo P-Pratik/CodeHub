@@ -238,3 +238,29 @@ body{
     z-index: 1000;
     background-color: rgba(0, 0, 0, 0.5);
 }
+
+.confirmButton{
+    padding: 10px 15px;
+    border-radius: 10px;
+    background: #FF9000;
+    border: #ffb617 solid;
+    color: #fff;
+    font-weight: 600;
+    transition: all 0.3s ease 0s ;
+    cursor: pointer;
+}
+
+.confirmButton:hover
+{
+    background: #fe780a;
+}
+
+.confirmButton:disabled{
+    background: #777;
+    border-color: #999;
+    cursor: not-allowed;
+}
+
+.confirmButton:disabled:hover{
+    background: #777;
+}
