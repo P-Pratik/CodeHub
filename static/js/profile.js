@@ -1,4 +1,5 @@
 // Remove console.logs before deployment
+
 let cropper;
 
 function makeEditable(id) {
@@ -24,7 +25,6 @@ function makeEditable(id) {
     });
 }
 
-
 function updateConfirm() {
     document.getElementById('update-confirm').disabled = false;
 }
@@ -45,14 +45,19 @@ function updateProfile(uid) {
         },
         body: JSON.stringify(postData),
     })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            document.getElementById('update-confirm').disabled = true;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        document.getElementById('update-confirm').disabled = true;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+function toggleCropperVisibility(visible) {
+    const overlayCropper = document.querySelector('.overlay-cropper');
+    overlayCropper.style.display = visible ? 'block' : 'none';
 }
 
 function handleProfilePicture() {
@@ -81,6 +86,7 @@ function handleProfilePicture() {
                     aspectRatio: 1,
                     viewMode: 1,
                 });
+                toggleCropperVisibility(true); // Show overlay-cropper
                 cropButton.style.display = 'block';
             };
             reader.readAsDataURL(file);
@@ -105,31 +111,33 @@ function handleProfilePicture() {
             method: 'POST',
             body: formData,
         })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Profile picture updated successfully');
-                    window.location.reload();
-                } else {
-                    alert('Error: ' + data.error);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Profile picture updated successfully');
+                window.location.reload();
+            } else {
+                alert('Error: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        })
+        .finally(() => {
+            toggleCropperVisibility(false); // Hide overlay-cropper after updating profile picture
+        });
     }
-
 }
 
-function updateStats(){
+function updateStats() {
     fetch('/update/stats', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
     })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-        })
-} 
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+    });
+}

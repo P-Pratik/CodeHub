@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block head %}
-    <title> Profile </title>
+    <title>Profile</title>
     <script src="{{ url_for('static', filename='js/profile.js') }}" defer></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
-    <link  href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js" defer></script>
 {% endblock %}
 {% block body %}
@@ -15,7 +15,7 @@
                         <h1>Profile</h1>
                         <div>
                             <div class="avatar">
-                                <img id="avatar" src="{{ url_for('static', filename='images/' + user.profile_pic) }}" alt="avatar">
+                                <img class="pfp" id="avatar" src="{{ url_for('static', filename='images/' + user.profile_pic) }}" alt="avatar">
                                 <div class="overlay-button">
                                     <div class="file-upload">
                                         <input type="file" id="profilePicInput" accept="image/png, image/jpg, image/jpeg" onclick="handleProfilePicture()">
@@ -28,6 +28,16 @@
                         </div>
                     </div>
                     <div class="user-info">
+                        <div class="overlay-cropper" style="display:none;">
+                            <div class="cropper-container">
+                                <div>
+                                    <img id="cropImage" class="cropper-image" style="display:none;" height="400px">
+                                </div>
+                                <div class="cropButton-container">
+                                    <button class="cropButton" id="cropButton" style="display:none;">Crop and Upload</button>
+                                </div>
+                            </div>
+                        </div>
                         <div>
                             <h3>Basic Info</h3>
                             <div class="fields-container">
@@ -49,8 +59,8 @@
                             <div class="fields-container">
                                 <label for="leetcode">Leet Code:</label>
                                 <div class="fields">
-                                    <h5 id="leetcode" class="editable">{{userplatform.leetcode}}</h5>
-                                    <button class="edit-link"  onclick="makeEditable('leetcode')">
+                                    <h5 id="leetcode" class="editable">{{ userplatform.leetcode }}</h5>
+                                    <button class="edit-link" onclick="makeEditable('leetcode')">
                                         <img src="{{ url_for('static', filename='svg/pen.svg') }}" alt="edit">
                                     </button>
                                 </div>
@@ -58,25 +68,19 @@
                             <div class="fields-container">
                                 <label for="gfg">GeeksForGeeks:</label>
                                 <div class="fields">
-                                    <h5 id="geeksforgeeks" class="editable">{{userplatform.geeksforgeeks}}</h5>
-                                    <button class="edit-link"  onclick="makeEditable('geeksforgeeks')">
+                                    <h5 id="geeksforgeeks" class="editable">{{ userplatform.geeksforgeeks }}</h5>
+                                    <button class="edit-link" onclick="makeEditable('geeksforgeeks')">
                                         <img src="{{ url_for('static', filename='svg/pen.svg') }}" alt="edit">
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-            
-                    <div>
-                        <img id="cropImage" style="display:none;" height="400px">
-                    </div>
-                    <br>
-                    <button id="cropButton" style="display:none;">Crop and Upload</button>
                 </div>
             </div>
         </div>
     </div>
-    <button id="update-confirm" onclick="updateProfile( {{ user.uid }} )" disabled>Confirm Changes</button>
-    <button id="update-confirm" onclick="updateStats() ">Test button</button>
-    <button id="logoutbtn"><a href="/logout" style="color: #000;"> logout </a></button>
+    <button id="update-confirm" onclick="updateProfile({{ user.uid }})" disabled>Confirm Changes</button>
+    <button id="update-stats" onclick="updateStats()">Test button</button>
+    <button id="logoutbtn"><a href="/logout" style="color: #000;">logout</a></button>
 {% endblock %}
