@@ -36,10 +36,10 @@ body{
     margin-bottom: 8%;
 }
 
-.user-container img{
+.avatar img{
+    height: 220px;
     margin: 5%;
     margin-top: 0;
-    height: 220px;
     border: #FF9000 solid 4px;
     border-radius: 25px;
     display: block;
@@ -78,6 +78,10 @@ body{
     border-color: #FF9000;
 }
 
+.user-container{
+    max-height: 400px;
+}
+
 .user-info-container{
     display: flex;
     align-items: center;
@@ -88,7 +92,6 @@ body{
     width: 60%;
     height: 250px;
     margin: 3%;
-    margin-top: 2%;
     /* outline: red solid; */
     align-items: center;
     display: flex;
@@ -186,3 +189,52 @@ body{
     outline: none;
 }
 
+.cropper-container{
+    background-color: #1E1E1E;
+    z-index: 999;
+    width: 30%;
+}
+
+.cropper-image {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    border: none;
+    border-radius: 0;
+    display: block;
+}
+
+.cropButton{
+    padding: 10px 15px;
+    border-radius: 10px;
+    background: #FF9000;
+    border: #ffb617 solid;
+    color: #fff;
+    font-weight: 600;
+    margin: 5% 0;
+    transition: all 0.3s ease 0s ;
+}
+
+.cropButton:hover
+{
+    background: #fe780a;
+}
+
+.cropButton-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay-cropper {
+    position: absolute;
+    padding-top: 5%;
+    padding-left: 5%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.5);
+}
