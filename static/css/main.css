@@ -94,6 +94,7 @@ header{
 }
 
 .user-div:hover img, .user-div:focus img{
+.user-div:hover img, .user-div:focus img{
     border-color: #ffb617;
 }
 
