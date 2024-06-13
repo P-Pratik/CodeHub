@@ -327,7 +327,7 @@ p{
 }
 
 .filter-title h2{
-    color: #1E1E1E;
+    color: #333333;
     margin-left: 3%;
     display: flex;
     flex-direction: column;
@@ -463,23 +463,47 @@ th:last-child {
 
 .hover-text{
     color: #fff;
+    border: #fff solid;
+    border-radius: 10px;
+    padding: 3px 0px;
+    width: 100px;
     transition: all 0.3s ease 0s;
 }
 
 .basic-difficulty{
     color: #479aff;
+    padding: 3px 0;
+    width: 100px;
+    background-color: #479aff40;
+    border: #479aff solid;
+    border-radius: 10px;
 }
 
 .easy-difficulty{
     color: #00AF00;
+    padding: 3px 0px;
+    width: 100px;
+    background-color: #00AF0040;
+    border: #00AF00 solid;
+    border-radius: 10px;
 }
 
 .medium-difficulty{
     color: #FFB855;
+    padding: 3px 0;
+    width: 100px;
+    background-color: #FFB85540;
+    border: #FFB855 solid;
+    border-radius: 10px;
 }
 
 .hard-difficulty{
     color: #FF2D55;
+    padding: 3px 0px;
+    width: 100px;
+    background-color: #FF2D5540;
+    border: #FF2D55 solid;
+    border-radius: 10px;
 }
 
 

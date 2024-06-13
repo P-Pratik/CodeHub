@@ -1,24 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
-*{
+* {
     box-sizing: border-box;
     font-family: 'Inter';
     margin: 0;
     padding: 0;
 }
 
-body{
+body {
     background: #1E1E1E;
     color: #fff;
 }
 
-.user-align{
+.user-align {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.user-container{
+.user-container {
     background: linear-gradient(to bottom right, #35353520, #35353560);
     border: #353535 solid;
     width: 70%;
@@ -27,7 +27,7 @@ body{
     border-radius: 10px;
 }
 
-.user-container h1{
+.user-container h1 {
     font-size: 1.8em;
     text-align: left;
     margin-top: 0;
@@ -36,7 +36,7 @@ body{
     margin-bottom: 8%;
 }
 
-.avatar img{
+.avatar img {
     height: 220px;
     margin: 5%;
     margin-top: 0;
@@ -45,7 +45,7 @@ body{
     display: block;
 }
 
-.avatar{
+.avatar {
     position: relative;
     display: inline-block;
 }
@@ -78,54 +78,59 @@ body{
     border-color: #FF9000;
 }
 
-.user-container{
+.user-container {
     max-height: 400px;
 }
 
-.user-info-container{
+.user-info-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.user-info{
+.user-info {
     width: 60%;
     height: 250px;
     margin: 3%;
-    /* outline: red solid; */
     align-items: center;
     display: flex;
     justify-content: space-evenly;
 }
 
-.user-info h3{
+.user-info h3 {
     text-align: left;
 }
 
-.user-info h5{
+.user-info h5 {
     font-size: 15px;
     font-weight: 400;
     text-align: center;
 }
 
-.fields-container{
+.fields-container {
     margin: 1em auto;
 }
 
-.fields-container label{
+.fields-container label {
+    display: block;
     font-size: 0.8em;
+    margin-bottom: 8px;
+    margin-top: 30px;
 }
 
-.fields{
+.field-and-edit {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    margin-top: 8px;
-    margin-bottom: 10%;
+}
+
+.fields {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: #cccccc90 solid 2px;
     background-color: #1E1E1E60;
     border-radius: 10px;
-    width: 150px;
+    width: 180px;
     padding: 8px;
 }
 
@@ -138,19 +143,38 @@ body{
     outline: none;
 }
 
-.vertical{
+.fields.coding {
+    justify-content: center;
+}
+
+.vertical {
     display: flex;
     align-items: center;
     height: 80%;
     border: solid #cccccc80 1px;
     margin: 0 10%;
+    margin-top: 3%;
 }
 
-.pfp-button{
+.pfp-button {
     margin-left: 5%;
 }
 
-.edit-link{
+.edit-container {
+    background-color: #4E4A4A;
+    padding: 8px;
+    margin-left: 10px;
+    margin-top: 2px;
+    border-radius: 100%;
+    align-self: flex-start;
+    transition: background-color 0.3s ease 0s;
+}
+
+.edit-container:hover{
+    background-color: #5E5A5A;
+}
+
+.edit-link {
     background-color: transparent;
     border: none;
     display: flex;
@@ -158,9 +182,9 @@ body{
     cursor: pointer;
 }
 
-.edit-link img{
+.edit-link img {
     height: 16px;
-    width: 30px;
+    width: 16px;
     border: none;
 }
 
@@ -181,24 +205,24 @@ body{
     border-color: #777;
 }
 
-.textbox{
+.textbox {
     display: flex;
     align-items: center;
     background: transparent;
     width: 150px;
+    text-align: center;
     color: #fff;
     outline: none;
     font-size: 15px;
     font-weight: 400;
-    padding-left: 18%;
 }
 
-.textbox:focus{
+.textbox:focus {
     border: none;
     outline: none;
 }
 
-.cropper-container{
+.cropper-container {
     background-color: #1E1E1E;
     z-index: 999;
     width: 30%;
@@ -214,7 +238,7 @@ body{
     display: block;
 }
 
-.cropButton{
+.cropButton {
     padding: 10px 15px;
     border-radius: 10px;
     background: #FF9000;
@@ -222,15 +246,14 @@ body{
     color: #fff;
     font-weight: 600;
     margin: 5% 0;
-    transition: all 0.3s ease 0s ;
+    transition: all 0.3s ease 0s;
 }
 
-.cropButton:hover
-{
+.cropButton:hover {
     background: #fe780a;
 }
 
-.cropButton-container{
+.cropButton-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -248,28 +271,27 @@ body{
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.confirmButton{
+.confirmButton {
     padding: 10px 15px;
     border-radius: 10px;
     background: #FF9000;
     border: #ffb617 solid;
     color: #fff;
     font-weight: 600;
-    transition: all 0.3s ease 0s ;
+    transition: all 0.3s ease 0s;
     cursor: pointer;
 }
 
-.confirmButton:hover
-{
+.confirmButton:hover {
     background: #fe780a;
 }
 
-.confirmButton:disabled{
+.confirmButton:disabled {
     background: #777;
     border-color: #999;
     cursor: not-allowed;
 }
 
-.confirmButton:disabled:hover{
+.confirmButton:disabled:hover {
     background: #777;
 }
