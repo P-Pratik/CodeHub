@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div id="basic-info" class="section">
                             <h3>Basic Info</h3>
                             <div class="fields-container">
                                 <label for="username">Username:</label>
@@ -54,24 +54,32 @@
                             </div>
                         </div>
                         <div class="vertical"></div>
-                        <div>
+                        <div id="coding-profile">
                             <h3>Coding Profile</h3>
                             <div class="fields-container">
                                 <label for="leetcode">Leet Code:</label>
-                                <div class="fields">
-                                    <h5 id="leetcode" class="editable">{{ userplatform.leetcode }}</h5>
-                                    <button class="edit-link" onclick="makeEditable('leetcode')">
-                                        <img src="{{ url_for('static', filename='svg/pen.svg') }}" alt="edit">
-                                    </button>
+                                <div class="field-and-edit">
+                                    <div class="fields coding">
+                                        <h5 id="leetcode" class="editable">{{ userplatform.leetcode }}</h5>
+                                    </div>
+                                    <div class="edit-container">
+                                        <button class="edit-link" onclick="makeEditable('leetcode')">
+                                            <img src="{{ url_for('static', filename='svg/pen.svg') }}" alt="edit">
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                             <div class="fields-container">
                                 <label for="gfg">GeeksForGeeks:</label>
-                                <div class="fields">
-                                    <h5 id="geeksforgeeks" class="editable">{{ userplatform.geeksforgeeks }}</h5>
-                                    <button class="edit-link" onclick="makeEditable('geeksforgeeks')">
-                                        <img src="{{ url_for('static', filename='svg/pen.svg') }}" alt="edit">
-                                    </button>
+                                <div class="field-and-edit">
+                                    <div class="fields coding">
+                                        <h5 id="geeksforgeeks" class="editable">{{ userplatform.geeksforgeeks }}</h5>
+                                    </div>
+                                    <div class="edit-container">
+                                        <button class="edit-link" onclick="makeEditable('geeksforgeeks')">
+                                            <img src="{{ url_for('static', filename='svg/pen.svg') }}" alt="edit">
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
