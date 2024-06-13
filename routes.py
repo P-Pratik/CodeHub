@@ -87,6 +87,10 @@ def register_routes(app, db, bcrypt):
 
         elif request.method == "POST":
             return
+        
+    @app.route("/contest", methods=["GET"])
+    def contest():
+        return render_template("contest.html")
 
     @app.route("/api/profile/<username>", methods=["GET"])
     def stats(username):
@@ -97,6 +101,17 @@ def register_routes(app, db, bcrypt):
             print(e)
             data = {"error": "Some error occurred"}
         return jsonify(data)
+
+    @app.route("/api/contest/upcoming", methods=["GET"])
+    def getcontest():
+        gfgContest = gfg.getUpcomingContest()
+        lcContest = lc.getUpcomingContest()
+        return jsonify({"gfgcontest": gfgContest, "lccontest": lcContest})
+
+    @app.route("/api/contest/past", methods=["GET"])
+    def getPastContest():
+        gfgContest = gfg.getPastContest(1)
+        return
 
     @app.route("/update/profile", methods=["PUT"])
     @login_required
@@ -122,7 +137,6 @@ def register_routes(app, db, bcrypt):
         else:
             return jsonify(success=False, error="User not found")
 
-    # under dev
     @app.route("/update/stats", methods=["PUT"])
     @login_required
     def update_stats():

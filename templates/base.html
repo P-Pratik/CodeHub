@@ -32,7 +32,7 @@
         <div class="nav">
             <ul class="nav__links">
                 <li><a href="{{url_for('index')}}"> Home</a></li>
-
+                <li><a href="{{url_for('contest')}}">Contest</a></li>
                 {% if current_user.is_authenticated %}
                 
                 <li><a href="{{ url_for('logout')}}"> Logout  </a></li>

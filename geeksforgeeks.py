@@ -20,12 +20,36 @@ def fetchProblems(page, filters={}):
         "_id": 0,
     }
     sort = {"id": 1}
-    problems = collection.find(filters, query).skip(offset).limit(quantity).sort(sort)
-    return list(problems)
+    problems = collection.find(filters, query).sort(sort).skip(offset).limit(quantity)
+    data = list(problems)
+    return data
 
 
 def getDaily():
     requestUrl = f"{baseUrl}/api/vr/problems-of-day/problem/today/"
+    try:
+        response = requests.get(requestUrl)
+        data = response.json()
+    except:
+        data = {"error": "Some error occurred"}
+    return data
+
+def getUpcomingContest():
+    data = getContest(page = 1)
+    if "error" in data:
+        return data
+    data = data["results"]["upcoming"]
+    return data
+
+def getPastContest(page):
+    data = getContest(page)
+    if "error" in data:
+        return data
+    data = data["results"]["past"]
+    return data
+
+def getContest(page = 1):
+    requestUrl = f"{baseUrl}/api/vr/events/?page_number={page}&sub_type=all&type=contest"
     try:
         response = requests.get(requestUrl)
         data = response.json()
@@ -70,7 +94,9 @@ def getSubmissionCalendar(username, year=datetime.now().year, month=""):
         response = {"error": "Some error occurred"}
     return response
 
+
+
 # pp.pprint(fetchProblems(1))
 # pp.pprint(getProfile())
 # pp.pprint(getSubmissionCalender(year="2023"))
-
+# pp.pprint(getContest())
