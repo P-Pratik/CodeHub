@@ -137,24 +137,6 @@ function displayCurrentDate() {
     leetDateElement.textContent = formattedUTCDate;
 }
 
-displayCurrentDate();
-
-function prevPage() {
-    let page = document.getElementById('page').innerText;
-    if (page > 1) {
-        page--;
-        document.getElementById('page').innerText = page;
-        applyfilter();
-    }
-}
-
-function nextPage() {
-    let page = document.getElementById('page').innerText;
-    page++;
-    document.getElementById('page').innerText = page;
-    applyfilter();
-}
-
 function renderProblems(data, platform) {
     let baseUrl, endUrl;
 
@@ -180,7 +162,9 @@ function renderProblems(data, platform) {
 
         // Determine color class based on difficulty
         let difficultyClass = '';
-        if (data[i].difficulty === 'Basic') {
+        if (data[i].difficulty === 'School'){
+            difficultyClass = 'school-difficulty';
+        } else if (data[i].difficulty === 'Basic') {
             difficultyClass = 'basic-difficulty';
         } else if (data[i].difficulty === 'Easy') {
             difficultyClass = 'easy-difficulty';
@@ -259,6 +243,22 @@ function fetchProblems(postData = {}) {
     });
 }
 
+function prevPage() {
+    let page = document.getElementById('page').innerText;
+    if (page > 1) {
+        page--;
+        document.getElementById('page').innerText = page;
+        applyfilter();
+    }
+}
+
+function nextPage() {
+    let page = document.getElementById('page').innerText;
+    page++;
+    document.getElementById('page').innerText = page;
+    applyfilter();
+}
+
 function applyfilter() {
     const difficulty = document.getElementById('difficulty').value;
     const platform = document.getElementById('platform').value;
@@ -271,9 +271,17 @@ function applyfilter() {
         filters: filters,
         platform: platform,
     };
-
     fetchProblems(postData);
 }
 
+let filterButton = document.getElementById('applyFilter');
+filterButton.addEventListener('click', {
+    handleEvent: function(event) {
+        document.getElementById('page').innerText = '1';
+        applyfilter();
+    }
+});
+
+displayCurrentDate();
 fetchDaily();
 fetchProblems();
