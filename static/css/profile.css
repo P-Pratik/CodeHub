@@ -129,6 +129,15 @@ body{
     padding: 8px;
 }
 
+.fields input[type="text"] {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 400;
+    outline: none;
+}
+
 .vertical{
     display: flex;
     align-items: center;

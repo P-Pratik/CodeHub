@@ -128,9 +128,19 @@ def register_routes(app, db, bcrypt):
         if not request.json:
             return jsonify(success=False, error="No data provided")
 
-        uid = request.json["uid"]
-        geeksforgeeks = request.json["geeksforgeeks"].strip()
-        leetcode = request.json["leetcode"].strip()
+        uid = current_user.uid
+
+        if request.json["geeksforgeeks"] == None:
+            geeksforgeeks = None
+        else:
+            geeksforgeeks = request.json["geeksforgeeks"].strip()
+
+        if request.json["leetcode"] == None:
+            leetcode = None
+        else:
+            leetcode = request.json["leetcode"].strip()
+
+
 
         user = UserPlatforms.query.filter(UserPlatforms.uid == uid).first()
 
