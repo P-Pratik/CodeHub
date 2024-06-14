@@ -1,15 +1,19 @@
 // Remove console.logs before deployment
-
 let cropper;
+let debounceTimeout;
 
 document.addEventListener("DOMContentLoaded", function () {
-    var form = document.getElementById("coding-profile-form");
-    var inputs = form.querySelectorAll('input[type="text"]');
-    var updateConfirmButton = document.getElementById("update-confirm");
+    let form = document.getElementById("coding-profile-form");
+    let inputs = form.querySelectorAll('input[type="text"]');
+    let updateConfirmButton = document.getElementById("update-confirm");
 
     inputs.forEach(function (input) {
         input.addEventListener("input", function () {
-            updateConfirmButton.disabled = false;
+            clearTimeout(debounceTimeout);
+            updateConfirmButton.disabled = true;
+            debounceTimeout = setTimeout(() => {
+                usernameExists(input);
+            }, 1000);
         });
     });
 
@@ -24,17 +28,11 @@ document.addEventListener("DOMContentLoaded", function () {
             .value.trim();
         var leetcode = document.getElementById("leetcode").value.trim();
 
-        if (
-            geeksforgeeks === "None" ||
-            geeksforgeeks === ""
-        ) {
+        if (geeksforgeeks === "None" || geeksforgeeks === "") {
             geeksforgeeks = null;
         }
 
-        if (
-            leetcode === "None" ||
-            leetcode === ""
-        ) {
+        if (leetcode === "None" || leetcode === "") {
             leetcode = null;
         }
 
@@ -60,6 +58,43 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 });
+
+function usernameExists(input) {
+    let username = input.value.trim();
+    let platform = input.getAttribute("name");
+    let messageElement = document.getElementById(input.getAttribute('id') + '-message');
+    let updateConfirmButton = document.getElementById("update-confirm");
+
+    if (username === "") {
+        updateConfirmButton.disabled = false;
+        messageElement.innerHTML = '<span style="color: yellow;">setting no username</span>';
+        return;
+    }
+
+    let postData = {}
+    postData["platform"] = platform;
+    postData["username"] = username;
+
+    console.log(postData);
+    fetch("/check/username-exists", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postData),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data);
+        if (data.exists) {
+            updateConfirmButton.disabled = false;
+            messageElement.innerHTML = '<span style="color: green;">Username is available.</span>';
+        } else {
+            messageElement.innerHTML = '<span style="color: red;">Username does not exist.</span>';
+        }
+    });
+
+};
 
 function toggleCropperVisibility(visible) {
     const overlayCropper = document.querySelector(".overlay-cropper");

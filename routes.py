@@ -140,8 +140,6 @@ def register_routes(app, db, bcrypt):
         else:
             leetcode = request.json["leetcode"].strip()
 
-
-
         user = UserPlatforms.query.filter(UserPlatforms.uid == uid).first()
 
         if user:
@@ -219,6 +217,31 @@ def register_routes(app, db, bcrypt):
         except Exception as e:
             db.session.rollback()
             return jsonify(success=False, error=str(e))
+
+    @app.route("/check/username-exists", methods=["POST"])
+    @login_required
+    def check_username_exists():
+        if not request.json:
+            return jsonify(success=False, error="No data provided")
+
+        print(request.json)
+        platform = request.json["platform"]
+        username = request.json["username"]
+
+        print(platform, username)
+        if platform == "geeksforgeeks":
+            data = gfg.usernameExists(username)
+            if "error" in data:
+                return jsonify(exists=False, error=data["error"])
+            
+        elif platform == "leetcode":
+            data = lc.usernameExists(username)
+            if "error" in data:
+                return jsonify(exists=False, error=data["error"])
+        
+        return jsonify(exists=data["exists"])
+
+
 
     @app.route("/problem/<page>", methods=["POST"])
     def problem(page):

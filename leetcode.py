@@ -106,6 +106,23 @@ query = {
 """,
 }
 
+def usernameExists(username):
+    requestUrl = altUrl
+    query =  """query ($username: String!) {
+                matchedUser(username: $username) {
+                    username
+                }
+            }
+        """
+    variable = {"username": username}
+    try:
+        response = requests.post(requestUrl, json={"query": query, "variables": variable})
+        data = response.json()
+        if "errors" in data:
+            return {"exists": False}
+        return {"exists": True}
+    except:
+        return {"error": "Error fetching data"}
 
 def fetchProblems(page, filters={}):
     collection = db["Leetcode"]
@@ -284,3 +301,6 @@ def contestInfo(contestName):
 # print(fetchProblems(1))
 # pp.pprint(getSubmissionCalender())
 # pp.pprint(getSubmitStats("pratik_420"))
+
+
+print(usernameExists("pratik_420"))

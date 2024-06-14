@@ -7,6 +7,19 @@ from config.dbconnect import DatabaseConnection
 baseUrl = "https://practiceapi.geeksforgeeks.org"
 db = DatabaseConnection().connection
 
+
+def usernameExists(username):
+    requestUrl = f"https://www.geeksforgeeks.org/user/{username}/"
+    response = requests.get(requestUrl)
+    try:
+        if response.status_code == 200:
+            data = {"exists": True}
+        else:
+            data = {"exists": False}
+    except:
+        data = {"error": "Some error occurred"}
+    return data
+
 def fetchProblems(page, filters={}):
     collection = db["GeeksForGeeks"]
     quantity = 20
