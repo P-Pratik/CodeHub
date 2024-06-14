@@ -7,7 +7,36 @@
 {% block body %}
     <h1>Contest</h1>
     
+    <div class="upcoming-contest">
+        <h2>Upcoming Contests</h2>
+        <div class="upcoming-contest-container" id="upcoming-contest-container">
 
+        </div>
+    </div>
+
+    <div class="past-contest">
+        <h2>Past Contests</h2>
+
+        <div class="filterForm">
+            <label for="platform">Platform:</label>
+            <select id="platform" name="platform">
+                <option value="all">All</option>
+                <option value="geeksforgeeks">GeeksForGeeks</option>
+                <option value="leetcode">LeetCode</option>
+            </select>
+            <button id="applyFilter">Apply</button>
+        </div>
+
+        <div class="past-contest-container" id="past-contest-container">
+
+        </div>
+
+        <div class="pagination">
+            <button id="prev" onclick="prevPage()">◄</button>
+            <span id="page">1</span>
+            <button id="next" onclick="nextPage()">►</button>
+        </div>
+    </div>
 
 
 {% endblock %}

@@ -19,7 +19,9 @@ from handleUser import handleUser, fetchUserData
 
 
 def register_routes(app, db, bcrypt):
+
     @app.route("/", methods=["GET"])
+    @app.route("/index", methods=["GET"])
     def index():
         logged_in = current_user.is_authenticated
         return render_template("index.html", logged_in=logged_in)
@@ -108,10 +110,17 @@ def register_routes(app, db, bcrypt):
         lcContest = lc.getUpcomingContest()
         return jsonify({"gfgcontest": gfgContest, "lccontest": lcContest})
 
-    @app.route("/api/contest/past", methods=["GET"])
-    def getPastContest():
-        gfgContest = gfg.getPastContest(1)
-        return
+
+    @app.route("/api/contest/past/<page>", methods=["POST"])
+    def getPastContest(page = 1):
+        if request.json:
+            platform = request.json["platform"]
+
+        print(platform)
+        gfgContest = gfg.getPastContest(int(page))
+        lcContest = lc.getPastContest(int(page))
+        return jsonify({"gfgcontest": gfgContest, "lccontest": lcContest})
+
 
     @app.route("/update/profile", methods=["PUT"])
     @login_required

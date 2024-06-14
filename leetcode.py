@@ -232,7 +232,7 @@ def getPastContest(page):
     }
 
     """
-    var = {"pageNo": page}
+    var = {"page": page}
     requestUrl = altUrl
 
     try:
