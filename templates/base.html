@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
 
     <!-- Calender HeatMap -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://d3js.org/d3.v6.min.js"></script>
 
     <script src="https://unpkg.com/cal-heatmap/dist/cal-heatmap.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/cal-heatmap/dist/cal-heatmap.css">
-
-
+    <link rel="stylesheet" href="https://unpkg.com/cal-heatmap/dist/cal-heatmap.css" />
 
     <script type="text/javascript">
         const dailyUrl = "{{ url_for('daily') }}";
@@ -25,25 +24,24 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     {% block head %} {% endblock %}
-
-
 </head>
+
 <body>
     <header>
         <a href="{{url_for('index')}}">
-            <img class="logo" src="{{ url_for('static', filename='svg/codehub.svg') }}" alt="logo" height="40px">
+            <img class="logo" src="{{ url_for('static', filename='svg/codehub.svg') }}" alt="logo" height="40px" />
         </a>
         <div class="nav">
             <ul class="nav__links">
                 <li><a href="{{url_for('index')}}"> Home</a></li>
                 <li><a href="{{url_for('contest')}}">Contest</a></li>
                 {% if current_user.is_authenticated %}
-                
-                <li><a href="{{ url_for('logout')}}"> Logout  </a></li>
+
+                <li><a href="{{ url_for('logout')}}"> Logout </a></li>
                 {% else %}
 
-                <li><a href="{{ url_for('login')}}"> Login  </a></li>
-                <li><a href="{{ url_for('register')}}"> Register  </a></li>
+                <li><a href="{{ url_for('login')}}"> Login </a></li>
+                <li><a href="{{ url_for('register')}}"> Register </a></li>
 
                 {% endif %}
             </ul>
@@ -51,7 +49,8 @@
         {% if current_user.is_authenticated %}
         <a id="user" class="user" href="{{ url_for('user', username=current_user.username) }}">
             <div class="user-div">
-                <img src="{{ url_for('static', filename='images/' + current_user.profile_pic) }}" alt="User Profile Picture">
+                <img src="{{ url_for('static', filename='images/' + current_user.profile_pic) }}"
+                    alt="User Profile Picture" />
                 <p>{{ current_user.username }}</p>
             </div>
         </a>
@@ -62,4 +61,5 @@
 
     {% block body %} {% endblock %}
 </body>
+
 </html>

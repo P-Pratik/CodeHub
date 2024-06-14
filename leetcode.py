@@ -6,6 +6,9 @@ from config.dbconnect import DatabaseConnection
 import pycurl
 from io import BytesIO
 
+import pycurl
+from io import BytesIO
+
 baseUrl = "https://leetcode.com/graphql?query="
 altUrl = "https://leetcode.com/graphql/"
 db = DatabaseConnection().connection
@@ -107,6 +110,24 @@ query = {
 }
 
 
+def usernameExists(username):
+    requestUrl = altUrl
+    query =  """query ($username: String!) {
+                matchedUser(username: $username) {
+                    username
+                }
+            }
+        """
+    variable = {"username": username}
+    try:
+        response = requests.post(requestUrl, json={"query": query, "variables": variable})
+        data = response.json()
+        if "errors" in data:
+            return {"exists": False}
+        return {"exists": True}
+    except:
+        return {"error": "Error fetching data"}
+
 def fetchProblems(page, filters={}):
     collection = db["Leetcode"]
     quantity = 20
@@ -132,11 +153,13 @@ def fetchProblems(page, filters={}):
     return list(problems)
 
 
+
 def getDaily():
     requestUrl = f'{baseUrl}{query["daily"]}'
     response = requests.get(requestUrl)
     data = response.json()
     return data
+
 
 
 def getDailyMin():
@@ -146,8 +169,10 @@ def getDailyMin():
     return data
 
 
+
 def getProfile(username):
     pass
+
 
 
 def getSolveStats(username):
@@ -163,6 +188,8 @@ def getSolveStats(username):
         data = {"error": "Error fetching data"}
     return data
 
+
+def getSubmissionCalendar(username, year=2024):
 
 def getSubmissionCalendar(username, year=2024):
     q = "query userProfileCalendar($username: String!, $year: Int) { matchedUser(username: $username) { userCalendar(year: $year) { activeYears submissionCalendar } } }"
@@ -232,7 +259,7 @@ def getPastContest(page):
     }
 
     """
-    var = {"pageNo": page}
+    var = {"page": page}
     requestUrl = altUrl
 
     try:
@@ -284,3 +311,6 @@ def contestInfo(contestName):
 # print(fetchProblems(1))
 # pp.pprint(getSubmissionCalender())
 # pp.pprint(getSubmitStats("pratik_420"))
+
+
+print(usernameExists("pratik_420"))

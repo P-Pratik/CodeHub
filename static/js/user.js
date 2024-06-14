@@ -4,6 +4,12 @@ function getLastYearDate() {
     lastYearDate.setMonth(lastYearDate.getMonth() + 1);
     return lastYearDate.toISOString().split("T")[0];
 }
+function getLastYearDate() {
+    let lastYearDate = new Date();
+    lastYearDate.setFullYear(lastYearDate.getFullYear() - 1);
+    lastYearDate.setMonth(lastYearDate.getMonth() + 1);
+    return lastYearDate.toISOString().split("T")[0];
+}
 
 function userData(username) {
     fetch("/api/profile/" + username)
