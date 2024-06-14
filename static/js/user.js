@@ -100,6 +100,32 @@ function renderSolved(data) {
         solved.appendChild(stat);
         solvedStats.appendChild(solved);
     }
+
+    const basic = data[0]["count"], easy = data[1]["count"], medium = data[2]["count"], hard = data[3]["count"];
+    const total_basic = 150, total_easy = 802, total_medium = 1672, total_hard = 709;
+
+    const graph_data = [basic, (total_basic-basic), easy, (total_easy-easy), medium, (total_medium-medium), hard, (total_hard-hard)];
+    const colors = ['#57FFFF', '#556666','#3FD63F', '#335533', '#FFD300', '#4E4E2E', '#FF4C4C', '#6E3333']; 
+    // blue, lite blue, green, lite green, yellow, lite yellow, red, lite red 
+    const ctx = document.getElementById('chart').getContext('2d');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: graph_data,
+                backgroundColor: colors,
+                borderWidth: 0
+            }]
+        },
+        options: {
+            cutout: '95%',
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
 }
 
 userData(username);
