@@ -413,6 +413,11 @@ table {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+table tr td:first-child{
+    /* outline:  red solid; */
+    width: 50%;
+}
+
 th {
     padding: 4% 3%;
     background: #0E0E0E;
