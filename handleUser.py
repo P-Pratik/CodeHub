@@ -18,6 +18,8 @@ def addUserCalendar(users, years):
     for year in years:
         for user in users:
             platform = user["platform"]
+            if user["username"] == None or user["username"] == "":
+                continue
             username = user["username"]
 
             if platform == "gfg":
@@ -65,19 +67,50 @@ def mergeDictionaries(dict1, dict2):
 def buildUserCalender(users, years=[2023, 2024]):
     data = addUserCalendar(users, years)
     submissionCalender = []
-    totalActiveDays = len(data)
+    totalActiveDays = 0
 
-    for key, value in data.items():
-        submissionCalender.append({"date": key, "count": value})
-
+    # if data is not empty  
+    if data:
+        totalActiveDays = len(data)
+        for key, value in data.items():
+            submissionCalender.append({"date": key, "count": value})
+        
     return submissionCalender, totalActiveDays
 
 
 def getUserStats(users):
-    mergedStats = []
+    mergedStats = [
+      {
+        "difficulty": "All",
+        "count": 0
+      },
+      {
+        "difficulty": "School",
+        "count": 0
+      },
+      {
+        "difficulty": "Basic",
+        "count": 0
+      },
+      {
+        "difficulty": "Easy",
+        "count": 0
+      },
+      {
+        "difficulty": "Medium",
+        "count": 0
+      },
+      {
+        "difficulty": "Hard",
+        "count": 0
+      }
+    ]
 
     for user in users:
         platform = user["platform"]
+        if user["username"] == None or user["username"] == "":
+            continue
+
         username = user["username"]
 
         if platform == "gfg":
@@ -255,10 +288,10 @@ def handleUser(uid, users):
 # print(getUserQuestions())
 # getUserStats()
 # users = [
-#     {'platform': 'gfg', 'username': 'pratikp2lgv'},
-#     {'platform': 'lc', 'username': 'pratik_420'},
+#     {'platform': 'gfg', 'username': ''},
+#     {'platform': 'lc', 'username': ''},
 # ]
-# buildUserData(1, users)
+# buildUserData(3, users)
 
 
 # updateCalender(
