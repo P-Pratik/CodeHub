@@ -1,33 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
-*{
+* {
     box-sizing: border-box;
     font-family: 'Inter';
     margin: 0;
     padding: 0;
 }
 
-body{
+body {
     background: #1E1E1E;
     color: #fff;
 }
 
-.user-align{
+.profile-info {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.user-container{
+.user-container {
     background: linear-gradient(to bottom right, #35353520, #35353560);
     border: #353535 solid;
     width: 70%;
     margin: 5%;
     padding: 3%;
+    height: 450px;
     border-radius: 10px;
 }
 
-.user-container h1{
+
+.user-container h1 {
     font-size: 1.8em;
     text-align: left;
     margin-top: 0;
@@ -36,7 +38,7 @@ body{
     margin-bottom: 8%;
 }
 
-.avatar img{
+.avatar img {
     height: 220px;
     margin: 5%;
     margin-top: 0;
@@ -45,7 +47,7 @@ body{
     display: block;
 }
 
-.avatar{
+.avatar {
     position: relative;
     display: inline-block;
 }
@@ -78,55 +80,63 @@ body{
     border-color: #FF9000;
 }
 
-.user-container{
-    max-height: 400px;
-}
-
-.user-info-container{
+.user-info-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.user-info{
+.user-info {
     width: 60%;
     height: 250px;
     margin: 3%;
-    /* outline: red solid; */
     align-items: center;
     display: flex;
     justify-content: space-evenly;
 }
 
-.user-info h3{
+.user-info h3 {
     text-align: left;
 }
 
-.user-info h5{
+.user-info h5 {
     font-size: 15px;
     font-weight: 400;
     text-align: center;
 }
 
-.fields-container{
+.fields-container {
     margin: 1em auto;
+    position: relative; /* Ensure the svg-container can be positioned absolutely within */
 }
 
-.fields-container label{
+.fields-container label {
+    display: block;
     font-size: 0.8em;
+    margin-bottom: 8px;
+    margin-top: 30px;
 }
 
-.fields{
+.fields-container:hover .remark-container{
+    display: block;
+}
+
+.field-and-edit {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    margin-top: 8px;
-    margin-bottom: 10%;
+}
+
+.fields {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: #cccccc90 solid 2px;
     background-color: #1E1E1E60;
     border-radius: 10px;
-    width: 150px;
+    width: 180px;
+    height: 35px;
     padding: 8px;
+    position: relative; /* Ensure the svg-container can be positioned absolutely within */
 }
 
 .fields input[type="text"] {
@@ -135,22 +145,77 @@ body{
     color: #fff;
     font-size: 15px;
     font-weight: 400;
+    height: 100%;
+    width: 100%;
     outline: none;
+    text-align: center;
 }
 
-.vertical{
+.fields.coding {
+    justify-content: center;
+}
+
+.svg-container {
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: -35px;
+    top: 50%;
+    transform: translateY(-50%); /* Center vertically */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out 0s;
+}
+
+.svg-container.visible {
+    opacity: 1; /* Show the tick mark */
+}
+
+.remark-container {
+    position: absolute;
+    right: 8%;
+    top: 60%;
+    transform: translateY(-55%);
+    display: none;
+    z-index: 1000;
+    background-color: transparent;
+    padding: 8px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+}
+
+
+.vertical {
     display: flex;
     align-items: center;
     height: 80%;
     border: solid #cccccc80 1px;
     margin: 0 10%;
+    margin-top: 3%;
 }
 
-.pfp-button{
+.pfp-button {
     margin-left: 5%;
 }
 
-.edit-link{
+.edit-container {
+    background-color: #4E4A4A;
+    padding: 8px;
+    margin-left: 10px;
+    margin-top: 2px;
+    border-radius: 100%;
+    align-self: flex-start;
+    transition: background-color 0.3s ease 0s;
+}
+
+.edit-container:hover {
+    background-color: #5E5A5A;
+}
+
+.edit-link {
     background-color: transparent;
     border: none;
     display: flex;
@@ -158,9 +223,9 @@ body{
     cursor: pointer;
 }
 
-.edit-link img{
+.edit-link img {
     height: 16px;
-    width: 30px;
+    width: 16px;
     border: none;
 }
 
@@ -181,27 +246,14 @@ body{
     border-color: #777;
 }
 
-.textbox{
-    display: flex;
-    align-items: center;
-    background: transparent;
-    width: 150px;
-    color: #fff;
-    outline: none;
-    font-size: 15px;
-    font-weight: 400;
-    padding-left: 18%;
-}
-
-.textbox:focus{
-    border: none;
-    outline: none;
-}
-
-.cropper-container{
+.cropper-container {
     background-color: #1E1E1E;
     z-index: 999;
     width: 30%;
+    margin: 0 auto;
+    padding: 1em;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .cropper-image {
@@ -214,30 +266,67 @@ body{
     display: block;
 }
 
-.cropButton{
+.cropButton {
     padding: 10px 15px;
     border-radius: 10px;
-    background: #FF9000;
-    border: #ffb617 solid;
+    background: #FF900020;
+    border: #FF9000 solid;
     color: #fff;
     font-weight: 600;
     margin: 5% 0;
-    transition: all 0.3s ease 0s ;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
 }
 
-.cropButton:hover
-{
-    background: #fe780a;
+.cropButton:hover {
+    background: #FF900070;
 }
 
-.cropButton-container{
+.cropButton-container {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 1em;
+}
+
+.cropClose-button{
+    background-color: #FF900020;
+    border: #FF9000 solid;
+    color: #fff;
+    height: 30px;
+    width: 30px;
+    transition: background-color 0.3s ease 0s;
+    border-radius: 100%;
+}
+
+.cropClose-button:hover{
+    background-color: #FF900070;
+}
+
+.cropClose-button-container {
+    background-color: #1E1E1E;
+    width: 30%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.file-name {
+    color: #fff;
+    font-weight: 600;
+    font-size: 1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 70%;
 }
 
 .overlay-cropper {
-    position: absolute;
+    position: fixed;
     padding-top: 5%;
     padding-left: 5%;
     top: 0;
@@ -246,30 +335,26 @@ body{
     height: 100%;
     z-index: 1000;
     background-color: rgba(0, 0, 0, 0.5);
+    flex-direction: column;
+    align-items: center;
 }
 
-.confirmButton{
+.confirmButton {
     padding: 10px 15px;
     border-radius: 10px;
-    background: #FF9000;
-    border: #ffb617 solid;
+    background: #FF900020;
+    border: #FF9000 solid;
     color: #fff;
     font-weight: 600;
-    transition: all 0.3s ease 0s ;
+    transition: all 0.3s ease 0s;
     cursor: pointer;
 }
 
-.confirmButton:hover
-{
-    background: #fe780a;
+.confirmButton:hover {
+    background: #FF900070;
 }
 
-.confirmButton:disabled{
-    background: #777;
-    border-color: #999;
-    cursor: not-allowed;
-}
-
-.confirmButton:disabled:hover{
-    background: #777;
+.confirmButton-container {
+    width: 30%;
+    transition: display 0.3s ease 0s;
 }
