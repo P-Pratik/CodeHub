@@ -265,18 +265,5 @@ function handleProfilePicture() {
     }
 }
 
-function updateStats() {
-    fetch("/update/stats", {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-    })
-    .then((response) => response.json())
-    .then((data) => {
-        console.log(data);
-    });
-}
-
 handleProfilePicture(); // Initialize profile picture handling
 });
