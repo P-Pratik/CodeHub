@@ -2,12 +2,17 @@
 
 ## Description
 
-これはCodeHubというプロジェクトです。CodeHubはGitHub上でコードを共有し、協力して開発するためのプラットフォームです。CodeHubを使用すると、開発者はコードのバージョン管理、コードレビュー、プロジェクトの管理などを効率的に行うことができます。
+Web application to view problems and view combined coding profiles of users from various platforms like Codeforces, Codechef, AtCoder, LeetCode, etc. ( Currently Leetcode and GeeksforGeeks are supported )
 
-CodeHubの特徴：
-- シンプルで使いやすいインターフェース
-- チームメンバーとのコード共有とコラボレーション
-- プロジェクトの進捗管理とタスクの追跡
-- コードのバージョン管理と履歴の追跡
+## Features
 
-CodeHubは、ソフトウェア開発者にとって非常に便利なツールです。ぜひ使ってみてください！
+> still in developement
+
+- View problems from LeetCode and GeeksforGeeks
+- View Daily problems
+- View Contests
+- View combined coding profiles of users from various platforms like Leetcode, Geeksforgeeks, Codechef, AtCoder, etc.
+- View problems solved by a user on LeetCode and GeeksforGeeks
+- Bookmark problems
+- Create a custom list of problems
+- View problems by tags and filters of all kinds
