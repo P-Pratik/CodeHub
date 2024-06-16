@@ -301,6 +301,3 @@ def contestInfo(contestName):
 # print(fetchProblems(1))
 # pp.pprint(getSubmissionCalender())
 # pp.pprint(getSubmitStats("pratik_420"))
-
-
-print(usernameExists("pratik_420"))

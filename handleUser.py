@@ -276,7 +276,7 @@ def fetchUserData(uid):
     user_data = col.find_one({"uid": uid}, {"_id": 0, "uid": 0})
     return user_data
 
-def handleUser(uid, users):
+def handleUser(uid, users = []):
     user = col.find_one({"uid": uid}, {"uid": 1})
     if user:
         updateUserdata(uid, users)

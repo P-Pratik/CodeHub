@@ -30,7 +30,7 @@ class UserQuestions(db.Model):
 
     def __repr__(self):
         return f'Question {self.question} and Answer {self.answer}'
-    
+
 class UserPlatforms(db.Model):
     __tablename__ = 'user_platforms'
     uid = db.Column(db.Integer, db.ForeignKey('users.uid'), primary_key=True)
@@ -39,4 +39,10 @@ class UserPlatforms(db.Model):
     hackerrank = db.Column(db.Text)
 
     def __repr__(self):
-        return f'Platform {self.platform} and Username {self.username}'
+        data = {
+            'uid': self.uid,
+            'leetcode': self.leetcode,
+            'geeksforgeeks': self.geeksforgeeks,
+            'hackerrank': self.hackerrank
+        }
+        return str(data)

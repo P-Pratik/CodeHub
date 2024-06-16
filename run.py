@@ -1,6 +1,10 @@
-from app import create_app
+import os
+from app import create_app, db
+from scheduler import timely_update
 
-flask_app = create_app()
+app = create_app()
 
-if __name__ == '__main__':
-    flask_app.run(debug=True)
+if __name__ == "__main__":
+    if os.environ.get("WERKZEUG_RUN_MAIN") == "true":
+        timely_update(app, db)
+    app.run(debug=True)

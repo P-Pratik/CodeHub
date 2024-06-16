@@ -54,18 +54,19 @@ def register_routes(app, db, bcrypt):
             email = request.form["email"]
             password = request.form["password"]
             hashed_password = bcrypt.generate_password_hash(password).decode("utf-8")
-            user = User(username=username, email=email, password=hashed_password)
 
+            user = User(username=username, email=email, password=hashed_password)
             db.session.add(user)
             db.session.commit()
 
-            usr = User.query.filter(User.username == username).first()
+            user = User.query.filter(User.username == username).first()
             userplatforms = UserPlatforms(
-                uid=usr.uid, leetcode=None, geeksforgeeks=None, hackerrank=None
+                uid=user.uid, leetcode=None, geeksforgeeks=None, hackerrank=None
             )
             db.session.add(userplatforms)
             db.session.commit()
 
+            handleUser(uid=user.uid, users=[])
             print(f"User {username} has been created!")
             return redirect(url_for("login"))
 
