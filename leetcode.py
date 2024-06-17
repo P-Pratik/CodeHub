@@ -234,7 +234,7 @@ def getUpcomingContest():
     weekly = contestInfo(f"weekly-contest-{pastWeekly+1}")
     biweekly = contestInfo(f"biweekly-contest-{pastBiweekly+1}")
 
-    return {"weekly": weekly, "biweekly": biweekly}
+    return [weekly, biweekly];
 
 
 def getPastContest(page):
