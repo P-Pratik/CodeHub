@@ -12,6 +12,8 @@ body {
     color: #fff;
 }
 
+
+
 .profile-info {
     display: flex;
     align-items: center;
@@ -27,7 +29,6 @@ body {
     height: 450px;
     border-radius: 10px;
 }
-
 
 .user-container h1 {
     font-size: 1.8em;
@@ -351,6 +352,16 @@ body {
 }
 
 .confirmButton:hover {
+    background: #fe780a;
+}
+
+.confirmButton:disabled {
+    background: #777;
+    border-color: #999;
+    cursor: not-allowed;
+}
+
+.confirmButton:disabled:hover {
     background: #FF900070;
 }
 
