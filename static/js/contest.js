@@ -31,7 +31,7 @@ function getPastContest(data = {}) {
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
-            // renderPastContest(data);
+            renderPast(data);
         })
         .catch((error) => {
             console.error('Error fetching past contests:', error);
@@ -174,8 +174,40 @@ function renderLeetContests(leetContests) {
     setInterval(updateTimer, 1000);
 }
 
-function renderPastContest(data) {
+function renderPast(data){
+    let contestContainer = document.getElementById("past-contest-container");
+    contestContainer.innerHTML = "";
+    if (data.gfgcontest && Array.isArray(data.gfgcontest)) {
+        renderGFGPast(data.gfgcontest, contestContainer);
+    }
 }
+
+function renderGFGPast(data, contestContainer) {
+    // time is in GMT +5:30 
+    data.forEach((contest) => {
+        try {
+            let contestElement = document.createElement("div");
+            contestElement.innerHTML = `
+                <div class="past-contest">
+                    <a href="https://practice.geeksforgeeks.org/contest/${contest.slug}" target="_blank" referrerpolicy="no-referrer"">
+                        <div class="past-banner">
+                            <img src="${contest.banner.desktop_url}" alt="Contest Banner" height="50px"/>
+                        </div>
+                        <div class="past-information">
+                            <div>${contest.name}</div>
+                            <div>${contest.date} ${contest.time}</div>
+                        </div>
+                    </a>
+                </div>
+            `;
+            contestContainer.appendChild(contestElement);
+        }
+        catch (error) {
+            console.error('Error rendering GFG past contest:', error);
+        }
+    });
+                        
+}       
 
 function prevPage() {
     let page = document.getElementById("page").innerText;
