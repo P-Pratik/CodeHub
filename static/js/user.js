@@ -128,4 +128,20 @@ function renderSolved(data) {
     });
 }
 
+function updateStats() {
+    fetch("/update/stats", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data);
+        window.location.reload();
+    });
+}
+
+
+document.getElementById("update-stats").addEventListener("click", updateStats);
 userData(username);

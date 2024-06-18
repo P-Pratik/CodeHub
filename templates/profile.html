@@ -1,95 +1,109 @@
-{% extends 'base.html' %} {% block head %}
+{% extends 'base.html' %}
+
+{% block head %}
 <title>Profile</title>
 <script src="{{ url_for('static', filename='js/profile.js') }}" defer></script>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}" />
-<link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js" defer></script>
-{% endblock %} {% block body %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css" integrity="sha512-UtLOu9C7NuThQhuXXrGwx9Jb/z9zPQJctuAgNUBK3Z6kkSYT9wJ+2+dh6klS+TDBCV9kNPBbAxbVD+vCcfGPaA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js" integrity="sha512-JyCZjCOZoyeQZSd5+YEAcFgz2fowJ1F1hyJOXgtKu4llIa0KneLcidn5bwfutiehUTiOuK87A986BZJMko0eWQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+
+{% block body %}
 <div class="profile-info">
-    <div class="user-align">
-        <div class="user-container">
-            <div class="user-info-container">
+    <div class="user-container">
+        <div class="user-info-container">
+            <div>
+                <h1>Profile</h1>
                 <div>
-                    <h1>Profile</h1>
-                    <div>
-                        <div class="avatar">
-                            <img class="pfp" id="avatar"
-                                src="{{ url_for('static', filename='images/' + user.profile_pic) }}" alt="avatar" />
-                            <div class="overlay-button">
-                                <div class="file-upload">
-                                    <input type="file" id="profilePicInput" accept="image/png, image/jpg, image/jpeg"
-                                        onclick="handleProfilePicture()" />
-                                    <label for="profilePicInput">
-                                        <img src="{{ url_for('static', filename='svg/pen.svg') }}" alt="edit" />
-                                    </label>
-                                </div>
+                    <div class="avatar">
+                        <img class="pfp" id="avatar"
+                            src="{{ url_for('static', filename='images/' + user.profile_pic) }}" alt="avatar" />
+                        <div class="overlay-button">
+                            <div class="file-upload">
+                                <input type="file" id="profilePicInput" accept="image/png, image/jpg, image/jpeg"
+                                    onclick="handleProfilePicture()" />
+                                <label for="profilePicInput">
+                                    <img src="{{ url_for('static', filename='svg/pen.svg') }}" alt="edit" />
+                                </label>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="user-info">
-                    <div class="overlay-cropper" style="display: none">
-                        <div class="cropper-container">
-                            <div>
-                                <img id="cropImage" class="cropper-image" style="display: none" height="400px" />
-                            </div>
-                            <div class="cropButton-container">
-                                <button class="cropButton" id="cropButton" style="display: none">
-                                    Crop and Upload
-                                </button>
-                            </div>
+            </div>
+            <div class="user-info">
+                <div class="overlay-cropper" style="display: none">
+                    <div class="cropClose-button-container">
+                        <span id="fileName" class="file-name"></span>
+                        <button id="cropCloseButton" class="cropClose-button">X</button>
+                    </div>
+                    <div class="cropper-container">
+                        <div>
+                            <img id="cropImage" class="cropper-image" style="display: none" height="400px" />
+                        </div>
+                        <div class="cropButton-container">
+                            <button class="cropButton" id="cropButton" style="display: none">
+                                Crop and Upload
+                            </button>
                         </div>
                     </div>
-                    <div>
-                        <h3>Basic Info</h3>
-                        <div class="fields-container">
-                            <label for="username">Username:</label>
-                            <div class="fields">
-                                <h5>{{ user.username }}</h5>
-                            </div>
-                        </div>
-                        <div class="fields-container">
-                            <label for="uid">User ID:</label>
-                            <div class="fields">
-                                <h5 id="uid">{{ user.uid }}</h5>
-                            </div>
+                </div>
+                <div>
+                    <h3>Basic Info</h3>
+                    <div class="fields-container">
+                        <label for="username">Username:</label>
+                        <div class="fields">
+                            <h5>{{ user.username }}</h5>
                         </div>
                     </div>
-                    <div class="vertical"></div>
-                    <div>
-                        <h3>Coding Profile</h3>
-                        <form id="coding-profile-form">
-                            <div class="fields-container">
-                                <label for="leetcode">LeetCode:</label>
-                                <div class="fields">
-                                    {% if userplatform.leetcode %}
-                                    <input type="text" id="leetcode" name="leetcode" value="{{ userplatform.leetcode }}" />
-                                    {% else %}
-                                    <input type="text" id="leetcode" name="leetcode" placeholder="No Information Given" value=""  />
-                                    {% endif %}
-                                </div>
+                    <div class="fields-container">
+                        <label for="uid">User ID:</label>
+                        <div class="fields">
+                            <h5 id="uid">{{ user.uid }}</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vertical"></div>
+                
+                <div>
+                    <h3>Coding Profile</h3>
+                    <form id="coding-profile-form">
+                        <div class="fields-container">
+                            <label for="leetcode">LeetCode:</label>
+                            <div class="fields">
+                                {% if userplatform.leetcode %}
+                                <input type="text" id="leetcode" name="leetcode" value="{{ userplatform.leetcode }}" />
+                                {% else %}
+                                <input type="text" id="leetcode" name="leetcode" placeholder="No Information Given" value=""  />
+                                {% endif %}
                                 <span id="leetcode-message"></span>
                             </div>
-                            <div class="fields-container">
-                                <label for="geeksforgeeks">GeeksForGeeks:</label>
-                                <div class="fields">
-                                    {% if userplatform.geeksforgeeks %}
-                                    <input type="text" id="geeksforgeeks" name="geeksforgeeks" value="{{ userplatform.geeksforgeeks }}" >
-                                    {% else %}
-                                    <input type="text" id="geeksforgeeks" name="geeksforgeeks" placeholder="No Information Given" value=""  />
-                                    {% endif %}
-                                </div>
+                        </div>
+                        <div class="fields-container">
+                            <label for="geeksforgeeks">GeeksForGeeks:</label>
+                            <div class="fields">
+                                {% if userplatform.geeksforgeeks %}
+                                <input type="text" id="geeksforgeeks" name="geeksforgeeks" value="{{ userplatform.geeksforgeeks }}" >
+                                {% else %}
+                                <input type="text" id="geeksforgeeks" name="geeksforgeeks" placeholder="No Information Given" value=""  />
+                                {% endif %}
                                 <span id="geeksforgeeks-message"></span>
                             </div>
-                            <button type="submit" class="confirmButton" id="update-confirm" disabled>
-                                Confirm Changes
-                            </button>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: flex-end;">
+            <div class="remark-container" id="remarkContainer" style="display: flex; align-items: center; margin-right: 10px;">
+                <!-- SVG and message will be inserted here dynamically -->
+            </div>
+            <div id="confirmButton-container" class="confirmButton-container" style="display: none; justify-content: center;">
+                <button type="submit" class="confirmButton" id="update-confirm">
+                    Confirm Changes
+                </button>
             </div>
         </div>
     </div>
 </div>
-<button id="update-stats" onclick="updateStats()">Test button</button>
 {% endblock %}

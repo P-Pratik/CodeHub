@@ -350,18 +350,35 @@ p{
 .filterForm select, .filterForm button{
     flex: 1 0 48%;
     margin-bottom: 10px;
-    padding: 10px;
     font-size: 1em;
+}
+
+.filterForm select{
     border: 1px solid #ccc;
     border-radius: 4px;
+    padding: 10px;
 }
-.filterForm select:focus, .filterForm button:focus{
+
+.filterForm select:focus {
     border-color: #FF9000;
 }
 
 .filter-button{
+    background-color: #FF9000;
+    border: #ffb617 solid;
+    color: #fff;
     display: flex;
+    align-items: center;
+    font-weight: 600;
+    border-radius: 4px;
     justify-content: center;
+    transition: all 0.3s ease 0s;
+    padding: 10px;
+    margin-left: 20px;
+}
+
+.filter-button:hover{
+    background-color: #fe780a;
 }
 
 .allproblems{
@@ -383,7 +400,7 @@ p{
     font-size: 2.1em;
 }
 
-#apply{
+/* #apply{
     background: #FF9000;
     border: none;
     color: #1E1E1E;
@@ -397,7 +414,7 @@ p{
 
 #apply:hover{
     background: #ffb617;
-}
+} */
 
 .problemtb-container {
     margin: 5% 0;
@@ -411,6 +428,11 @@ table {
     border-collapse: collapse;
     margin-bottom: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+table tr td:first-child{
+    /* outline:  red solid; */
+    width: 50%;
 }
 
 th {

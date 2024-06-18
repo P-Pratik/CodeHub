@@ -54,18 +54,19 @@ def register_routes(app, db, bcrypt):
             email = request.form["email"]
             password = request.form["password"]
             hashed_password = bcrypt.generate_password_hash(password).decode("utf-8")
-            user = User(username=username, email=email, password=hashed_password)
 
+            user = User(username=username, email=email, password=hashed_password)
             db.session.add(user)
             db.session.commit()
 
-            usr = User.query.filter(User.username == username).first()
+            user = User.query.filter(User.username == username).first()
             userplatforms = UserPlatforms(
-                uid=usr.uid, leetcode=None, geeksforgeeks=None, hackerrank=None
+                uid=user.uid, leetcode=None, geeksforgeeks=None, hackerrank=None
             )
             db.session.add(userplatforms)
             db.session.commit()
 
+            handleUser(uid=user.uid, users=[])
             print(f"User {username} has been created!")
             return redirect(url_for("login"))
 
@@ -89,7 +90,7 @@ def register_routes(app, db, bcrypt):
 
         elif request.method == "POST":
             return
-        
+
     @app.route("/contest", methods=["GET"])
     def contest():
         return render_template("contest.html")
@@ -110,17 +111,14 @@ def register_routes(app, db, bcrypt):
         lcContest = lc.getUpcomingContest()
         return jsonify({"gfgcontest": gfgContest, "lccontest": lcContest})
 
-
     @app.route("/api/contest/past/<page>", methods=["POST"])
-    def getPastContest(page = 1):
+    def getPastContest(page=1):
         if request.json:
             platform = request.json["platform"]
 
-        print(platform)
         gfgContest = gfg.getPastContest(int(page))
         lcContest = lc.getPastContest(int(page))
         return jsonify({"gfgcontest": gfgContest, "lccontest": lcContest})
-
 
     @app.route("/update/profile", methods=["PUT"])
     @login_required
@@ -150,7 +148,8 @@ def register_routes(app, db, bcrypt):
                 return jsonify(success=True)
             except Exception as e:
                 db.session.rollback()
-                return jsonify(success=False, error=str(e))
+                print(e)
+                return jsonify(success=False, error="Some error occurred")
         else:
             return jsonify(success=False, error="User not found")
 
@@ -216,7 +215,7 @@ def register_routes(app, db, bcrypt):
             return jsonify(success=True)
         except Exception as e:
             db.session.rollback()
-            return jsonify(success=False, error=str(e))
+            return jsonify(success=False, error="Some error occurred")
 
     @app.route("/check/username-exists", methods=["POST"])
     @login_required
@@ -224,24 +223,20 @@ def register_routes(app, db, bcrypt):
         if not request.json:
             return jsonify(success=False, error="No data provided")
 
-        print(request.json)
         platform = request.json["platform"]
         username = request.json["username"]
 
-        print(platform, username)
         if platform == "geeksforgeeks":
             data = gfg.usernameExists(username)
             if "error" in data:
                 return jsonify(exists=False, error=data["error"])
-            
+
         elif platform == "leetcode":
             data = lc.usernameExists(username)
             if "error" in data:
                 return jsonify(exists=False, error=data["error"])
-        
+
         return jsonify(exists=data["exists"])
-
-
 
     @app.route("/problem/<page>", methods=["POST"])
     def problem(page):

@@ -234,7 +234,7 @@ def getUpcomingContest():
     weekly = contestInfo(f"weekly-contest-{pastWeekly+1}")
     biweekly = contestInfo(f"biweekly-contest-{pastBiweekly+1}")
 
-    return {"weekly": weekly, "biweekly": biweekly}
+    return [weekly, biweekly];
 
 
 def getPastContest(page):
@@ -301,6 +301,3 @@ def contestInfo(contestName):
 # print(fetchProblems(1))
 # pp.pprint(getSubmissionCalender())
 # pp.pprint(getSubmitStats("pratik_420"))
-
-
-print(usernameExists("pratik_420"))
