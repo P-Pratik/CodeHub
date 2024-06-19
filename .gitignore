@@ -1,4 +1,4 @@
 .venv
 __pycache__
 /config
-/static/node_modules
+app/static/node_modules

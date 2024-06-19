@@ -2,8 +2,8 @@ import schedule
 import time
 import json
 import threading
-from models import UserPlatforms
-from handleUser import handleUser
+from app.models import UserPlatforms
+from data_sync.user_sync import handleUser
 
 def auto_update(app, db):
     with app.app_context():
