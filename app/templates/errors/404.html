@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1> 404 NOT FOUND </h1>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block head %}
+    <title> Contest </title>
+    <script src="{{ url_for('static', filename='js/contest.js') }}" defer></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/contest.css') }}">
+{% endblock %}
+
+{% block body %}
+    <h1>Error :[</h1>
+    <div class="error_code" id="error_code"></div>
+    <div class="error_msg" id="error_msg"></div>
+{% endblock %}

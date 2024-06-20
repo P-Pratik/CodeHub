@@ -16,35 +16,54 @@
 
     <div class="container">
         <h1>Upcoming Contests</h1>
-        <div class="upcoming-contest"></div>
+        <div class="upcoming-container">
+            <div class="contestType-container">
+                <h3>GFG Contests</h3>
+                <div class="carousel-container">
+                    <button class="carousel-button prev" onclick="prevGFGContest()">&#9664;</button>
+                    <button class="below-carousel-button prev" onclick="prevGFGContest()">&#9664;</button>
+                    <div class="upcoming-contest gfg-contests"></div>
+                    <button class="carousel-button next" onclick="nextGFGContest()">&#9654;</button>
+                    <button class="below-carousel-button next" onclick="nextGFGContest()">&#9654;</button>
+                </div>
+            </div>
+            <div class="vertical"></div>
+            <div class="contestType-container">
+                <h3>LeetCode Contests</h3>
+                <div class="carousel-container">
+                    <button class="carousel-button prev" onclick="prevLeetContest()">&#9664;</button>
+                    <button class="below-carousel-button prev" onclick="prevGFGContest()">&#9664;</button>
+                    <div class="upcoming-contest leet-contests"></div>
+                    <button class="carousel-button next" onclick="nextLeetContest()">&#9654;</button>
+                    <button class="below-carousel-button next" onclick="nextGFGContest()">&#9654;</button>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="container">
-            <h2>Past Contests</h2>
     
-            <div class="filterForm">
-                <label for="platform">Platform:</label>
-                <select id="platform" name="platform">
-                    <option value="all">All</option>
-                    <option value="geeksforgeeks">GeeksForGeeks</option>
-                    <option value="leetcode">LeetCode</option>
-                </select>
+    <div class="container">
+        <h1>Past Contests</h1>
+        <div class="past-filterForm">
+            <div class="past-filterForm-content">
+                <img src="{{ url_for('static', filename='svg/filter-2.svg') }}" alt="filter">
+                <div class="platform-select">
+                    <label for="platform">Platform:</label>
+                    <select id="platform" name="platform">
+                        <option value="all">All</option>
+                        <option value="geeksforgeeks">GeeksForGeeks</option>
+                        <option value="leetcode">LeetCode</option>
+                    </select>
+                </div>
                 <button class="filter-button" id="applyFilter">Apply</button>
             </div>
-
-            <div class="" id="past-contest-container">
-
-            </div>
-    
-            <div class="pagination">
-                <button id="prev" onclick="prevPage()">◄</button>
-                <span id="page">1</span>
-                <button id="next" onclick="nextPage()">►</button>
-            </div>
+        </div>
+        <div id="past-contest-container"></div>
+        <div class="pagination">
+            <button id="prev" onclick="prevPage()">&#9664;</button>
+            <span id="page">1</span>
+            <button id="next" onclick="nextPage()">&#9654;</button>
+        </div>
     </div>
 
-    <div id="wordsContainer">
-        
-    </div>
-
+    <div id="wordsContainer"></div>
 {% endblock %}

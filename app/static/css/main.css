@@ -542,14 +542,24 @@ th:last-child {
 }
 
 .pagination button{
-    padding: 8px 9px;
-    margin: 0 5px;
-    background: #ccc;
+    background: #ddd;
     color: #1E1E1E;
     border: none;
+    height: 35px;
+    width: 35px;
+    padding: 10px;
+    padding-bottom: 15px;
+    margin: 0 10px;
     border-radius: 100%;
     cursor: pointer;
     transition: all 0.3s ease 0s;
+}
+
+.pagination button[id="prev"]{
+    padding-right: 20px;
+}
+.pagination button[id="next"]{
+    padding-left: 12px;
 }
 
 .pagination button:hover{
