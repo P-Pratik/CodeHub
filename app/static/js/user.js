@@ -101,7 +101,8 @@ function renderSolved(data) {
         solvedStats.appendChild(solved);
     }
     const school = data[1]["count"], basic = data[2]["count"], easy = data[3]["count"], medium = data[4]["count"], hard = data[5]["count"];
-    const total_school = 123, total_basic = 523, total_easy = 1872, total_medium = 2687, total_hard = 911;
+    const total_school = 123, total_basic = 523, total_easy = 1872, total_medium = 2687, total_hard = 911; 
+    //figure some way to get total questions on Lc & Gfg
 
     const graph_data = [school, (total_school - school), basic, (total_basic-basic), easy, (total_easy-easy), medium, (total_medium-medium), hard, (total_hard-hard)];
     const colors = ['#ff44ff', '#673367', '#57FFFF', '#556666','#3FD63F', '#335533', '#FFD300', '#4E4E2E', '#FF4C4C', '#6E3333']; 
@@ -125,6 +126,15 @@ function renderSolved(data) {
             }
         }
     });
+    
+    document.getElementById("completed").textContent = data[0]["count"]; 
+    document.getElementById("total").textContent = 6116; 
+    
+    document.getElementById("solved-school").textContent = school + "/" + total_school;
+    document.getElementById("solved-basic").textContent = basic + "/" + total_basic;
+    document.getElementById("solved-easy").textContent = easy + "/" + total_easy;
+    document.getElementById("solved-medium").textContent = medium + "/" + total_medium;
+    document.getElementById("solved-hard").textContent = hard + "/" + total_hard;
 }
 
 function updateStats() {
