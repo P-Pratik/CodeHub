@@ -21,6 +21,7 @@ function userData(username) {
 
             renderCalender(calender, date);
             renderSolved(solvedStats);
+            renderContestData();
 
             document
                 .getElementById("calYear")
@@ -135,6 +136,48 @@ function renderSolved(data) {
     document.getElementById("solved-easy").textContent = easy + "/" + total_easy;
     document.getElementById("solved-medium").textContent = medium + "/" + total_medium;
     document.getElementById("solved-hard").textContent = hard + "/" + total_hard;
+}
+
+function renderContestData() {
+    // const data = {300:1200, 69:1300, 301:1400};
+    // contest data shall arrive in order of least recently to most recently, combining both weekly and biweekly
+    const xValues = [0, 302, 12, 13, 306, 16, 312,1,1,1];
+    const yValues = [0, 1214, 1326, 1440, 1432, 1567, 1604, 1464, 1542, 1467, 1576];
+    const gradientColors = ['#E78300', '#FFC700']; // add any more colors
+
+    new Chart("myChart", {
+    type: "line",
+    data: {
+        labels: xValues,
+        datasets: [{
+        fill: true,
+        lineTension: 0.35,      //curvature of line: more is better but also more inaccurate
+        backgroundColor: function(context) {
+            const chart = context.chart;
+            const {ctx, chartArea} = chart;
+            if (!chartArea) {return null;}
+
+            const gradientFill = ctx.createLinearGradient(chartArea.left, 0, chartArea.right, 0);
+            for (let i = 0; i < gradientColors.length; i++) {
+            gradientFill.addColorStop(i / (gradientColors.length - 1), gradientColors[i]);
+            }
+            return gradientFill;
+        },
+        borderColor: "#FFFFFF",
+        pointRadius: 2.5,
+        data: yValues
+        }]
+    },
+    options: {
+        plugins:{
+            legend: {display: false}
+            },
+            scales: {
+                x: {display: false},
+                y: {ticks: {min: 0, max: 2400}, display: false}
+            }// min, max is range of ratings possible (else graph overflow)
+        }
+    });
 }
 
 function updateStats() {
