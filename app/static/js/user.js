@@ -129,8 +129,9 @@ function renderSolved(data) {
     });
     
     document.getElementById("completed").textContent = data[0]["count"]; 
-    document.getElementById("total").textContent = 6116; 
-    
+    document.getElementById("total").textContent = 6116;
+
+    document.getElementById("solved-all").textContent = (school + basic + easy + medium + hard) + "/" + (total_school + total_basic + total_easy + total_medium + total_hard);
     document.getElementById("solved-school").textContent = school + "/" + total_school;
     document.getElementById("solved-basic").textContent = basic + "/" + total_basic;
     document.getElementById("solved-easy").textContent = easy + "/" + total_easy;
@@ -145,7 +146,7 @@ function renderContestData() {
     const yValues = [0, 1214, 1326, 1440, 1432, 1567, 1604, 1464, 1542, 1467, 1576];
     const gradientColors = ['#E78300', '#FFC700']; // add any more colors
 
-    new Chart("myChart", {
+    new Chart("contest-widget", {
     type: "line",
     data: {
         labels: xValues,

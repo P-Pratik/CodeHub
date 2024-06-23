@@ -27,18 +27,6 @@
 </div>
 
 <div class="statistics">
-    <div class="heatmap">
-        <h2>Heatmap</h2>
-        <select id="calYear" name="calYear">
-            <option value="current">Current</option>
-            <option value="2023-01-01">2023</option>
-            <option value="2022-01-01">2022</option>
-        </select>
-        <div id="cal-heatmap"></div>
-        <a href="#" id="prev">← Previous</a>
-        <a href="#" id="next">Next →</a>
-    </div>
-
     <div class="solved-stats" id="solvedStats">
         <h2>Solved</h2>
         
@@ -58,6 +46,7 @@
                 </div>
             </div>
             <div class="legend">
+                <div class="legend-item"><p><span id="all">All</span><br><span class="count" id="solved-all">0/0</span></p></div>
                 <div class="legend-item"><p><span id="school">School</span><br><span class="count" id="solved-school">0/0</span></p></div>
                 <div class="legend-item"><p><span id="basic">Basic</span><br><span class="count" id="solved-basic">0/0</span></p></div>
                 <div class="legend-item"><p><span id="easy">Easy</span><br><span class="count" id="solved-easy">0/0</span></p></div>
@@ -68,7 +57,19 @@
     </div>
     <!--widget end-->
     <!--contest widget: -->
-    <canvas id="myChart" style="max-width:400px; max-height: 200px;"></canvas>
+    <canvas id="contest-widget" style="max-width:400px; max-height: 200px;"></canvas>
+
+    <div class="heatmap">
+        <h2>Heatmap</h2>
+        <select id="calYear" name="calYear">
+            <option value="current">Current</option>
+            <option value="2023-01-01">2023</option>
+            <option value="2022-01-01">2022</option>
+        </select>
+        <div id="cal-heatmap"></div>
+        <a href="#" id="prev">← Previous</a>
+        <a href="#" id="next">Next →</a>
+    </div>
 </div>
 
 
