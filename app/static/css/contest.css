@@ -230,6 +230,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 2% 5%;
+    padding-bottom: 3%;
     border: #353535 solid;
     border-radius:  10px;
 }
@@ -277,7 +278,7 @@ body {
 
 .past-filterForm-content img{
     margin-top: 3%;
-    margin-right: 8%;
+    margin-right: 12%;
     height: 25px;
 }
 
@@ -325,6 +326,8 @@ body {
 .carousel-button {
     background-color: #FF900020;
     color: #fff;
+    position: relative;
+    top: 7.5%;
     border: #FF9000 solid;
     padding: 10px;
     height: 50px;
@@ -346,7 +349,7 @@ body {
     font-size: 18px;
     border-radius: 100px;
     position: absolute;
-    top: 42%;
+    top: 50%;
     z-index: 990;
     border: none;
 }

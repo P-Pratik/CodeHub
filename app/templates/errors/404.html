@@ -1,12 +1,24 @@
 {% extends 'base.html' %}
 {% block head %}
-    <title> Contest </title>
-    <script src="{{ url_for('static', filename='js/contest.js') }}" defer></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/contest.css') }}">
+    <title> 404 Not Found </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/error.css') }}">
 {% endblock %}
 
 {% block body %}
-    <h1>Error :[</h1>
-    <div class="error_code" id="error_code"></div>
-    <div class="error_msg" id="error_msg"></div>
+    <div class="error_content-container">
+        <div class="error_content">
+            <h1>Error :[</h1>
+            <div class="error_code" id="error_code">404</div>
+            <div class="error_type" id="error_code">NOT FOUND</div>
+            <div class="msg_list-container">
+                <ul class="msg_list">
+                    <li class="error_msg">The page you are looking for either doesn't exist, was renamed or was removed.</li>
+                    <li class="error_msg2">Please check if there was an typo from your end.</li>
+                    <li class="error_msg2">
+                        Redirect to <a href="{{url_for('home.index')}}">Home</a> ?
+                    </li>
+                </ul>
+            </div>
+        </div>        
+    </div>
 {% endblock %}
