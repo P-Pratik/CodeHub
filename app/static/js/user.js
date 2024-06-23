@@ -19,7 +19,7 @@ function userData(username) {
             let active = data["userCalender"]["totalActiveDays"]
             let solvedStats = data["stats"]["solvedStats"];
             let date = getLastYearDate();
-            
+
             renderCalender(calender, date, active);
             renderSolved(solvedStats);
             renderContestData();
@@ -34,14 +34,19 @@ function userData(username) {
                     date = document.getElementById("calYear").value;
                 }
                 document.getElementById("cal-heatmap").innerHTML = "";
-                renderCalender(calender, date);
+                renderCalender(calender, date, active);
             }
         });
 }
 
 function renderCalender(calender, date, active) {
     const cal = new CalHeatmap();
-    document.getElementById("total-solved-stats").textContent = "total active days: " + active;
+    let submission = 0
+    for (let i = 0; i < calender.length; i++) {
+        submission = submission + calender[i]["count"];
+    }
+    document.getElementById("total-active-days").textContent = "total active days: " + active;
+    document.getElementById("total-submissions").textContent = "total submissions: " + submission;
     cal.paint(
         {
             range: 12,
