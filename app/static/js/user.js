@@ -16,10 +16,11 @@ function userData(username) {
         .then((response) => response.json())
         .then((data) => {
             let calender = data["userCalender"]["submissionCalender"];
+            let active = data["userCalender"]["totalActiveDays"]
             let solvedStats = data["stats"]["solvedStats"];
             let date = getLastYearDate();
-
-            renderCalender(calender, date);
+            
+            renderCalender(calender, date, active);
             renderSolved(solvedStats);
             renderContestData();
 
@@ -38,8 +39,9 @@ function userData(username) {
         });
 }
 
-function renderCalender(calender, date) {
+function renderCalender(calender, date, active) {
     const cal = new CalHeatmap();
+    document.getElementById("total-solved-stats").textContent = "total active days: " + active;
     cal.paint(
         {
             range: 12,
