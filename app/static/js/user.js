@@ -38,15 +38,55 @@ function userData(username) {
             }
         });
 }
+/*
+algorithm for max streak (for future reference in case of backend implementation)
 
+dates.sort(key= lambda dict: dict["date"])
+current_streak, max_streak = 1, 1
+for i in range(1,len(dates)):
+    date1 = date[i - 1]     # previous
+    date2 = date[i]         # current
+    date3 = Date(date1 + 1) # next occuring date of date1
+    if (difference of previous and current is one, and (month, year) are same for both dates) or 
+    (if current is same as next occuring date of previous date and difference of either month or year is one):
+        current  = current + 1
+    else:
+        max_streak = max(max_streak, current_streak)
+        reset current to 1
+*/ 
 function renderCalender(calender, date, active) {
-    const cal = new CalHeatmap();
     let submission = 0
     for (let i = 0; i < calender.length; i++) {
         submission = submission + calender[i]["count"];
     }
+
+    let maxStreak = 1;
+    let currentStreak = 1;
+
+    calender.sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        return dateA - dateB;
+      });
+
+    for (let i = 1; i < calender.length; i++) {
+        let date1 = new Date(calender[i - 1]["date"]);
+        let date2 = new Date(calender[i]["date"]);
+        let date3 = new Date(date1.getDate() + 1);
+
+        if (((date2.getDate() - date1.getDate()) === 1 && date1.getMonth() === date2.getMonth() && date1.getFullYear() === date2.getFullYear()) || 
+        (date3.getDate() === date2.getDate() && ((date2.getMonth() - date1.getMonth()) === 1)||(date2.getFullYear() - date1.getFullYear()) === 1)){
+            currentStreak++;
+        } else {
+            maxStreak = Math.max(maxStreak, currentStreak);
+            currentStreak = 1;
+        }
+    }
     document.getElementById("total-active-days").textContent = "total active days: " + active;
     document.getElementById("total-submissions").textContent = "total submissions: " + submission;
+    document.getElementById("maximum-streak").textContent = "maximum streak: " + maxStreak;
+    
+    const cal = new CalHeatmap();
     cal.paint(
         {
             range: 12,
