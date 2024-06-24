@@ -137,17 +137,6 @@ function renderCalender(calender, date, active) {
 }
 
 function renderSolved(data) {
-    let solvedStats = document.getElementById("solvedStats");
-    for (let i = 0; i < data.length; i++) {
-        let solved = document.createElement("div");
-        let difficulty = data[i]["difficulty"];
-        let count = data[i]["count"];
-        let stat = document.createElement("p");
-        stat.textContent = difficulty + " : " + count;
-
-        solved.appendChild(stat);
-        solvedStats.appendChild(solved);
-    }
     const school = data[1]["count"], basic = data[2]["count"], easy = data[3]["count"], medium = data[4]["count"], hard = data[5]["count"];
     const total_school = 123, total_basic = 523, total_easy = 1872, total_medium = 2687, total_hard = 911; 
     //figure some way to get total questions on Lc & Gfg
