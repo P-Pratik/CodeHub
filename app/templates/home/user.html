@@ -25,10 +25,16 @@
     <p> {{ userplatform.geeksforgeeks }}</p>
     {% if current_user.is_authenticated and current_user.username == user.username %}
     <div class="edit-profile">
-        <a href="{{ url_for('profile.profile') }}">Edit Profile</a>
+        <a href="{{ url_for('profile.profile') }}">Edit Profile 
+            <img src="{{ url_for('static', filename='svg/other pen.svg') }}" alt="edit-icon" />
+        </a>
     </div>
-    <button id="update-stats">Fetch Latest</button>
+    <button id="update-stats" > Refresh <i class="fa fa-refresh"> </i> </button>
     {% endif %}
+</div>
+
+<div id="refresh-overlay">
+    <i class="fa fa-refresh fa-spin spinny-icon"></i>
 </div>
 
 <div class="statistics">
@@ -51,7 +57,6 @@
                 </div>
             </div>
             <div class="legend">
-                <div class="legend-item"><p><span id="all">All</span><br><span class="count" id="solved-all">0/0</span></p></div>
                 <div class="legend-item"><p><span id="school">School</span><br><span class="count" id="solved-school">0/0</span></p></div>
                 <div class="legend-item"><p><span id="basic">Basic</span><br><span class="count" id="solved-basic">0/0</span></p></div>
                 <div class="legend-item"><p><span id="easy">Easy</span><br><span class="count" id="solved-easy">0/0</span></p></div>

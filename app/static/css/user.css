@@ -1,0 +1,58 @@
+h1 {
+    padding-left: 100px;
+    padding-right: 100%;
+}
+.avatar img {
+    height: 220px;
+    margin: 5%;
+    margin-top: 0;
+    border: #FF9000 solid 4px;
+    border-radius: 15px;
+    display: block;
+}
+
+.avatar {
+    position: relative;
+    display: inline-block;
+}
+
+.edit-profile {
+    width: 300px;
+    height: 2em;
+    border-radius: 0.5em;
+    color: #fff;
+    background-color: #FF9000;
+    text-align: center;
+}
+
+.edit-profile a{
+    font-weight: 500;
+}
+
+#update-stats {
+    background-color: #1e1e1e;
+    color: white;
+    border: solid 0px;
+    padding: 10px;
+}
+
+.spinny-icon {
+    font-size: 10em;
+    margin-left: 45%;
+    margin-right: 50%;
+    margin-top: 20%;
+}
+
+#refresh-overlay {
+    position: fixed; /* Sit on top of the page content */
+    display: none; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+  }

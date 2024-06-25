@@ -167,7 +167,6 @@ function renderSolved(data) {
     document.getElementById("completed").textContent = data[0]["count"]; 
     document.getElementById("total").textContent = 6116;
 
-    document.getElementById("solved-all").textContent = (school + basic + easy + medium + hard) + "/" + (total_school + total_basic + total_easy + total_medium + total_hard);
     document.getElementById("solved-school").textContent = school + "/" + total_school;
     document.getElementById("solved-basic").textContent = basic + "/" + total_basic;
     document.getElementById("solved-easy").textContent = easy + "/" + total_easy;
@@ -218,6 +217,7 @@ function renderContestData() {
 }
 
 function updateStats() {
+    document.getElementById("refresh-overlay").style.display = "block";
     fetch("/update/stats", {
         method: "PUT",
         headers: {
