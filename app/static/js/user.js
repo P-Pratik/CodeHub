@@ -172,6 +172,7 @@ function renderSolved(data) {
     document.getElementById("solved-easy").textContent = easy + "/" + total_easy;
     document.getElementById("solved-medium").textContent = medium + "/" + total_medium;
     document.getElementById("solved-hard").textContent = hard + "/" + total_hard;
+    renderRadarChart(school, basic, easy, medium, hard);
 }
 
 function renderContestData() {
@@ -212,6 +213,42 @@ function renderContestData() {
                 x: {display: false},
                 y: {ticks: {min: 0, max: 2400}, display: false}
             }// min, max is range of ratings possible (else graph overflow)
+        }
+    });
+}
+
+function renderRadarChart(school, basic, easy, medium, hard) {
+    let ctx = document.getElementById('radarChart').getContext('2d');
+    const gradientColors = ['#E78300', '#FFC700']; // add any more colors
+    let myRadarChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels:['School', 'Basic', 'Easy', 'Medium', 'Hard'],
+            datasets: [{
+                label: 'GeeksforGeeks Skills',
+                data: [school, basic, easy, medium, hard],
+                backgroundColor: function(context) {
+                    const chart = context.chart;
+                    const {ctx, chartArea} = chart;
+                    if (!chartArea) {return null;}
+        
+                    const gradientFill = ctx.createLinearGradient(chartArea.left, 0, chartArea.right, 0);
+                    for (let i = 0; i < gradientColors.length; i++) {
+                    gradientFill.addColorStop(i / (gradientColors.length - 1), gradientColors[i]);
+                    }
+                    return gradientFill;
+                },
+                borderColor: '#FFFFFF',
+                borderWidth: 2,
+            }]
+        },
+        options: {
+            scale: {
+                ticks: {display: false}
+            },
+            plugins: {
+                legend: { display: false}
+            }
         }
     });
 }

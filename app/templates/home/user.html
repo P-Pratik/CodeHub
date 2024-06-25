@@ -26,23 +26,23 @@
     {% if current_user.is_authenticated and current_user.username == user.username %}
     <div class="edit-profile">
         <a href="{{ url_for('profile.profile') }}">Edit Profile 
-            <img src="{{ url_for('static', filename='svg/other pen.svg') }}" alt="edit-icon" />
+            <img src="{{ url_for('static', filename='svg/other pen.svg') }}" id="edit-icon" alt="edit-icon" />
         </a>
     </div>
     <button id="update-stats" > Refresh <i class="fa fa-refresh"> </i> </button>
     {% endif %}
-</div>
-
-<div id="refresh-overlay">
-    <i class="fa fa-refresh fa-spin spinny-icon"></i>
-</div>
-
-<div class="statistics">
-    <div class="solved-stats" id="solvedStats">
-        <h2>Solved</h2>
-        
+    <div id="refresh-overlay">
+        <i class="fa fa-refresh fa-spin spinny-icon"></i>
     </div>
     
+    <!--radar chart-->
+    <div class='radar-wrapper'>
+        <canvas id="radarChart"width="700" height="300"></canvas>
+    </div>
+    
+</div>
+
+<div class="statistics"> 
     <!--widget-->
     <div class="widget-wrapper">
         <div class="widget">
@@ -67,10 +67,9 @@
     </div>
     <!--widget end-->
     <!--contest widget: -->
-    <canvas id="contest-widget" style="max-width:400px; max-height: 200px;"></canvas>
-
+    <canvas id="contest-widget"></canvas>
+    <!--heatmap-->
     <div class="heatmap">
-        <h2>Heatmap</h2>
         <p id="total-active-days">0</p>
         <p id="total-submissions">0</p>
         <p id="maximum-streak">0</p>

@@ -22,7 +22,9 @@ h1 {
     border-radius: 0.5em;
     color: #fff;
     background-color: #FF9000;
-    text-align: center;
+    display: flex; /*flex because text & icon wont line up*/
+    justify-content: center;
+    align-items: center;
 }
 
 .edit-profile a{
@@ -36,6 +38,11 @@ h1 {
     padding: 10px;
 }
 
+.user-info, .statistics {
+    background-color: #434343;
+    border-radius: 20px;
+}
+
 .spinny-icon {
     font-size: 10em;
     margin-left: 45%;
@@ -44,15 +51,21 @@ h1 {
 }
 
 #refresh-overlay {
-    position: fixed; /* Sit on top of the page content */
-    display: none; /* Hidden by default */
-    width: 100%; /* Full width (cover the whole page) */
-    height: 100%; /* Full height (cover the whole page) */
+    position: fixed; 
+    display: none; 
+    width: 100%; 
+    height: 100%;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
-    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
-    cursor: pointer; /* Add a pointer on hover */
+    background-color: rgba(0,0,0,0.5); 
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+    z-index: 4; 
+    cursor: pointer; 
+  }
+
+  #edit-icon {
+    height: 1em;
   }
