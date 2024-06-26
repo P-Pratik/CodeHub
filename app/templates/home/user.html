@@ -1,11 +1,13 @@
 {% extends 'base.html' %} {% block head %}
 <title>{{ user.username }}</title>
 <script src="{{ url_for('static', filename='js/user.js') }}" defer></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}" />
 {% endblock %} {% block body %}
 
 <h1>Profile</h1>
 <script>
     const username = "{{ user.username }}";
+    const userplatform = "{{ userplatform }}";
 </script>
 
 <div class="user-info">
@@ -18,17 +20,59 @@
         />
     </div>
     <p id="username"> {{ user.username }} </p>
+    <p> {{ user.uid }}</p>
+    <p> {{ userplatform.leetcode }}</p>
+    <p> {{ userplatform.geeksforgeeks }}</p>
     {% if current_user.is_authenticated and current_user.username == user.username %}
     <div class="edit-profile">
-        <a href="{{ url_for('profile.profile') }}">Edit Profile</a>
+        <a href="{{ url_for('profile.profile') }}">Edit Profile 
+            <img src="{{ url_for('static', filename='svg/other pen.svg') }}" id="edit-icon" alt="edit-icon" />
+        </a>
     </div>
-    <button id="update-stats">Fetch Latest</button>
+    <button id="update-stats" > Refresh <i class="fa fa-refresh"> </i> </button>
     {% endif %}
+    <div id="refresh-overlay">
+        <i class="fa fa-refresh fa-spin spinny-icon"></i>
+    </div>
+    
+    <!--radar chart-->
+    <div class='radar-wrapper'>
+        <canvas id="radarChart"width="700" height="300"></canvas>
+    </div>
+    
 </div>
 
-<div class="statistics">
+<div class="statistics"> 
+    <!--widget-->
+    <div class="widget-wrapper">
+        <div class="widget">
+            <div class="circle-chart">
+                <canvas id="chart" width="200" height="200"></canvas>
+                <div class="overlay-circle">
+                    <div class="inner-circle">
+                        <p>
+                            <span id="completed">0</span>/<br><span id="total">0</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="legend">
+                <div class="legend-item"><p><span id="school">School</span><br><span class="count" id="solved-school">0/0</span></p></div>
+                <div class="legend-item"><p><span id="basic">Basic</span><br><span class="count" id="solved-basic">0/0</span></p></div>
+                <div class="legend-item"><p><span id="easy">Easy</span><br><span class="count" id="solved-easy">0/0</span></p></div>
+                <div class="legend-item"><p><span id="medium">Med.</span><br><span class="count" id="solved-medium">0/0</span></p></div>
+                <div class="legend-item"><p><span id="hard">Hard</span><br><span class="count" id="solved-hard">0/0</span></p></div>
+            </div>
+        </div>
+    </div>
+    <!--widget end-->
+    <!--contest widget: -->
+    <canvas id="contest-widget"></canvas>
+    <!--heatmap-->
     <div class="heatmap">
-        <h2>Heatmap</h2>
+        <p id="total-active-days">0</p>
+        <p id="total-submissions">0</p>
+        <p id="maximum-streak">0</p>
         <select id="calYear" name="calYear">
             <option value="current">Current</option>
             <option value="2023-01-01">2023</option>
@@ -38,34 +82,6 @@
         <a href="#" id="prev">← Previous</a>
         <a href="#" id="next">Next →</a>
     </div>
-
-    <div class="solved-stats" id="solvedStats">
-        <h2>Solved</h2>
-        
-    </div>
-    
-    <!--widget-->
-    <div class="widget-wrapper">
-        <div class="widget">
-            <div class="circle-chart">
-                <canvas id="chart" width="200" height="200"></canvas>
-                <div class="overlay-circle">
-                    <div class="inner-circle">
-                        <p>
-                            <span id="completed">270</span>/<br><span id="total">1860</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="legend">
-                <div class="legend-item"><p><span id="basic">Basic</span><br><span id="count">50/150</span></p></div>
-                <div class="legend-item"><p><span id="easy">Easy</span><br><span id="count">100/802</span></p></div>
-                <div class="legend-item"><p><span id="medium">Med.</span><br><span id="count">70/1672</span></p></div>
-                <div class="legend-item"><p><span id="hard">Hard</span><br><span id="count">50/709</span></p></div>
-            </div>
-        </div>
-    </div>
-    <!--widget end-->
 </div>
 
 

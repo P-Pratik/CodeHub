@@ -1,8 +1,12 @@
+#radar-wrapper {
+    width: 100px;
+}
+
 .widget-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #1E1E1E;
+    background-color: #383838;
     margin: 100px;
 }
 
@@ -73,6 +77,10 @@
     padding: 5px;
 }
 
+#school {
+    color: #ff44ff;
+}
+
 #basic  {
     color: #57FFFF;
 }
@@ -89,6 +97,16 @@
     color: #FF4C4C;
 }
 
-#count {
+.count {
     font-size: small;
+}
+
+#contest-widget {
+    max-width:400px; 
+    max-height: 200px; 
+    background-color: #383838;
+}
+
+.heatmap {
+    background-color: #383838;
 }

@@ -1,0 +1,71 @@
+h1 {
+    padding-left: 100px;
+    padding-right: 100%;
+}
+.avatar img {
+    height: 220px;
+    margin: 5%;
+    margin-top: 0;
+    border: #FF9000 solid 4px;
+    border-radius: 15px;
+    display: block;
+}
+
+.avatar {
+    position: relative;
+    display: inline-block;
+}
+
+.edit-profile {
+    width: 300px;
+    height: 2em;
+    border-radius: 0.5em;
+    color: #fff;
+    background-color: #FF9000;
+    display: flex; /*flex because text & icon wont line up*/
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-profile a{
+    font-weight: 500;
+}
+
+#update-stats {
+    background-color: #1e1e1e;
+    color: white;
+    border: solid 0px;
+    padding: 10px;
+}
+
+.user-info, .statistics {
+    background-color: #434343;
+    border-radius: 20px;
+}
+
+.spinny-icon {
+    font-size: 10em;
+    margin-left: 45%;
+    margin-right: 50%;
+    margin-top: 20%;
+}
+
+#refresh-overlay {
+    position: fixed; 
+    display: none; 
+    width: 100%; 
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); 
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+    z-index: 4; 
+    cursor: pointer; 
+  }
+
+  #edit-icon {
+    height: 1em;
+  }
