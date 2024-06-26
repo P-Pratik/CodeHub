@@ -141,9 +141,14 @@ function renderSolved(data) {
     const total_school = 123, total_basic = 523, total_easy = 1872, total_medium = 2687, total_hard = 911; 
     //figure some way to get total questions on Lc & Gfg
 
-    const graph_data = [school, (total_school - school), basic, (total_basic-basic), easy, (total_easy-easy), medium, (total_medium-medium), hard, (total_hard-hard)];
-    const colors = ['#ff44ff', '#673367', '#57FFFF', '#556666','#3FD63F', '#335533', '#FFD300', '#4E4E2E', '#FF4C4C', '#6E3333']; 
+    //const graph_data = [school, (total_school - school), basic, (total_basic-basic), easy, (total_easy-easy), medium, (total_medium-medium), hard, (total_hard-hard)];
+    //const colors = ['#ff44ff', '#673367', '#57FFFF', '#556666','#3FD63F', '#335533', '#FFD300', '#4E4E2E', '#FF4C4C', '#6E3333'];
     // pink, lite pink, blue, lite blue, green, lite green, yellow, lite yellow, red, lite red 
+
+    const seperatador = 50;
+    const graph_data = [easy, (total_easy-easy),seperatador, medium, (total_medium-medium),seperatador, hard, (total_hard-hard), seperatador];
+    const colors = ['#25EFA7', '#245C48','#383838', 'rgb(255, 241, 6)', '#675E3C', '#383838', 'rgb(255, 63, 63)', '#6C3232','#383838'];
+    //                  green,  lite green,     gray,       yellow,     lite yellow,    grey,       red,            lite red,   gray
     const ctx = document.getElementById('chart').getContext('2d');
     new Chart(ctx, {
         type: 'doughnut',
@@ -151,11 +156,12 @@ function renderSolved(data) {
             datasets: [{
                 data: graph_data,
                 backgroundColor: colors,
+                borderColor: '#4E4A4A',
                 borderWidth: 0
             }]
         },
         options: {
-            cutout: '95%',
+            cutout: '85%',
             plugins: {
                 legend: {
                     display: false
@@ -164,15 +170,15 @@ function renderSolved(data) {
         }
     });
     
-    document.getElementById("completed").textContent = data[0]["count"]; 
-    document.getElementById("total").textContent = 6116;
+    document.getElementById("completed").textContent = easy + medium + hard;    //data[0]["count"]; 
+    document.getElementById("total").textContent = total_easy + total_medium + total_hard;     // 6116;
 
-    document.getElementById("solved-school").textContent = school + "/" + total_school;
-    document.getElementById("solved-basic").textContent = basic + "/" + total_basic;
+    //document.getElementById("solved-school").textContent = school + "/" + total_school;
+    //document.getElementById("solved-basic").textContent = basic + "/" + total_basic;
     document.getElementById("solved-easy").textContent = easy + "/" + total_easy;
     document.getElementById("solved-medium").textContent = medium + "/" + total_medium;
     document.getElementById("solved-hard").textContent = hard + "/" + total_hard;
-    renderRadarChart(school, basic, easy, medium, hard);
+    //renderRadarChart(school, basic, easy, medium, hard);
 }
 
 function renderContestData() {
