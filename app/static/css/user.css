@@ -2,6 +2,11 @@ h1 {
     padding-left: 100px;
     padding-right: 100%;
 }
+
+.bold span{
+    font-weight: bold;
+}
+
 .avatar img {
     height: 220px;
     margin: 5%;
@@ -60,13 +65,26 @@ h1 {
     right: 0;
     bottom: 0;
     background-color: rgba(0,0,0,0.5); 
-    backdrop-filter: blur(1px);
-    -webkit-backdrop-filter: blur(1px);
-    transform: translateZ(0);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    transform: translateZ(0); /*gpu to render*/
     z-index: 4; 
     cursor: pointer; 
-  }
+}
 
-  #edit-icon {
+#edit-icon {
     height: 1em;
-  }
+}
+
+select {
+    padding: 10px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #4E4A4A;
+    color: #fff;
+} 
+option{
+    background-color: #4E4A4A;
+    color: #eee;
+}
