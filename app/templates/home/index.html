@@ -5,7 +5,6 @@
 
 {% block body %}
 <h1 class="welcome">Welcome👋</h1>
-
 <p>{{ logged_in }}</p><br>
 
 <div class="daily-bigdiv">
@@ -25,6 +24,15 @@
             <div class="daily-container" id="gfg-daily-container">
                 <h4 id="gfg-date" class="current-date"></h4>
                 <div id="gfg-daily-content" class="daily-content"></div>
+                <div class="stats-tags">
+                    <div class="tags" id="gfg-tags">
+                        <div class="tags-inner">
+                            <span id="topic"></span>
+                            <span id="company"></span>
+                        </div>
+                    </div>
+                    <div class="stats" id="gfg-stats"></div>
+                </div>
             </div>
         </div>
         
@@ -42,6 +50,10 @@
             <div class="daily-container" id="leetcode-daily-container">
                 <h4 id="leet-date" class="current-date"></h4>
                 <div id="leetcode-daily-content" class="daily-content"></div>
+                <div class="stats-tags">
+                    <div class="tags" id="leet-tags"></div>
+                    <div class="stats" id="leet-stats"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -89,10 +101,11 @@
     </div>
 
     <div class="pagination">
-        <button id="prev" onclick="prevPage()">◄</button>
+        <button id="prev" onclick="prevPage()">&#9664;</button>
         <span id="page">1</span>
-        <button id="next" onclick="nextPage()">►</button>
+        <button id="next" onclick="nextPage()">&#9654;</button>
     </div>
 </div>
+
 
 {% endblock %}

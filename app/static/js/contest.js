@@ -1,3 +1,7 @@
+let gfgIndex = 0;
+let leetIndex = 0;
+let gfgContests = [];
+let leetContests = [];
 
 function getUpcomingContest() {
     fetch("/api/contest/upcoming")
@@ -6,11 +10,13 @@ function getUpcomingContest() {
             console.log("Upcoming Contests:", data);
             
             if (data.gfgcontest && Array.isArray(data.gfgcontest)) {
-                renderGFGContests(data.gfgcontest);
+                gfgContests = data.gfgcontest;
+                renderGFGContests();
             }
             
             if (data.lccontest && Array.isArray(data.lccontest)) {
-                renderLeetContests(data.lccontest);
+                leetContests = data.lccontest;
+                renderLeetContests();
             }
         })
         .catch((error) => {
@@ -20,24 +26,23 @@ function getUpcomingContest() {
 }
 
 function getPastContest(data = {}) {
-    const page = document.getElementById("page").innerText;
-    fetch("/api/contest/past/" + page, {
+    const page = parseInt(document.getElementById("page").innerText, 10);
+    fetch(`/api/contest/past/${page}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
     })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data);
-            renderPast(data);
-        })
-        .catch((error) => {
-            console.error('Error fetching past contests:', error);
-        });
+    .then((response) => response.json())
+    .then((data) => {
+        console.log("Past Contests:", data);
+        renderPast(data);
+    })
+    .catch((error) => {
+        console.error('Error fetching past contests:', error);
+    });
 }
-
 
 function calculateTimeDiff(endTime) {
     const now = new Date().getTime();
@@ -51,12 +56,11 @@ function calculateTimeDiff(endTime) {
     return { days, hours, minutes, seconds, timeRemaining };
 }
 
-
 function updateTimer() {
-    const contestType = 'gfgcontest'; // Assuming you determine contestType somewhere
+    const contestType = 'gfgcontest';
 
     if (contestType === 'gfgcontest') {
-        const timers = document.querySelectorAll(".timer");
+        const timers = document.querySelectorAll(".contest-timer");
         timers.forEach(timer => {
             const endTime = new Date(timer.dataset.endTime).getTime();
             const timeDiff = calculateTimeDiff(endTime);
@@ -84,7 +88,6 @@ function updateTimer() {
     }
 }
 
-
 function createContestCard(contestName, contestType, bannerUrl, contestLink, timeDiff, endTime) {
     let contestCard = document.createElement("div");
     contestCard.className = "card-wrapper";
@@ -93,14 +96,14 @@ function createContestCard(contestName, contestType, bannerUrl, contestLink, tim
             <div class="upcoming-contest card-wrapper">
                 <div class="card-title">
                     <h2>${contestName}</h2>
-                    <div class="timer" id="gfg-timer" data-end-time="${endTime}">
-                        <span id="days" class="timer-box">${timeDiff.days}</span>
-                        <span class="timer-colon">:</span>
-                        <span id="hours" class="timer-box">${timeDiff.hours}</span>
-                        <span class="timer-colon">:</span>
-                        <span id="mins" class="timer-box">${timeDiff.minutes}</span>
-                        <span class="timer-colon">:</span>
-                        <span id="secs" class="timer-box">${timeDiff.seconds}</span>
+                    <div class="contest-timer" id="gfg-contest-timer" data-end-time="${endTime}">
+                        <span id="days" class="contest-timer-box">${timeDiff.days}</span>
+                        <span class="contest-timer-colon">:</span>
+                        <span id="hours" class="contest-timer-box">${timeDiff.hours}</span>
+                        <span class="contest-timer-colon">:</span>
+                        <span id="mins" class="contest-timer-box">${timeDiff.minutes}</span>
+                        <span class="contest-timer-colon">:</span>
+                        <span id="secs" class="contest-timer-box">${timeDiff.seconds}</span>
                     </div>
                 </div>
                 <div class="upcoming-contest-container card" id="upcoming-contest-container" style="background-image: url('${bannerUrl}')">
@@ -116,131 +119,149 @@ function createContestCard(contestName, contestType, bannerUrl, contestLink, tim
     return contestCard;
 }
 
-
-function renderGFGContests(gfgContests) {
-    let contestList = document.querySelector(".upcoming-contest");
+function renderGFGContests() {
+    let contestList = document.querySelector(".gfg-contests");
     contestList.innerHTML = "";
-
-    gfgContests.forEach((contest) => {
-        try {
-            let bannerUrl = contest.banner.desktop_url;
-            let contestLink = `https://practice.geeksforgeeks.org/contest/${contest.slug}`;
-            let endTime = new Date(contest.start_time).getTime(); // Assuming `start_time` is in the format YYYY-MM-DDTHH:MM:SSZ
-            let timeDiff = calculateTimeDiff(endTime);
-            let contestCard = createContestCard(contest.name, "GFG Contest", bannerUrl, contestLink, timeDiff, contest.start_time);
-            contestList.appendChild(contestCard);
-        } catch (error) {
-            console.error('Error rendering GFG contest:', error);
-            contestList.innerHTML += `<div class="error">Error rendering GFG contest: ${JSON.stringify(contest)}</div>`;
-        }
-    });
-
+    if (gfgContests.length > 0) {
+        let contest = gfgContests[gfgIndex];
+        let bannerUrl = contest.banner.desktop_url;
+        let contestLink = `https://practice.geeksforgeeks.org/contest/${contest.slug}`;
+        let endTime = new Date(contest.start_time).getTime();
+        let timeDiff = calculateTimeDiff(endTime);
+        let contestCard = createContestCard(contest.name, "GFG Contest", bannerUrl, contestLink, timeDiff, contest.start_time);
+        contestList.appendChild(contestCard);
+    }
     setInterval(updateTimer, 1000);
 }
 
-function renderLeetContests(leetContests) {
-    let contestList = document.querySelector(".upcoming-contest");
+function renderLeetContests() {
+    let contestList = document.querySelector(".leet-contests");
+    contestList.innerHTML = "";
+    if (leetContests.length > 0) {
+        let contest = leetContests[leetIndex];
+        let startTimeEpoch = contest.start_time;
+        let endTimeEpoch = startTimeEpoch + contest.duration;
+        let startTime = new Date(startTimeEpoch * 1000);
+        let endTime = new Date(endTimeEpoch * 1000);
+        let timeDiff = calculateTimeDiff(endTime.getTime());
+        let contestLink = contest.url;
 
-    leetContests.forEach((contest) => {
-        try {
-            let startTimeEpoch = contest.start_time;
-            let endTimeEpoch = startTimeEpoch + contest.duration;
-            let startTime = new Date(startTimeEpoch * 1000);
-            let endTime = new Date(endTimeEpoch * 1000);
-            let timeDiff = calculateTimeDiff(endTime.getTime()); 
-            let contestLink = contest.url;
-
-            let bannerUrl = "";
-            let contestTitle = contest.title;
-
-            let words = contestTitle.split(" ");
-
-            if (words[0] === "Biweekly") {
-                bannerUrl = "/static/svg/leet-biweekly.png";
-            } else if(words[0] === "Weekly") {
-                bannerUrl = "/static/svg/leet-weekly.png";
-            }else{
-                bannerUrl = "";
-            }
-
-            let contestCard = createContestCard(contest.title, "LeetCode Contest", bannerUrl, contestLink, timeDiff, endTime);
-            contestList.appendChild(contestCard);
-        } catch (error) {
-            console.error('Error rendering LeetCode contest:', error);
-            contestList.innerHTML += `<div class="error">Error rendering LeetCode contest: ${JSON.stringify(contest)}</div>`;
+        let bannerUrl = "";
+        let contestTitle = contest.title;
+        let words = contestTitle.split(" ");
+        if (words[0] === "Biweekly") {
+            bannerUrl = "/static/images/leet-biweekly.png";
+        } else if (words[0] === "Weekly") {
+            bannerUrl = "/static/images/leet-weekly.png";
         }
-    });
 
+        let contestCard = createContestCard(contest.title, "LeetCode Contest", bannerUrl, contestLink, timeDiff, endTime);
+        contestList.appendChild(contestCard);
+    }
     setInterval(updateTimer, 1000);
 }
 
-function renderPast(data){
+function renderPast(data) {
     let contestContainer = document.getElementById("past-contest-container");
     contestContainer.innerHTML = "";
-    if (data.gfgcontest && Array.isArray(data.gfgcontest)) {
-        renderGFGPast(data.gfgcontest, contestContainer);
+    
+    data.forEach(contest => {
+        if (contest.platform === "geeksforgeeks") {
+            renderPastContest(contest, contestContainer, "gfg");
+        } else if (contest.platform === "leetcode") {
+            renderPastContest(contest, contestContainer, "leetcode");
+        }
+    });
+}
+
+function renderPastContest(contest, contestContainer, platform) {
+    try {
+        let bannerUrl = "";
+        if (platform === "gfg") {
+            bannerUrl = contest.banner.desktop_url;
+        } else if (platform === "leetcode") {
+            if (contest.banner === "leetcode-weekly") {
+                bannerUrl = "/static/images/leet-weekly.png";
+            } else if (contest.banner === "leetcode-biweekly") {
+                bannerUrl = "/static/images/leet-biweekly.png";
+            } else {
+                bannerUrl = `/static/images/${contest.banner}.png`;
+            }
+        }
+
+        let contestElement = document.createElement("div");
+        contestElement.innerHTML = `
+            <div class="past-contest">
+                <a href="${contest.url}" target="_blank" referrerpolicy="no-referrer">
+                    <div class="past-banner">
+                        <img src="${bannerUrl}" alt="Contest Banner" height="80px" width="160px"/>
+                    </div>
+                    <div class="past-title">${contest.title}</div>
+                    <div class="past-information">
+                        <div class="past-date-time">${new Date(contest.start_time * 1000).toLocaleString()}</div>
+                    </div>
+                </a>
+            </div>
+        `;
+        contestContainer.appendChild(contestElement);
+    } catch (error) {
+        console.error(`Error rendering ${platform === "gfg" ? "GFG" : "LeetCode"} past contest:`, error);
     }
 }
 
-function renderGFGPast(data, contestContainer) {
-    // time is in GMT +5:30 
-    data.forEach((contest) => {
-        try {
-            let contestElement = document.createElement("div");
-            contestElement.innerHTML = `
-                <div class="past-contest">
-                    <a href="https://practice.geeksforgeeks.org/contest/${contest.slug}" target="_blank" referrerpolicy="no-referrer"">
-                        <div class="past-banner">
-                            <img src="${contest.banner.desktop_url}" alt="Contest Banner" height="50px"/>
-                        </div>
-                        <div class="past-information">
-                            <div>${contest.name}</div>
-                            <div>${contest.date} ${contest.time}</div>
-                        </div>
-                    </a>
-                </div>
-            `;
-            contestContainer.appendChild(contestElement);
-        }
-        catch (error) {
-            console.error('Error rendering GFG past contest:', error);
-        }
-    });
-                        
-}       
-
 function prevPage() {
-    let page = document.getElementById("page").innerText;
+    let page = parseInt(document.getElementById("page").innerText, 10);
     if (page > 1) {
         page--;
         document.getElementById("page").innerText = page;
-        applyfilter();
+        applyFilter();
     }
 }
 
 function nextPage() {
-    let page = document.getElementById("page").innerText;
+    let page = parseInt(document.getElementById("page").innerText, 10);
     page++;
     document.getElementById("page").innerText = page;
-    applyfilter();
+    applyFilter();
 }
 
-function applyfilter() {
+function applyFilter() {
     const platform = document.getElementById("platform").value;
+    const data = { platform };
 
-    const data = {
-        platform: platform,
-    };
+    document.getElementById("page").innerText = "1";
     getPastContest(data);
 }
 
 let filterButton = document.getElementById("applyFilter");
-filterButton.addEventListener("click", {
-    handleEvent: function () {
-        document.getElementById("page").innerText = "1";
-        applyfilter();
-    },
+filterButton.addEventListener("click", function() {
+    applyFilter();
 });
 
-getUpcomingContest();
-applyfilter();
+function nextGFGContest() {
+    gfgIndex = (gfgIndex + 1) % gfgContests.length;
+    renderGFGContests();
+}
+
+function prevGFGContest() {
+    gfgIndex = (gfgIndex - 1 + gfgContests.length) % gfgContests.length;
+    renderGFGContests();
+}
+
+function nextLeetContest() {
+    leetIndex = (leetIndex + 1) % leetContests.length;
+    renderLeetContests();
+}
+
+function prevLeetContest() {
+    leetIndex = (leetIndex - 1 + leetContests.length) % leetContests.length;
+    renderLeetContests();
+}
+
+document.querySelector('.gfg-contests').addEventListener('click', nextGFGContest);
+document.querySelector('.leet-contests').addEventListener('click', nextLeetContest);
+
+document.addEventListener("DOMContentLoaded", function () {
+    getUpcomingContest();
+    getPastContest();
+});
