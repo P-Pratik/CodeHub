@@ -1,3 +1,4 @@
+<!-- contest.html -->
 {% extends 'base.html' %}
 {% block head %}
     <title> Contest </title>
@@ -20,22 +21,22 @@
             <div class="contestType-container">
                 <h3>GFG Contests</h3>
                 <div class="carousel-container">
-                    <button class="carousel-button prev" onclick="prevGFGContest()">&#9664;</button>
-                    <button class="below-carousel-button prev" onclick="prevGFGContest()">&#9664;</button>
+                    <button id="gfg-prev" class="carousel-button prev" onclick="prevGFGContest()">&#9664;</button>
+                    <button id="gfg-prev-under" class="below-carousel-button prev" onclick="prevGFGContest()">&#9664;</button>
                     <div class="upcoming-contest gfg-contests"></div>
-                    <button class="carousel-button next" onclick="nextGFGContest()">&#9654;</button>
-                    <button class="below-carousel-button next" onclick="nextGFGContest()">&#9654;</button>
+                    <button id="gfg-next" class="carousel-button next" onclick="nextGFGContest()">&#9654;</button>
+                    <button id="gfg-next-under" class="below-carousel-button next" onclick="nextGFGContest()">&#9654;</button>
                 </div>
             </div>
-            <div class="vertical"></div>
+            <!-- <div class="vertical"></div> -->
             <div class="contestType-container">
                 <h3>LeetCode Contests</h3>
                 <div class="carousel-container">
-                    <button class="carousel-button prev" onclick="prevLeetContest()">&#9664;</button>
-                    <button class="below-carousel-button prev" onclick="prevGFGContest()">&#9664;</button>
+                    <button id="leet-prev" class="carousel-button prev" onclick="prevLeetContest()">&#9664;</button>
+                    <button id="leet-prev-under" class="below-carousel-button prev" onclick="prevLeetContest()">&#9664;</button>
                     <div class="upcoming-contest leet-contests"></div>
-                    <button class="carousel-button next" onclick="nextLeetContest()">&#9654;</button>
-                    <button class="below-carousel-button next" onclick="nextGFGContest()">&#9654;</button>
+                    <button id="leet-next" class="carousel-button next" onclick="nextLeetContest()">&#9654;</button>
+                    <button id="leet-next-under" class="below-carousel-button next" onclick="nextLeetContest()">&#9654;</button>
                 </div>
             </div>
         </div>

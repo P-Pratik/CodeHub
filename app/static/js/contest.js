@@ -1,3 +1,4 @@
+// contest.js
 let gfgIndex = 0;
 let leetIndex = 0;
 let gfgContests = [];
@@ -122,6 +123,12 @@ function createContestCard(contestName, contestType, bannerUrl, contestLink, tim
 function renderGFGContests() {
     let contestList = document.querySelector(".gfg-contests");
     contestList.innerHTML = "";
+    
+    const prevButton = document.getElementById("gfg-prev");
+    const nextButton = document.getElementById("gfg-next");
+    const prevButtonUnder = document.getElementById("gfg-prev-under");
+    const nextButtonUnder = document.getElementById("gfg-next-under");
+    
     if (gfgContests.length > 0) {
         let contest = gfgContests[gfgIndex];
         let bannerUrl = contest.banner.desktop_url;
@@ -130,6 +137,17 @@ function renderGFGContests() {
         let timeDiff = calculateTimeDiff(endTime);
         let contestCard = createContestCard(contest.name, "GFG Contest", bannerUrl, contestLink, timeDiff, contest.start_time);
         contestList.appendChild(contestCard);
+        
+        prevButton.classList.remove("hide-carousel-buttons");
+        nextButton.classList.remove("hide-carousel-buttons");
+        prevButtonUnder.classList.remove("hide-carousel-buttons");
+        nextButtonUnder.classList.remove("hide-carousel-buttons");
+    } else {
+        contestList.innerHTML = `<div class="no-contest"><h4 style='font-weight: 500;'>No upcoming GeeksforGeeks contests available.</h4></div>`;
+        prevButton.classList.add("hide-carousel-buttons");
+        nextButton.classList.add("hide-carousel-buttons");
+        prevButtonUnder.classList.add("hide-carousel-buttons");
+        nextButtonUnder.classList.add("hide-carousel-buttons");
     }
     setInterval(updateTimer, 1000);
 }
@@ -137,6 +155,12 @@ function renderGFGContests() {
 function renderLeetContests() {
     let contestList = document.querySelector(".leet-contests");
     contestList.innerHTML = "";
+    
+    const prevButton = document.getElementById("leet-prev");
+    const nextButton = document.getElementById("leet-next");
+    const prevButtonUnder = document.getElementById("leet-prev-under");
+    const nextButtonUnder = document.getElementById("leet-next-under");
+    
     if (leetContests.length > 0) {
         let contest = leetContests[leetIndex];
         let startTimeEpoch = contest.start_time;
@@ -157,6 +181,17 @@ function renderLeetContests() {
 
         let contestCard = createContestCard(contest.title, "LeetCode Contest", bannerUrl, contestLink, timeDiff, endTime);
         contestList.appendChild(contestCard);
+        
+        prevButton.classList.remove("hide-carousel-buttons");
+        nextButton.classList.remove("hide-carousel-buttons");
+        prevButtonUnder.classList.remove("hide-carousel-buttons");
+        nextButtonUnder.classList.remove("hide-carousel-buttons");
+    } else {
+        contestList.innerHTML = "<h4 style='font-weight: 500;'>No upcoming LeetCode contests available.</h4>";
+        prevButton.classList.add("hide-carousel-buttons");
+        nextButton.classList.add("hide-carousel-buttons");
+        prevButtonUnder.classList.add("hide-carousel-buttons");
+        nextButtonUnder.classList.add("hide-carousel-buttons");
     }
     setInterval(updateTimer, 1000);
 }

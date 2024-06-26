@@ -5,5 +5,79 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/problems.css') }}">
 {% endblock %}
 {% block body %}
-        <h1> Welcome to Problems Page</h1>
+
+<div class="container banner-container">
+    <div class="banner-content">
+        <img src="{{ url_for('static', filename='svg/angle-brace-1.svg') }}" alt="trophy" height="40px">
+        <h1>PROBLEMS</h1>
+        <img src="{{ url_for('static', filename='svg/angle-brace-2.svg') }}" alt="trophy" height="40px">
+    </div>
+</div>
+
+<div class="allproblems">
+    <h1>Latest Problems</h1>
+    <div class="filterForm">
+        <div class="filterForm-content">
+            <img src="{{ url_for('static', filename='svg/filter-2.svg') }}" alt="filter">
+            <div class="difficulty-select">
+                <label for="difficulty">Difficulty:</label>
+                <select id="difficulty" name="difficulty">
+                    <option value="">All</option>
+                    <option value="School">School</option>
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                </select>
+            </div>
+            <div class="platform-select">
+                <label for="platform">Platform:</label>
+                <select id="platform" name="platform">
+                    <option value="geeksforgeeks">GeeksForGeeks</option>
+                    <option value="leetcode">LeetCode</option>
+                </select>
+            </div>
+            <button class="filter-button" id="applyFilter">Apply</button>
+        </div>
+    </div>
+    <div class="problemtb-container">
+        <table id="problemstb">
+            <thead>
+                <tr>
+                    <th>Problem Name</th>
+                    <th>Difficulty</th>
+                    <th>Accuracy</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="problems"></tbody>
+        </table>
+    </div>
+
+    <div class="pagination">
+        <button id="prev" onclick="prevPage()">&#9664;</button>
+        <span id="page">1</span>
+        <button id="next" onclick="nextPage()">&#9654;</button>
+    </div>
+    <!-- <div>      
+
+         <div class="filterForm">
+            <label for="difficulty">Difficulty:</label>
+            <select id="difficulty" name="difficulty">
+                <option value="">All</option>
+                <option value="Easy">Easy</option>
+                <option value="Medium">Medium</option>
+                <option value="Hard">Hard</option>
+            </select>
+        
+            <label for="platform">Platform:</label>
+            <select id="platform" name="platform">
+                <option value="geeksforgeeks">GeeksForGeeks</option>
+                <option value="leetcode">LeetCode</option>
+            </select>
+            <button class="filter-button" id="applyFilter">Apply</button>
+        </div>
+    </div> -->
+    
+
+</div>
 {% endblock %}

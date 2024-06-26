@@ -54,6 +54,7 @@ body {
     display: flex;
     justify-content: space-evenly;
     height: 100%;
+    flex-wrap: wrap;
 }
 
 .upcoming-contest {
@@ -367,15 +368,15 @@ body {
 }
 
 
-.vertical {
+/* .vertical {
     display: flex;
     align-items: center;
     height: 80%;
     padding-bottom: 20%;
     border: solid #cccccc80 1px;
-    margin: 0 5%;
+    margin: 0 2%;
     margin-top: 8%;
-}
+} */
 
 
 .prev{
@@ -396,4 +397,16 @@ body {
     width: 300px;
     padding: 10px;
     margin: 0 10px;
+}
+
+.no-contest{
+    width: 420px;
+    height: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hide-carousel-buttons{
+    display: none;
 }

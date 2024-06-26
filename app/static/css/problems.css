@@ -1,0 +1,326 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+@font-face {
+    font-family: 'Public Pixel';
+    src: url('/static/font/PublicPixel-eZPz6.ttf') format('truetype');
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Inter';
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #1E1E1E;
+    color: #fff;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 4% 8%;
+    margin-top: 1%;
+    border: #353535 solid;
+    border-radius: 10px;
+    background: linear-gradient(to bottom right, #35353520, #35353560);
+    padding: 20px;
+}
+
+.banner-container {
+    background: url('/static/svg/problem-banner.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner-content h1 {
+    margin: 0;
+    text-shadow: 2px 2px #d65b0e;
+    font-family: 'Public Pixel', sans-serif;
+    font-size: 34px;
+}
+
+.problems-container {
+    margin-bottom: 15px;
+}
+
+.filterForm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    width: 100%;
+    margin: 5% 0;
+    margin-bottom: 15px;
+}
+
+.filterForm-content{
+    width: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2% 8%;
+    padding-bottom: 3%;
+    border: #353535 solid;
+    border-radius:  10px;
+}
+
+.filterForm-content select{
+    padding: 0 5%;
+    height: 40px;
+    width: 200px;
+    margin-top: 2%;
+    border-radius: 4px;
+    margin: 0 15px;
+    outline: none;
+}
+
+.filterForm-content label{
+    font-size: 15PX;
+    font-weight: 600;
+    color: #ccc;
+    margin: 0 15px;
+}
+
+.platform-select{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.filterForm-content img{
+    margin-top: 3%;
+    margin-right: 12%;
+    height: 25px;
+}
+
+.filterForm-content button{
+    margin-top: 18px;
+    height: 40px;
+    padding: 0 5%;
+    width: 200px;
+    background: #FF900020;
+    border: #FF9000 solid;
+    color: #fff;
+    font-weight: 600;
+    transition: all 0.3s ease 0s;
+    border-radius: 10px;
+}
+
+.filterForm-content button:hover {
+    background-color: #FF900040;
+}
+
+.allproblems {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 4% 8%;
+    margin-top: 1%;
+    border: #353535 solid;
+    border-radius: 10px;
+    background: linear-gradient(to bottom right, #35353520, #35353560);
+}
+
+.allproblems h1{
+    font-size: 2em;
+}
+
+.allproblems a {
+    background: #FF9000;
+    color: #1E1E1E;
+    cursor: pointer;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 10px;
+    transition: all 0.3s ease 0s;
+}
+
+.problems-container {
+    max-width: 800px;
+    margin: 20px auto;
+    margin-top: 0;
+    padding: 20px;
+    background: #D9D9D920;
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.problemtb-container {
+    margin: 5% 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+
+table {
+    width: 75%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+table tr td:first-child {
+    width: 50%;
+}
+
+th {
+    padding: 4% 3%;
+    background: #0E0E0E;
+    color: #fff;
+    text-align: left;
+}
+
+td {
+    padding: 3%;
+    color: #fff;
+    font-weight: 500;
+    text-align: left;
+}
+
+tr {
+    background: #333333;
+    transition: background-color 0.3s ease;
+}
+
+tr:nth-child(even) {
+    background: #3d3d3d;
+}
+
+tr:hover {
+    background-color: #FF9000;
+}
+
+tr:hover a {
+    background-color: #fff;
+    color: #1E1E1E;
+}
+
+tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+th:first-child {
+    border-top-left-radius: 10px;
+}
+
+th:last-child {
+    border-top-right-radius: 10px;
+}
+
+.hover-text {
+    color: #fff;
+    border: #fff solid;
+    border-radius: 10px;
+    padding: 3px 0px;
+    width: 100px;
+    transition: all 0.3s ease 0s;
+}
+
+.basic-difficulty {
+    color: #479aff;
+    padding: 3px 0;
+    width: 100px;
+    background-color: #479aff40;
+    border: #479aff solid;
+    border-radius: 10px;
+}
+
+.easy-difficulty {
+    color: #00AF00;
+    padding: 3px 0px;
+    width: 100px;
+    background-color: #00AF0040;
+    border: #00AF00 solid;
+    border-radius: 10px;
+}
+
+.medium-difficulty {
+    color: #FFB855;
+    padding: 3px 0;
+    width: 100px;
+    background-color: #FFB85540;
+    border: #FFB855 solid;
+    border-radius: 10px;
+}
+
+.hard-difficulty {
+    color: #FF2D55;
+    padding: 3px 0px;
+    width: 100px;
+    background-color: #FF2D5540;
+    border: #FF2D55 solid;
+    border-radius: 10px;
+}
+
+.school-difficulty{
+    color: #d445ff;
+    padding: 3px 0px;
+    width: 100px;
+    background-color: #d445ff40;
+    border: #d445ff solid;
+    border-radius: 10px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    margin: 20px auto;
+    margin-top: 0;
+    padding: 20px;
+    border-radius: 100px;
+    border: #353535 solid;
+}
+
+.pagination button {
+    background: #ddd;
+    color: #1E1E1E;
+    border: none;
+    height: 35px;
+    width: 35px;
+    padding: 10px;
+    padding-bottom: 15px;
+    margin: 0 10px;
+    border-radius: 100%;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.pagination button[id="prev"] {
+    padding-right: 20px;
+}
+.pagination button[id="next"] {
+    padding-left: 12px;
+}
+
+.pagination button:hover {
+    background: #fff;
+}
+
+.pagination span {
+    font-size: 1.2em;
+    margin: 0 10px;
+}

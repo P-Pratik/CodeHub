@@ -1,13 +1,3 @@
-document.addEventListener("DOMContentLoaded", function () {
-    displayCurrentDate();
-    fetchDaily();
-    fetchProblems();
-
-    document.getElementById("applyFilter").addEventListener("click", function () {
-        document.getElementById("page").innerText = "1";
-        applyfilter();
-    });
-});
 
 function renderDaily(data) {
     const gfgContainer = document.querySelector("#gfg-daily-content");
@@ -511,6 +501,17 @@ function applyfilter() {
     };
     fetchProblems(postData);
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    displayCurrentDate();
+    fetchDaily();
+    fetchProblems();
+
+    document.getElementById("applyFilter").addEventListener("click", function () {
+        document.getElementById("page").innerText = "1";
+        applyfilter();
+    });
+});
 
 displayCurrentDate();
 fetchDaily();
