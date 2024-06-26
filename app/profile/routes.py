@@ -14,7 +14,7 @@ from data_sync.user_sync import handleUser, fetchUserData
 def user(username):
     user = User.query.filter(User.username == username).first()
     userplatform = UserPlatforms.query.filter(UserPlatforms.uid == current_user.uid).first()
-    return render_template("home/user.html", user=user, userplatform=userplatform)
+    return render_template("profile/user.html", user=user, userplatform=userplatform)
 
 @profile_bp.route("/profile", methods=["GET", "POST"])
 @login_required

@@ -8,6 +8,10 @@ from data_sync.user_sync import fetchUserData
 import app.utils.geeksforgeeks as gfg
 import app.utils.leetcode as lc
 
+@problem_bp.route("/problems")
+def problems():
+    return render_template("problem/problems.html")
+
 @problem_bp.route("/problem/<page>", methods=["POST"])
 def problem(page):
     platform = "geeksforgeeks"
