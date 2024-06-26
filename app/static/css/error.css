@@ -1,0 +1,67 @@
+
+* {
+box-sizing: border-box;
+font-family: 'Inter', sans-serif;
+margin: 0;
+padding: 0;
+}
+
+body {
+background: #1E1E1E;
+color: #fff;
+}
+
+.error_content-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error_content{
+    text-align: center;
+}
+
+.error_content h1{
+    font-size: 3em;
+}
+
+.error_code{
+    font-size: 8em;
+    color: #ff9000;
+    font-weight: 800;
+}
+
+.error_type{
+    font-size: 2.5em;
+    color: #ff9000;
+    font-weight: 600;
+}
+
+.error_msg{
+    font-size: 24px;
+}
+
+.error_msg2{
+    font-size: 20px;
+    color: #ccc;
+}
+
+.msg_list-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.msg_list{
+    list-style: none;
+    margin-top: 50px;
+}
+
+.msg_list li{
+    margin: 20px 0;
+}
+
+.msg_list li a{
+    text-decoration: underline;
+    color: #ff9000;
+}

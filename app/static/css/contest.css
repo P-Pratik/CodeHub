@@ -4,12 +4,11 @@
 @font-face {
     font-family: 'Public Pixel';
     src: url('/static/font/PublicPixel-eZPz6.ttf') format('truetype');
-  }
-  
-  
+}
+
 * {
     box-sizing: border-box;
-    font-family: 'Inter';
+    font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -19,19 +18,7 @@ body {
     color: #fff;
 }
 
-.contest-bigdiv {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.contest-wrapper {
-    background-color: #333;
-    /* outline: red solid; */
-    width: 58.5%;
-}
-
-.container{
+.container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -40,100 +27,150 @@ body {
     border: #353535 solid;
     border-radius: 10px;
     background: linear-gradient(to bottom right, #35353520, #35353560);
-}
-
-.upcoming-contest{
-    align-self: center;
+    padding: 20px;
 }
 
 .banner-container {
     background: url('/static/svg/contest-banner.svg');
-    background-size: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-.banner-content h1 {
-    margin: 0; /* Remove default margin from h1 */
-    text-shadow: 2px 2px #bb5b00;
-    font-family: 'Public Pixel', sans-serif;
-    font-size: 34px;
-}
-
-.banner-content{
+.banner-content {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.card{
-    margin: 20px auto;
-    width: 668px;
-    height: 350px;
+.banner-content h1 {
+    margin: 0;
+    text-shadow: 2px 2px #bb5b00;
+    font-family: 'Public Pixel', sans-serif;
+    font-size: 34px;
+}
+
+.upcoming-container {
+    display: flex;
+    justify-content: space-evenly;
+    height: 100%;
+}
+
+.upcoming-contest {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.card-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease 0s;
+}
+
+
+.contest-carousel {
+    position: relative;
+    overflow: hidden;
+}
+
+.card {
+    width: 420px;
+    height: 200px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    margin-top: 0;
-    padding: 20px;
     border-radius: 10px;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
-.card-wrapper{
-    margin-bottom: 5%;
-}
-
-.card-title{
+.card-title {
+    width: 420px;
     background: #FF9000;
-    max-width: 800px;
-    margin: 20px auto;
-    margin-bottom: 0;
     padding: 1em;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
-.card-title h2{
-    font-size: 1.3em;
+.card-title h2 {
+    font-size: 1em;
     color: #1E1E1E;
-    text-align: left;
-    margin-left: 3%;
+    margin: 0 2%;
+}
+
+.contest-timer {
+    display: flex;
+    align-items: center;
+}
+
+.contest-timer-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #353535;
+    border-radius: 5px;
+    padding: 6px;
+    margin: 0 2px;
+    font-size: 1em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 35px;
+    height: 35px;
+}
+
+.contest-timer-colon {
+    font-size: 1.2em;
+}
+
+.contestType-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin: 5%;
+    margin-top: 2%;
 }
 
-.card a {
-    text-align: center;
-    width: fit-content;
-    background-color: #fff;
-    color: #1E1E1E;
-    padding: 0.5em 15px;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: all 0.3s ease 0s;
+.contestType-container h3{
+    margin: 5% 0;
 }
 
-.card a:hover {
-    background: #ddd;
-}
-
-.participateButton-container{
-    height: 90%;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-}
-
-.button-wrapper{
+.button-wrapper {
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.past-contest a{
+.participateButton-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 80%;
+}
+
+.participateButton-container a {
+    text-align: center;
+    background-color: #fff;
+    color: #1E1E1E;
+    padding: 0.5em 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.participateButton-container a:hover {
+    background: #ddd;
+}
+
+.past-contest a {
     background: #1E1E1E;
     color: #fff;
     padding: 1em;
@@ -142,15 +179,221 @@ body {
     width: 90%;
     display: flex;
     justify-content: space-between;
+
 }
 
-.past-banner{
+.past-contest a:hover{
+    outline: #353535 solid;
+}
+
+.past-banner {
     padding: 5px 2px;
 }
 
-.past-information{
+.past-information {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.past-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.past-date-time{
+    color: #ccc;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.filter-title{
+    width: 395px;
+}
+
+.past-filterForm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    width: 100%;
+    margin: 5% 0;
+}
+
+.past-filterForm-content{
+    width: 60%;
+    display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 2% 5%;
+    padding-bottom: 3%;
+    border: #353535 solid;
+    border-radius:  10px;
+}
+
+.past-filterForm-content select{
+    padding: 0 5%;
+    height: 40px;
+    width: 300px;
+    margin-top: 2%;
+    border-radius: 4px;
+    outline: none;
+}
+
+.past-filterForm-content select option {
+    border-radius: 0;
+}
+
+.past-filterForm-content button{
+    margin-top: 24px;
+    height: 40px;
+    padding: 0 5%;
+    width: 200px;
+    background: #FF900020;
+    border: #FF9000 solid;
+    color: #fff;
+    font-weight: 600;
+    transition: all 0.3s ease 0s;
+}
+
+.past-filterForm-content button:hover{
+    background: #FF900040;
+}
+
+.past-filterForm-content label{
+    font-size: 15PX;
+    font-weight: 600;
+    color: #ccc;
+}
+
+.platform-select{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.past-filterForm-content img{
+    margin-top: 3%;
+    margin-right: 12%;
+    height: 25px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    background: #ddd;
+    color: #1E1E1E;
+    border: none;
+    height: 35px;
+    width: 35px;
+    padding: 10px;
+    margin: 0 10px;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.pagination button[id="prev"]{
+    padding-right: 20px;
+}
+.pagination button[id="next"]{
+    padding-left: 12px;
+}
+
+.pagination span {
+    margin: 0 10px;
+}
+
+.carousel-container {
+    display: flex;
+    align-items: center;
+}
+
+.carousel-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.carousel-button {
+    background-color: #FF900020;
+    color: #fff;
+    position: relative;
+    top: 7.5%;
+    border: #FF9000 solid;
+    padding: 10px;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    font-size: 18px;
+    z-index: 1000;
+    border-radius: 100px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease 0s;
+}
+
+.below-carousel-button {
+    background: #1E1E1E;
+    color: transparent;
+    padding: 10px;
+    height: 50px;
+    width: 50px;
+    font-size: 18px;
+    border-radius: 100px;
+    position: absolute;
+    top: 50%;
+    z-index: 990;
+    border: none;
+}
+
+.carousel-button.prev, .below-carousel-button.prev {
+    left: 0;
+}
+
+.carousel-button.next, .below-carousel-button.next {
+    right: 0;
+}
+
+.carousel-button:hover {
+    background-color: #FF900040;
+}
+
+
+.vertical {
+    display: flex;
+    align-items: center;
+    height: 80%;
+    padding-bottom: 20%;
+    border: solid #cccccc80 1px;
+    margin: 0 5%;
+    margin-top: 8%;
+}
+
+
+.prev{
+    padding-left: 6px;
+}
+
+.next{
+    padding-right: 6px;
+}
+
+.gfg-contests, .leet-contests {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.card-wrapper {
+    width: 300px;
+    padding: 10px;
+    margin: 0 10px;
 }
