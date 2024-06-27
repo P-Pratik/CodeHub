@@ -44,7 +44,7 @@ body {
 
 .banner-content h1 {
     margin: 0;
-    text-shadow: 2px 2px #d65b0e;
+    text-shadow: 3px 6px #d65b0e;
     font-family: 'Public Pixel', sans-serif;
     font-size: 34px;
 }
@@ -138,9 +138,17 @@ body {
     font-size: 2em;
 }
 
+.problem-button-container{
+    background-color: #1E1E1E;
+    padding: 10px 0;
+    width: fit-content;
+    border-radius: 10px;
+}
+
 .allproblems a {
-    background: #FF9000;
-    color: #1E1E1E;
+    background: #FF900020;
+    color: #fff;
+    border: #FF9000 solid;
     cursor: pointer;
     padding: 10px 20px;
     text-decoration: none;
@@ -211,6 +219,7 @@ tr:hover {
 tr:hover a {
     background-color: #fff;
     color: #1E1E1E;
+    border: #fff solid;
 }
 
 tr:last-child td:first-child {

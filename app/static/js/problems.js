@@ -7,91 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-function renderProblems(data, platform) {
-    let baseUrl, endUrl;
-
-    if (platform === "leetcode") {
-        baseUrl = "https://leetcode.com/problems/";
-        endUrl = "/description/";
-    } else {
-        baseUrl = "https://www.geeksforgeeks.org/problems/";
-        endUrl = "/1/";
-    }
-
-    let container = document.getElementById("problems");
-    container.innerHTML = "";
-
-    for (let i = 0; i < data.length; i++) {
-        let tr = document.createElement("tr");
-        let problem_name = document.createElement("td");
-        let difficulty = document.createElement("td");
-        let diff_text = document.createElement("p");
-        let accuracy = document.createElement("td");
-        let problem_url = document.createElement("td");
-        let problem_url_a = document.createElement("a");
-
-        // Determine color class based on difficulty
-        let difficultyClass = "";
-        if (data[i].difficulty === "School") {
-            difficultyClass = "school-difficulty";
-        } else if (data[i].difficulty === "Basic") {
-            difficultyClass = "basic-difficulty";
-        } else if (data[i].difficulty === "Easy") {
-            difficultyClass = "easy-difficulty";
-        } else if (data[i].difficulty === "Medium") {
-            difficultyClass = "medium-difficulty";
-        } else if (data[i].difficulty === "Hard") {
-            difficultyClass = "hard-difficulty";
-        }
-        diff_text.classList.add(difficultyClass);
-
-        difficulty.appendChild(diff_text);
-
-        // color the acceptance or accuracy- 100% is green, 25% is red rest in between
-        /*
-        let accuracy_color;
-        let value = data[i].accuracy;
-        if (value <= 25) {
-            accuracy_color = "red";
-        } else if (value <= 75) {
-          var redValue = Math.round(255 * value / 100);
-          var greenValue = Math.round(255 * value / 100);
-          var blueValue  = 0;
-          accuracy_color = "rgb(" + redValue + ", " + greenValue + ", " + blueValue + ", 0)";
-        } else {
-            accuracy_color = "black";
-        }
-        accuracy.style.color = accuracy_color;
-        */
-        problem_name.textContent = data[i].problem_name;
-        diff_text.innerHTML = data[i].difficulty;
-        accuracy.textContent = `${parseFloat(data[i].accuracy).toFixed(2)}%`;
-        problem_url_a.textContent = "Solve";
-        problem_url_a.href = baseUrl + data[i].slug + endUrl;
-
-        problem_url.appendChild(problem_url_a);
-
-        tr.appendChild(problem_name);
-        tr.appendChild(difficulty);
-        tr.appendChild(accuracy);
-        tr.appendChild(problem_url);
-
-        // Add event listener to toggle class on hover
-        tr.addEventListener("mouseenter", () => {
-            // Remove difficulty class and add hover-text class
-            diff_text.classList.remove(difficultyClass);
-            diff_text.classList.add("hover-text");
-        });
-
-        tr.addEventListener("mouseleave", () => {
-            // Remove hover-text class and add the previous difficulty class
-            diff_text.classList.remove("hover-text");
-            diff_text.classList.add(difficultyClass);
-        });
-
-        container.appendChild(tr);
-    }
-}
 
 function renderProblems(data, platform) {
     let baseUrl, endUrl;
@@ -114,6 +29,7 @@ function renderProblems(data, platform) {
         let diff_text = document.createElement("p");
         let accuracy = document.createElement("td");
         let problem_url = document.createElement("td");
+        let problem_url_div = document.createElement("div");
         let problem_url_a = document.createElement("a");
 
         // Determine color class based on difficulty
@@ -154,8 +70,10 @@ function renderProblems(data, platform) {
         accuracy.textContent = `${parseFloat(problem.accuracy).toFixed(2)}%`;
         problem_url_a.textContent = "Solve";
         problem_url_a.href = baseUrl + problem.slug + endUrl;
+        problem_url_div.classList.add("problem-button-container");
 
-        problem_url.appendChild(problem_url_a);
+        problem_url_div.appendChild(problem_url_a);
+        problem_url.appendChild(problem_url_div);
 
         tr.appendChild(problem_name);
         tr.appendChild(difficulty);

@@ -226,19 +226,23 @@ function renderPastContest(contest, contestContainer, platform) {
 
         let contestElement = document.createElement("div");
         contestElement.innerHTML = `
-            <div class="past-contest">
-                <a href="${contest.url}" target="_blank" referrerpolicy="no-referrer">
-                    <div class="past-banner">
-                        <img src="${bannerUrl}" alt="Contest Banner" height="80px" width="160px"/>
+        <div class="past-contest">
+            <a href="${contest.url}" target="_blank" referrerpolicy="no-referrer">
+                <div class="past-banner">
+                    <img src="${bannerUrl}" alt="Contest Banner" height="80px" width="160px"/>
+                </div>
+                <div class="past-title">${contest.title}</div>
+                <div class="past-information">
+                    <div class="past-date-time">
+                        ${new Date(contest.start_time * 1000).toLocaleDateString()}, 
+                        ${new Date(contest.start_time * 1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}
                     </div>
-                    <div class="past-title">${contest.title}</div>
-                    <div class="past-information">
-                        <div class="past-date-time">${new Date(contest.start_time * 1000).toLocaleString()}</div>
-                    </div>
-                </a>
-            </div>
-        `;
-        contestContainer.appendChild(contestElement);
+                </div>
+            </a>
+        </div>
+    `;
+    contestContainer.appendChild(contestElement);
+    
     } catch (error) {
         console.error(`Error rendering ${platform === "gfg" ? "GFG" : "LeetCode"} past contest:`, error);
     }

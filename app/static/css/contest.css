@@ -221,12 +221,12 @@ body {
     background-color: transparent;
     box-shadow: none;
     border-radius: 0;
-    width: 100%;
-    margin: 5% 0;
+    width: 80%;
+    margin: 5% auto;
 }
 
 .past-filterForm-content{
-    width: 60%;
+    width: 75%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -252,6 +252,7 @@ body {
 .past-filterForm-content button{
     margin-top: 24px;
     height: 40px;
+    max-width: 150px;
     padding: 0 5%;
     width: 200px;
     background: #FF900020;
@@ -259,6 +260,9 @@ body {
     color: #fff;
     font-weight: 600;
     transition: all 0.3s ease 0s;
+    border-radius: 10px;
+    margin-left: 1em;
+    font-size: 0.9em;
 }
 
 .past-filterForm-content button:hover{
