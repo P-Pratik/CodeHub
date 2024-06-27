@@ -4,22 +4,32 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
 {% endblock %}
 {% block body %}
-<div>
-    <div class="form-title">
-        <h1>Login</h1>
-    </div>
+<div class="form-wrapper">
     <div class="form-container">
         <form method="POST" action="{{url_for('auth.login')}}">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required> <br>
-            
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required> <br>
-            
-            <div class="button-container">
-                <button type="submit">Login</button>
+            <h1>Login to Your Account</h1>
+            <div class="form-align">
+                <div class="form-align-inner">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required> <br>
+                    
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required> <br>
+                </div>
+            </div>
+            <div class="button-wrapper">                
+                <div class="button-container">
+                    <button type="submit">Login</button>
+                </div>
             </div>
         </form>
+    </div>
+    <div class="alt-container">
+        <h1>New Here?</h1>
+        <p>Hop on board and Explore the area!</p>
+        <div class="alt-button">
+            <a href="{{url_for('auth.register')}}">Rgister</a>
+        </div>
     </div>
 </div>
 {% endblock %}

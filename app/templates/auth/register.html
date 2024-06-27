@@ -4,25 +4,38 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
 {% endblock %}
 {% block body %}
-<div>
-    <div class="form-title">
-        <h1>Register</h1>
-    </div>
-    <div class="form-container">
-            <form action=" {{ url_for('auth.register') }}" method="POST">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required> <br>
-        
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required> <br>
-        
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required> <br>
 
+<div class="form-wrapper">
+    <div class="form-container">
+        <form action=" {{ url_for('auth.register') }}" method="POST">
+            <h1>Register to Get Started</h1>
+            
+            <div class="form-align">
+                <div class="form-align-inner">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required> <br>
+            
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required> <br>
+            
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required> <br>
+                </div>
+            </div>
+
+            <div class="button-wrapper">                
                 <div class="button-container">
                     <button type="submit">Register</button>
                 </div>
-            </form>
+            </div>
+        </form>
+    </div>
+    <div class="alt-container">
+        <h1>Already got an Account?</h1>
+        <p>Back for more? Let's get started!</p>
+        <div class="alt-button">
+            <a href="{{url_for('auth.login')}}">Login</a>
         </div>
     </div>
+</div>
 {% endblock %}
