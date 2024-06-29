@@ -132,6 +132,8 @@ def getPastContest(page):
 def populateContestCol():
     collection = db["Contest"]
     page = 1
+    miss_count = 0
+    force_stop = False
     while True:
         data = getPastContest(page)
         if "end" in data or "error" in data:
@@ -158,9 +160,18 @@ def populateContestCol():
             try:
                 query = collection.insert_one(modifiedSchema)
                 print(f"Inserted: {query.inserted_id}")
+
             except Exception as e:
                 print(f"Error: {e}")
+                miss_count += 1
+                if miss_count >= 10:              #mostly uptodate data. contest might be missed if website changed the data older than 10 contests
+                    print("breaking...")
+                    force_stop = True
+                    break
                 continue
 
+        if force_stop:
+            break
+
         page += 1
-        time.sleep(5)
+        time.sleep(1)

@@ -37,6 +37,8 @@ def getContest(page = 1):
 def populateContestCol():
     collection = db["Contest"]
     page = 1
+    miss_count = 0
+    force_stop = False
     while True:
         data = getPastContest(page)
         if "error" in data or "end" in data:
@@ -53,7 +55,7 @@ def populateContestCol():
             end_time = datetime.fromisoformat(contest["end_time"])
             end_time = int(end_time.timestamp()) - adjust
             
-            # no id so setting it to 0
+            # no id so setting it to 0 for all
             modifiedSchema = {
                 "platform": "geeksforgeeks",
                 "banner": contest["banner"],
@@ -67,14 +69,22 @@ def populateContestCol():
                 "status": "archived"
             }
 
-            pp.pprint(modifiedSchema)
-
             try:
                 query = collection.insert_one(modifiedSchema)
                 print(f"Inserted: {query.inserted_id}")
             except Exception as e:
+                miss_count += 1
                 print(f"Error: {e}")
+
+                # mostly uptodate data. contest might be missed if website changed the data older than 10 contests
+                if miss_count >= 10:              
+                    print("breaking...") 
+                    force_stop = True
+                    break
                 continue
 
+        if force_stop:
+            break
+
         page += 1
-        time.sleep(2)
+        time.sleep(1)
