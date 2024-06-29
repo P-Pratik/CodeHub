@@ -322,7 +322,7 @@ p {
     border-radius: 5px;
     padding: 5px;
     margin-right: 3px;
-    font-size: 0.9em;
+    font-size: 0.7em;
     font-weight: 600;
 }
 
@@ -336,6 +336,7 @@ p {
     color: #333;
     padding: 5px;
     margin-left: 5px;
+    cursor: pointer;
 }
 
 .company{
@@ -348,6 +349,7 @@ p {
     background-color: #ffb617;
     color: #333;
     padding: 5px;
+    cursor: pointer;
 }
 
 .stats{
@@ -360,6 +362,53 @@ p {
     align-items: center;
     margin-right: 5px;
 }
+
+.arrow {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #1E1E1E;
+    position: relative;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    top: -1.5em;
+}
+
+.tooltip {
+    display: none;
+    position: absolute;
+    background-color: #1E1E1E;
+    font-weight: 600;
+    color: #ddd;
+    font-size: 0.7em;
+    padding: 10px;
+    width: 150px;
+    z-index: 1000;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+    left: 85%;
+    top: 95%;
+    border-radius: 10px;
+}
+
+.tooltip ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    list-style: none;
+}
+
+.tooltip li{
+    margin-bottom: 10px;
+    margin-right: 3px;
+    margin-top: -4px;
+    margin-left: 0;
+    text-align: center;
+}
+
+.tags {
+    position: relative;
+}
+
 
 /*----------------------------------Problem Page stuff----------------------------------*/
 

@@ -80,8 +80,8 @@ body {
 }
 
 .card {
-    width: 420px;
-    height: 200px;
+    width: 500px;
+    height: 228px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -91,7 +91,7 @@ body {
 }
 
 .card-title {
-    width: 420px;
+    width: 500px;
     background: #FF9000;
     padding: 1em;
     border-top-left-radius: 10px;
@@ -102,7 +102,7 @@ body {
 }
 
 .card-title h2 {
-    font-size: 1em;
+    font-size: 1.1em;
     color: #1E1E1E;
     margin: 0 2%;
 }
@@ -120,10 +120,10 @@ body {
     border-radius: 5px;
     padding: 6px;
     margin: 0 2px;
-    font-size: 1em;
+    font-size: 1.1em;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
 }
 
 .contest-timer-colon {
@@ -168,7 +168,8 @@ body {
 }
 
 .participateButton-container a:hover {
-    background: #ddd;
+    background: #f0f0f0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .past-contest a {
@@ -360,11 +361,11 @@ body {
 }
 
 .carousel-button.prev, .below-carousel-button.prev {
-    left: 0;
+    left: -10%;
 }
 
 .carousel-button.next, .below-carousel-button.next {
-    right: 0;
+    right: -10%;
 }
 
 .carousel-button:hover {

@@ -40,14 +40,13 @@ function renderDaily(data) {
 
     const gfgcompanyTags = data.geeksdaily.tags.company_tags;
     const gfgtopicTags = data.geeksdaily.tags.topic_tags;
+    const maxTagsToShow = 2;
 
     function createTags(tags, parentDiv, label) {
         if (tags && tags.length > 0) {
-
-            const maxTagsToShow = 2;
             const tagsToShow = tags.slice(0, maxTagsToShow);
             const remainingTagsCount = tags.length - maxTagsToShow;
-
+    
             tagsToShow.forEach(tag => {
                 const tagSpan = document.createElement("span");
                 tagSpan.classList.add("tag");
@@ -59,9 +58,18 @@ function renderDaily(data) {
                 tagSpan.textContent = tag;
                 parentDiv.appendChild(tagSpan);
             });
-
+    
             if (remainingTagsCount > 0) {
                 const moreSpan = document.createElement("span");
+                const remainingTagsList = document.createElement("ul");
+    
+                const remainingTags = tags.slice(maxTagsToShow, tags.length);
+                remainingTags.forEach(tag => {
+                    const tagItem = document.createElement("li");
+                    tagItem.textContent = tag;
+                    remainingTagsList.appendChild(tagItem);
+                });
+    
                 moreSpan.classList.add("tag");
                 if (label === "Company Tags") {
                     moreSpan.classList.add("company-more");
@@ -69,10 +77,29 @@ function renderDaily(data) {
                     moreSpan.classList.add("topic-more");
                 }
                 moreSpan.textContent = `+${remainingTagsCount} more`;
+    
+                const toolTipContainer = document.createElement("div");
+                const arrow = document.createElement("div");
+                arrow.classList.add("arrow");
+                toolTipContainer.classList.add("tooltip");
+                toolTipContainer.appendChild(arrow);
+                toolTipContainer.appendChild(remainingTagsList);
+    
                 parentDiv.appendChild(moreSpan);
+                parentDiv.appendChild(toolTipContainer);
+    
+                moreSpan.addEventListener("mouseenter", () => {
+                    toolTipContainer.style.display = "block";
+                });
+    
+                moreSpan.addEventListener("mouseleave", () => {
+                    toolTipContainer.style.display = "none";
+                });
             }
         }
     }
+    
+    
 
     createTags(gfgcompanyTags, gfgCompanyTagsDiv, "Company Tags");
     createTags(gfgtopicTags, gfgTopicTagsDiv, "Topic Tags");
