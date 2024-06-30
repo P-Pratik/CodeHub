@@ -1,18 +1,49 @@
 h1 {
-    padding-left: 100px;
+    padding-left: 60px;
     padding-right: 100%;
 }
 
+.main {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.user-profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #434343;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+#user-stats {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.user-info {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-left: 1.5em;
+}
+.statistics {
+    background-color: #434343;
+    border-radius: 20px;
+    padding: 20px;
+}
 .bold span{
     font-weight: bold;
 }
 
 .avatar img {
-    height: 220px;
-    margin: 5%;
-    margin-top: 0;
+    height: 120px;
+    margin-left: auto;
+    margin-right: auto;
     border: #FF9000 solid 4px;
-    border-radius: 15px;
+    border-radius: 10px;
     display: block;
 }
 
@@ -41,11 +72,6 @@ h1 {
     color: white;
     border: solid 0px;
     padding: 10px;
-}
-
-.user-info, .statistics {
-    background-color: #434343;
-    border-radius: 20px;
 }
 
 .spinny-icon {
