@@ -46,7 +46,7 @@ def populateContestCol():
             break
 
         for contest in data:
-            contest_url = f"https://practice.geeksforgeeks.org/contest/{contest["slug"]}"
+            contest_url = "https://practice.geeksforgeeks.org/contest/{" + contest["slug"] + "}"
 
             adjust = 19800 # using to adjust time from IST to UTC
             start_time = datetime.fromisoformat(contest["start_time"])
