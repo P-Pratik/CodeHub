@@ -1,4 +1,3 @@
-// contest.js
 let gfgIndex = 0;
 let leetIndex = 0;
 let gfgContests = [];
@@ -108,16 +107,61 @@ function createContestCard(contestName, contestType, bannerUrl, contestLink, tim
                     </div>
                 </div>
                 <div class="upcoming-contest-container card" id="upcoming-contest-container" style="background-image: url('${bannerUrl}')">
-                    <div class="button-wrapper">
-                        <div class="participateButton-container">
-                            <a href="${contestLink}" target="_blank">Participate</a>
-                        </div>
+                    <div class="participateButton-container">
+                        <a href="${contestLink}" target="_blank">Participate</a>
                     </div>
+                    <div class="button-wrapper"></div>
                 </div>
             </div>
         </div>
     `;
     return contestCard;
+}
+
+function createGFGIndicators() {
+    const indicatorContainer = document.createElement("div");
+    indicatorContainer.className = "indicator-container";
+
+    gfgContests.forEach((_, index) => {
+        const indicator = document.createElement("button");
+        indicator.className = "carousel-indicator";
+        indicator.dataset.index = index;
+        if (index === gfgIndex) {
+            indicator.classList.add("active");
+        }
+        indicator.addEventListener("click", () => {
+            gfgIndex = index;
+            renderGFGContests();
+        });
+        indicatorContainer.appendChild(indicator);
+    });
+
+    const buttonWrapper = document.querySelector(".gfg-contests .button-wrapper");
+    buttonWrapper.innerHTML = "";
+    buttonWrapper.appendChild(indicatorContainer);
+}
+
+function createLeetIndicators() {
+    const indicatorContainer = document.createElement("div");
+    indicatorContainer.className = "indicator-container";
+
+    leetContests.forEach((_, index) => {
+        const indicator = document.createElement("button");
+        indicator.className = "carousel-indicator";
+        indicator.dataset.index = index;
+        if (index === leetIndex) {
+            indicator.classList.add("active");
+        }
+        indicator.addEventListener("click", () => {
+            leetIndex = index;
+            renderLeetContests();
+        });
+        indicatorContainer.appendChild(indicator);
+    });
+
+    const buttonWrapper = document.querySelector(".leet-contests .button-wrapper");
+    buttonWrapper.innerHTML = "";
+    buttonWrapper.appendChild(indicatorContainer);
 }
 
 function renderGFGContests() {
@@ -142,6 +186,8 @@ function renderGFGContests() {
         nextButton.classList.remove("hide-carousel-buttons");
         prevButtonUnder.classList.remove("hide-carousel-buttons");
         nextButtonUnder.classList.remove("hide-carousel-buttons");
+
+        createGFGIndicators(); // Call to create indicators
     } else {
         contestList.innerHTML = `<div class="no-contest"><h4 style='font-weight: 500;'>No upcoming GeeksforGeeks contests available.</h4></div>`;
         prevButton.classList.add("hide-carousel-buttons");
@@ -186,6 +232,8 @@ function renderLeetContests() {
         nextButton.classList.remove("hide-carousel-buttons");
         prevButtonUnder.classList.remove("hide-carousel-buttons");
         nextButtonUnder.classList.remove("hide-carousel-buttons");
+
+        createLeetIndicators(); // Call to create indicators
     } else {
         contestList.innerHTML = "<h4 style='font-weight: 500;'>No upcoming LeetCode contests available.</h4>";
         prevButton.classList.add("hide-carousel-buttons");
@@ -234,7 +282,7 @@ function renderPastContest(contest, contestContainer, platform) {
                 <div class="past-title">${contest.title}</div>
                 <div class="past-information">
                     <div class="past-date-time">
-                        ${new Date(contest.start_time * 1000).toLocaleDateString()}, 
+                        ${new Date(contest.start_time * 1000).toLocaleDateString('en-GB')}, 
                         ${new Date(contest.start_time * 1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}
                     </div>
                 </div>

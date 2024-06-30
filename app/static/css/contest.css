@@ -57,6 +57,10 @@ body {
     flex-wrap: wrap;
 }
 
+.upcoming-contest-container{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 .upcoming-contest {
     flex: 1;
     display: flex;
@@ -81,13 +85,14 @@ body {
 
 .card {
     width: 500px;
-    height: 228px;
+    height: 250px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .card-title {
@@ -99,6 +104,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .card-title h2 {
@@ -151,24 +157,26 @@ body {
 
 .participateButton-container {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    height: 80%;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 69%;
 }
+
 
 .participateButton-container a {
     text-align: center;
     background-color: #fff;
-    color: #1E1E1E;
+    color: #333;
     padding: 0.5em 15px;
     border-radius: 4px;
     text-decoration: none;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .participateButton-container a:hover {
-    background: #f0f0f0;
+    background: #efefef;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -344,6 +352,7 @@ body {
     border-radius: 100px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease 0s;
+        outline: none;
 }
 
 .below-carousel-button {
@@ -355,9 +364,10 @@ body {
     font-size: 18px;
     border-radius: 100px;
     position: absolute;
-    top: 50%;
+    top: 51%;
     z-index: 990;
     border: none;
+    outline: none;
 }
 
 .carousel-button.prev, .below-carousel-button.prev {
@@ -414,4 +424,34 @@ body {
 
 .hide-carousel-buttons{
     display: none;
+}
+
+.carousel-indicator {
+    border: none;
+    background-color: #ddd;
+    width: 8px;
+    height: 8px;
+    margin: 0 2px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.carousel-indicator.active {
+    background-color: #FF9000;
+}
+
+.indicator-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #353535;
+    box-shadow: 0 8px 12px #24242420, 0 -8px 12px #1E1E1E90;
+    height: 30px;
+    width: 100%;
+    height: 50px;
+    position: relative;
+    top: 39%;
+    z-index: 9999;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }

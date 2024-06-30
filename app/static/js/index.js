@@ -161,11 +161,12 @@ function renderDaily(data) {
         leetcodeTagsDiv.innerHTML = ""; // Clear previous tags
 
         const leetcodeTags = data.leetdaily.data.activeDailyCodingChallengeQuestion.question.topicTags;
-
+        
         let leetTagName = [];
         for(i=0; i<leetcodeTags.length; i++){
             leetTagName.push(leetcodeTags[i].name);
         }
+        
         createTags(leetTagName, leetcodeTagsDiv, "Topic Tags");
 
         const leetDiffStat = data.leetdaily.data.activeDailyCodingChallengeQuestion.question.difficulty;
