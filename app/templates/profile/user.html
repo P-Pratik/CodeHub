@@ -57,8 +57,8 @@
                 </div>
             </div>
             <div class="legend">
-                <div class="legend-item"><p><span id="school">School</span><br><span class="count" id="solved-school">0/0</span></p></div>
-                <div class="legend-item"><p><span id="basic">Basic</span><br><span class="count" id="solved-basic">0/0</span></p></div>
+                <!-- <div class="legend-item"><p><span id="school">School</span><br><span class="count" id="solved-school">0/0</span></p></div>
+                <div class="legend-item"><p><span id="basic">Basic</span><br><span class="count" id="solved-basic">0/0</span></p></div> -->
                 <div class="legend-item"><p><span id="easy">Easy</span><br><span class="count" id="solved-easy">0/0</span></p></div>
                 <div class="legend-item"><p><span id="medium">Med.</span><br><span class="count" id="solved-medium">0/0</span></p></div>
                 <div class="legend-item"><p><span id="hard">Hard</span><br><span class="count" id="solved-hard">0/0</span></p></div>
@@ -67,20 +67,34 @@
     </div>
     <!--widget end-->
     <!--contest widget: -->
-    <canvas id="contest-widget"></canvas>
+    <div class='contest-widget-wrapper'>
+        <canvas id="contest-widget"></canvas>
+        <div class='contest-widget-stats'>
+            <p>Highest Rating: <span class="bold">1612</span></p>
+            <p>Current Rating: <span class="bold">1540</span></p>
+            <p>Total Contests: <span class="bold">23</span></p>
+        </div>
+    </div>
     <!--heatmap-->
     <div class="heatmap">
-        <p id="total-active-days">0</p>
-        <p id="total-submissions">0</p>
-        <p id="maximum-streak">0</p>
-        <select id="calYear" name="calYear">
-            <option value="current">Current</option>
-            <option value="2023-01-01">2023</option>
-            <option value="2022-01-01">2022</option>
-        </select>
+        <div class='heatmap-stats'>
+            <p>
+                Total Active Days: <span id="total-active-days" style="font-weight: bold;">0</span> 
+                Total Submissions: <span id="total-submissions" style="font-weight: bold;">0</span> 
+                Highest Streak: <span id="maximum-streak" style="font-weight: bold;">0</span>
+            </p>
+            <select id="calYear" name="calYear">
+                <option value="current">Current</option>
+                <option value="2023-01-01">2023</option>
+                <option value="2022-01-01">2022</option>
+            </select>
+        </div>
         <div id="cal-heatmap"></div>
-        <a href="#" id="prev">← Previous</a>
-        <a href="#" id="next">Next →</a>
+        <div class='heatmap-bottom'>
+            <a href="#" id="prev">← Previous</a>
+            <p id="calYearRange">prevYear-curYear</p>
+            <a href="#" id="next">Next →</a>
+        </div>
     </div>
 </div>
 
