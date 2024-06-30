@@ -82,9 +82,12 @@ function renderCalender(calender, date, active) {
             currentStreak = 1;
         }
     }
-    document.getElementById("total-active-days").textContent = "total active days: " + active;
-    document.getElementById("total-submissions").textContent = "total submissions: " + submission;
-    document.getElementById("maximum-streak").textContent = "maximum streak: " + maxStreak;
+    const firstDay = new Date(calender[0]["date"]), lastDay = new Date(calender[calender.length - 1]["date"]);
+
+    document.getElementById("calYearRange").textContent = firstDay.getFullYear() + "-" + lastDay.getFullYear();
+    document.getElementById("total-active-days").textContent = active;
+    document.getElementById("total-submissions").textContent = submission;
+    document.getElementById("maximum-streak").textContent = maxStreak;
     
     const cal = new CalHeatmap();
     cal.paint(
@@ -178,7 +181,7 @@ function renderSolved(data) {
     document.getElementById("solved-easy").textContent = easy + "/" + total_easy;
     document.getElementById("solved-medium").textContent = medium + "/" + total_medium;
     document.getElementById("solved-hard").textContent = hard + "/" + total_hard;
-    //renderRadarChart(school, basic, easy, medium, hard);
+    renderRadarChart(school, basic, easy, medium, hard);
 }
 
 function renderContestData() {
