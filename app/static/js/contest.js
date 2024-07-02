@@ -18,12 +18,26 @@ function getUpcomingContest() {
                 leetContests = data.lccontest;
                 renderLeetContests();
             }
+
+            // Show upcoming section if there are contests
+            showUpcomingSection(gfgContests.length > 0 || leetContests.length > 0);
         })
         .catch((error) => {
             console.error('Error fetching upcoming contests:', error);
+            showUpcomingSection(false); // Hide upcoming section on error
             document.querySelector(".upcoming-contest").innerHTML = `Error fetching upcoming contests: ${error.message}`;
         });
 }
+
+function showUpcomingSection(show) {
+    const upcomingSection = document.querySelector('.upcoming-section');
+    if (show) {
+        upcomingSection.style.display = 'block';
+    } else {
+        upcomingSection.style.display = 'none';
+    }
+}
+
 
 function getPastContest(data = {}) {
     const page = parseInt(document.getElementById("page").innerText, 10);
