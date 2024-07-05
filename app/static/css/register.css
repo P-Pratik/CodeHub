@@ -112,15 +112,15 @@ input[type="password"] {
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus {
-    border-color: #FF9000;
+    border-color: #45D3F6;
     outline: none;
 }
 
 button[type="submit"] {
-    background-color: #FF900020;
+    background-color: #45D3F620;
     color: #fff;
     padding: 10px 40px;
-    border: #FF9000 solid;
+    border: #45D3F6 solid;
     border-radius: 10px;
     cursor: pointer;
     font-size: 16px;
@@ -130,7 +130,7 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #FF900040;
+    background-color: #45D3F640;
     
 }
 

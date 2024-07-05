@@ -18,6 +18,7 @@ body {
     font-size: 1.1em;
     margin-right: 10%;
     margin-left: 4%;
+    z-index: 1000;
 }
 
 .nav li, a {
@@ -42,20 +43,20 @@ body {
 }
 
 .login{
-    background-color: #FF9000;
+    background-color: #45D3F6;
     color: #fff;
     padding: 0 25px;
     height: 38px;
     border-radius: 100px;
     text-align: center;
-    border: #ffb617 solid;
+    border: #a9f1ff solid;
     transition: all 0.3s ease 0s;
     display: flex;
     align-items: center;
 }
 
 .login:hover{
-    background-color: #fe780a;
+    background-color: #21a9ee;
 }
 
 .login-container{
@@ -82,7 +83,7 @@ body {
 }
 
 .nav__links li a:hover {
-    color: #FF9000;
+    color: #45D3F6;
 }
 
 .user {
@@ -90,8 +91,8 @@ body {
 }
 
 .user-div {
-    border: #ffb617 solid 2px;
-    background: #FF9000;
+    border: #a9f1ff solid 2px;
+    background: #45D3F6;
     height: 38px;
     border-radius: 100px;
     transition: all 0.3s ease 0s;
@@ -106,10 +107,7 @@ body {
     padding-left: 10px;
     color: #fff;
     transition: all 0.3s ease 0s;
-}
-
-.user-div:hover p {
-    color: #fff;
+    text-shadow: 2px 4px 5px #21a9ee;
 }
 
 .user-div img {
@@ -117,22 +115,22 @@ body {
     box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.5);
     aspect-ratio: 1/1;
     border-radius: 100%;
-    border: #ffb617 solid 2px;
+    border: #a9f1ff solid 2px;
     border-left: none;
     transition: all 0.3s ease 0s;
 }
 
 .user-div:hover img, .user-div:focus img {
-    border-color: #ffb617;
+    border-color: #a9f1ff;
 }
 
 .user-div:hover, .user-div:focus {
-    border: #ffb617 solid 2px;
-    background: #fe780a;
+    border: #a9f1ff solid 2px;
+    background: #21a9ee;
 }
 
 h2, h3 {
-    color: #FF9000;
+    color: #a9f1ff;
     text-align: center;
 }
 
@@ -177,7 +175,7 @@ p {
 }
 
 .daily-title {
-    background: #FF9000;
+    background: #45D3F6;
     max-width: 800px;
     margin: 20px auto;
     margin-bottom: 0;
@@ -245,12 +243,12 @@ p {
 
 .daily-problem a {
     display: inline-block;
-    background-color: #FF900020;
+    background-color: #45D3F620;
     color: #fff;
     min-height: 40px;
     min-width: 140px;
     border-radius: 10px;
-    border: #FF9000 solid;
+    border: #45D3F6 solid;
     transition: background-color 0.3s ease 0s;
 }
 
@@ -264,7 +262,7 @@ p {
 }
 
 .daily-problem a:hover {
-    background: #FF900040;
+    background: #45D3F640;
 }
 
 .daily-problem > * {
@@ -317,6 +315,9 @@ p {
 .timer-colon {
     display: inline-block;
     font-size: 1.5em;
+    font-weight: 600;
+    text-shadow: 2px 4px 3px rgba(33, 169, 238, 0.7);
+    color: rgb(18, 102, 144);
 }
 
 .stats-tags {
@@ -364,12 +365,12 @@ p {
 
 .company {
     margin-bottom: 10px;
-    color: #ffb617;
-    border: #ffb617 solid 2px;
+    color: #a9f1ff;
+    border: #a9f1ff solid 2px;
 }
 
 .company-more {
-    background-color: #ffb617;
+    background-color: #a9f1ff;
     color: #333;
     padding: 5px;
     cursor: pointer;
@@ -418,6 +419,9 @@ p {
     flex-direction: column;
     justify-content: space-evenly;
     list-style: none;
+    width: fit-content;
+    position: relative;
+    right: 17px;
 }
 
 .tooltip li {
@@ -481,24 +485,24 @@ p {
     }
 
     .nav__links li a:hover {
-        color: #FF9000;
+        color: #45D3F6;
     }
 
     .login{
-        background-color: #FF9000;
+        background-color: #45D3F6;
         color: #fff;
         padding: 0 25px;
         height: 38px;
         border-radius: 100px;
         text-align: center;
-        border: #ffb617 solid;
+        border: #a9f1ff solid;
         transition: all 0.3s ease 0s;
         display: flex;
         align-items: center;
     }
     
     .login:hover{
-        background-color: #fe780a;
+        background-color: #21a9ee;
     }
     
     .login-container{
@@ -512,8 +516,8 @@ p {
     }
 
     .user-div {
-        border: #ffb617 solid 2px;
-        background: #FF9000;
+        border: #a9f1ff solid 2px;
+        background: #45D3F6;
         height: 38px;
         border-radius: 100px;
         transition: all 0.3s ease 0s;
@@ -528,10 +532,7 @@ p {
         padding-left: 10px;
         color: #fff;
         transition: all 0.3s ease 0s;
-    }
-
-    .user-div:hover p {
-        color: #fff;
+        text-shadow: 2px 4px 5px #21a9ee;
     }
 
     .user-div img {
@@ -539,18 +540,18 @@ p {
         box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.5);
         aspect-ratio: 1/1;
         border-radius: 100%;
-        border: #ffb617 solid 2px;
+        border: #a9f1ff solid 2px;
         border-left: none;
         transition: all 0.3s ease 0s;
     }
 
     .user-div:hover img, .user-div:focus img {
-        border-color: #ffb617;
+        border-color: #a9f1ff;
     }
 
     .user-div:hover, .user-div:focus {
-        border: #ffb617 solid 2px;
-        background: #fe780a;
+        border: #a9f1ff solid 2px;
+        background: #21a9ee;
     }
 }
 

@@ -43,7 +43,7 @@ body {
     height: 220px;
     margin: 5%;
     margin-top: 0;
-    border: #FF9000 solid 4px;
+    border: #45D3F6 solid 4px;
     border-radius: 25px;
     display: block;
 }
@@ -56,14 +56,14 @@ body {
 .overlay-button {
     position: absolute;
     bottom: 5%;
-    background-color: #4E4A4A;
+    background-color: #233439;
     right: -8%;
     height: 40px;
     width: 40px;
     margin-right: 3%;
-    border: #FF9000 solid;
-    border-right: #FF9000 4px solid;
-    border-bottom: #FF9000 4px solid;
+    border: #45D3F6 solid;
+    border-right: #45D3F6 4px solid;
+    border-bottom: #45D3F6 4px solid;
     cursor: pointer;
     border-bottom-right-radius: 25px;
     transition: background-color 0.3s ease, border-color 0.3s ease;
@@ -71,14 +71,14 @@ body {
 
 .overlay-button label img {
     height: 18px;
-    margin-top: 6px;
+    margin-top: 7px;
     width: 30px;
     border: none;
 }
 
 .overlay-button:hover {
-    background-color: #1E1E1E;
-    border-color: #FF9000;
+    background-color: #274B54;
+    border-color: #45D3F6;
 }
 
 .user-info-container {
@@ -270,8 +270,8 @@ body {
 .cropButton {
     padding: 10px 15px;
     border-radius: 10px;
-    background: #FF900020;
-    border: #FF9000 solid;
+    background: #45D3F620;
+    border: #45D3F6 solid;
     color: #fff;
     font-weight: 600;
     margin: 5% 0;
@@ -280,7 +280,7 @@ body {
 }
 
 .cropButton:hover {
-    background: #FF900070;
+    background: #45D3F670;
 }
 
 .cropButton-container {
@@ -291,8 +291,8 @@ body {
 }
 
 .cropClose-button{
-    background-color: #FF900020;
-    border: #FF9000 solid;
+    background-color: #45D3F620;
+    border: #45D3F6 solid;
     color: #fff;
     height: 30px;
     width: 30px;
@@ -301,7 +301,7 @@ body {
 }
 
 .cropClose-button:hover{
-    background-color: #FF900070;
+    background-color: #45D3F670;
 }
 
 .cropClose-button-container {
@@ -343,8 +343,8 @@ body {
 .confirmButton {
     padding: 10px 15px;
     border-radius: 10px;
-    background: #FF900020;
-    border: #FF9000 solid;
+    background: #45D3F620;
+    border: #45D3F6 solid;
     color: #fff;
     font-weight: 600;
     transition: all 0.3s ease 0s;
@@ -352,7 +352,7 @@ body {
 }
 
 .confirmButton:hover {
-    background: #fe780a;
+    background: #45D3F640;
 }
 
 .confirmButton:disabled {
@@ -362,7 +362,7 @@ body {
 }
 
 .confirmButton:disabled:hover {
-    background: #FF900070;
+    background: #45D3F670;
 }
 
 .confirmButton-container {

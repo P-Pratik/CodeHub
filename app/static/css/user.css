@@ -6,7 +6,7 @@ h1 {
     height: 220px;
     margin: 5%;
     margin-top: 0;
-    border: #FF9000 solid 4px;
+    border: #45D3F6 solid 4px;
     border-radius: 15px;
     display: block;
 }
@@ -21,7 +21,7 @@ h1 {
     height: 2em;
     border-radius: 0.5em;
     color: #fff;
-    background-color: #FF9000;
+    background-color: #45D3F6;
     display: flex; /*flex because text & icon wont line up*/
     justify-content: center;
     align-items: center;

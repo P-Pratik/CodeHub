@@ -44,7 +44,7 @@ body {
 
 .banner-content h1 {
     margin: 0;
-    text-shadow: 3px 6px #d65b0e;
+    text-shadow: 3px 5px #4e9af6;
     font-family: 'Public Pixel', sans-serif;
     font-size: 34px;
 }
@@ -110,8 +110,8 @@ body {
     height: 40px;
     padding: 0 5%;
     width: 200px;
-    background: #FF900020;
-    border: #FF9000 solid;
+    background: #45D3F620;
+    border: #45D3F6 solid;
     color: #fff;
     font-weight: 600;
     transition: all 0.3s ease 0s;
@@ -119,7 +119,7 @@ body {
 }
 
 .filterForm-content button:hover {
-    background-color: #FF900040;
+    background-color: #45D3F640;
 }
 
 .allproblems {
@@ -146,9 +146,9 @@ body {
 }
 
 .allproblems a {
-    background: #FF900020;
+    background: #45D3F620;
     color: #fff;
-    border: #FF9000 solid;
+    border: #45D3F6 solid;
     cursor: pointer;
     padding: 10px 20px;
     text-decoration: none;
@@ -213,7 +213,7 @@ tr:nth-child(even) {
 }
 
 tr:hover {
-    background-color: #FF9000;
+    background-color: #21a9ee;
 }
 
 tr:hover a {

@@ -27,13 +27,13 @@ color: #fff;
 
 .error_code{
     font-size: 8em;
-    color: #ff9000;
+    color: #45D3F6;
     font-weight: 800;
 }
 
 .error_type{
     font-size: 2.5em;
-    color: #ff9000;
+    color: #45D3F6;
     font-weight: 600;
 }
 
@@ -63,5 +63,5 @@ color: #fff;
 
 .msg_list li a{
     text-decoration: underline;
-    color: #ff9000;
+    color: #45D3F6;
 }
