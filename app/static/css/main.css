@@ -13,12 +13,49 @@ body {
     padding-top: 80px;
 }
 
+/* Webkit Scrollbar */
+::-webkit-scrollbar {
+    width: 0.4em;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #353535;
+    border-radius: 100vw;
+    margin-block: 0.8em;
+    border: 2px solid #1E1E1E;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #45D3F6;
+    border-radius: 100vw;
+    background-clip: content-box;
+    transition: all 0.3s ease 0s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #21a9ee;
+}
+
+/* Firefox Scrollbar */
+@supports (-moz-appearance:none) {
+
+    html {
+        scrollbar-width: thin;
+        scrollbar-color: #45D3F6 #353535;
+        border-radius: 100vw;
+    }
+
+    html::-webkit-scrollbar-thumb:hover {
+        background-color: #21a9ee;
+    }
+}
+
 .nav {
     text-decoration: none;
     font-size: 1.1em;
     margin-right: 10%;
     margin-left: 4%;
-    z-index: 1000;
+    z-index: 9000;
 }
 
 .nav li, a {
@@ -35,6 +72,8 @@ body {
     padding: 0.8em 8%;
     width: 100%;
     position: absolute;
+    left: 0;
+    top: 0;
 }
 
 .logo {
@@ -53,6 +92,7 @@ body {
     transition: all 0.3s ease 0s;
     display: flex;
     align-items: center;
+    text-shadow: -2px 2px 3px rgba(0, 0, 0, 0.3);
 }
 
 .login:hover{
@@ -100,6 +140,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-shadow: -2px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .user-div p {
@@ -107,7 +148,6 @@ body {
     padding-left: 10px;
     color: #fff;
     transition: all 0.3s ease 0s;
-    text-shadow: 2px 4px 5px #21a9ee;
 }
 
 .user-div img {
@@ -387,54 +427,91 @@ p {
     margin-right: 5px;
 }
 
-.arrow {
+/* .arrow {
     width: 0;
     height: 0;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 10px solid #1E1E1E;
-    position: relative;
+    position: absolute;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    top: -1.5em;
-}
+    top: -8px;
+    z-index: 1001;
+} */
 
-.tooltip {
+
+.tooltip, .company-tooltip {
     display: none;
     position: absolute;
-    background-color: #1E1E1E;
+    background: #0E0E0E;
     font-weight: 600;
     color: #ddd;
     font-size: 0.7em;
-    padding: 10px;
-    width: 150px;
+    padding: 8px;
+    max-width: 120px;
     z-index: 1000;
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
-    left: 85%;
-    top: 95%;
     border-radius: 10px;
+    border: #737373 solid 2px;
 }
 
-.tooltip ul {
+.tooltip::before, .company-tooltip::before{
+    width: 8px;
+    height: 8px;
+    border-top: solid #737373 2px;
+    border-right: 0;
+    border-left: solid #737373 2px;
+    border-bottom: 0;
+    transform: rotate(45deg);
+    position: absolute;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    top: -5px;
+    left: 50%;
+    z-index: 1001;
+    background: #0E0E0E;
+    content: '';
+}
+
+.tooltip ul, .company-tooltip ul {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    align-items: center;
     list-style: none;
     width: fit-content;
     position: relative;
     right: 17px;
+    max-height: 150px;
+    overflow-y: auto;
 }
 
-.tooltip li {
-    margin-bottom: 10px;
-    margin-right: 3px;
-    margin-top: -4px;
-    margin-left: 0;
+.tooltip li, .company-tooltip li {
+    margin-bottom: 12px;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-left: -2px;
     text-align: center;
+}
+
+.tooltip ul::-webkit-scrollbar-track,
+.company-tooltip ul::-webkit-scrollbar-track{
+    border: 1px #0E0E0E solid;
+    margin-block: 1em;
 }
 
 .tags {
     position: relative;
 }
+
+.moreTag{
+    height: 25px;
+    width: 60px;
+}
+
+.tagList{
+    width: fit-content;
+}
+
 
 @media only screen and (min-width: 1200px){
     .nav-container {
@@ -450,7 +527,7 @@ p {
         bottom: 0;
         width: 100%;
         height: fit-content;
-        z-index: 1000;
+        z-index: 9000;
         box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
         display: flex;
         justify-content: center;

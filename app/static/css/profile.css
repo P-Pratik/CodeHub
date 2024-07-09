@@ -253,8 +253,8 @@ body {
     width: 30%;
     margin: 0 auto;
     padding: 1em;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-top: 0;
+    border-bottom: 0;
 }
 
 .cropper-image {
@@ -280,7 +280,7 @@ body {
 }
 
 .cropButton:hover {
-    background: #45D3F670;
+    background: #45D3F640;
 }
 
 .cropButton-container {
@@ -288,6 +288,10 @@ body {
     align-items: center;
     justify-content: center;
     margin-top: 1em;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: #353535 solid;
+    border-top: 0;
 }
 
 .cropClose-button{
@@ -298,10 +302,11 @@ body {
     width: 30px;
     transition: background-color 0.3s ease 0s;
     border-radius: 100%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .cropClose-button:hover{
-    background-color: #45D3F670;
+    background-color: #45D3F640;
 }
 
 .cropClose-button-container {
@@ -314,6 +319,8 @@ body {
     padding: 1em;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    border: #353535 solid;
+    border-bottom: 0;
 }
 
 .file-name {
